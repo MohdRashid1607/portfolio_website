@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomorrow's Web — Glowing — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* BASE */
+        .cs-hero{padding:14rem 7% 8rem;background:var(--bg-color);position:relative;overflow:hidden;}
+        .cs-hero::before{content:'';position:absolute;top:-20rem;right:-10rem;width:60rem;height:60rem;background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%);pointer-events:none;}
+        .cs-breadcrumb{display:flex;align-items:center;gap:0.8rem;font-size:1.3rem;color:var(--text-light);margin-bottom:3rem;}
+        .cs-breadcrumb a{color:var(--main-color);font-weight:500;}
+        .cs-breadcrumb a:hover{text-decoration:underline;}
+        .cs-breadcrumb i{font-size:1.6rem;}
+        .cs-hero-inner{display:grid;grid-template-columns:1fr auto;gap:6rem;align-items:start;max-width:120rem;}
+        .cs-year-badge{display:inline-block;font-size:1.2rem;font-weight:700;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.4rem 1.4rem;border-radius:5rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.8rem;}
+        .cs-hero h1{font-size:5rem;font-weight:800;color:var(--text-color);line-height:1.1;letter-spacing:-0.03em;margin-bottom:2rem;}
+        .cs-hero h1 span{color:var(--main-color);}
+        .cs-hero-desc{font-size:1.7rem;color:var(--text-light);line-height:1.7;max-width:60rem;margin-bottom:3rem;}
+        .cs-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-bottom:3.5rem;}
+        .cs-tag{font-size:1.25rem;padding:0.5rem 1.4rem;border-radius:5rem;background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border-color);font-weight:500;}
+        .cs-tag-main{background:rgba(117,78,249,0.08);color:var(--main-color);border-color:rgba(117,78,249,0.2);}
+        .cs-tag-live{background:rgba(16,185,129,0.08);color:#10b981;border-color:rgba(16,185,129,0.2);}
+        .cs-hero-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+        .cs-meta-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:3rem;min-width:26rem;box-shadow:0 4px 24px var(--shadow-soft);}
+        .cs-meta-row{display:flex;flex-direction:column;gap:2rem;}
+        .cs-meta-item label{display:block;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:0.4rem;}
+        .cs-meta-item p{font-size:1.45rem;font-weight:600;color:var(--text-color);}
+        .cs-meta-divider{height:1px;background:var(--border-color);}
+        .cs-grade{font-size:2.4rem !important;font-weight:800 !important;color:var(--main-color) !important;}
+        .cs-live-tag{color:#10b981 !important;}
+        .cs-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg-alt);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
+        .cs-stat{padding:3rem 4rem;border-right:1px solid var(--border-color);text-align:center;}
+        .cs-stat:last-child{border-right:none;}
+        .cs-stat strong{display:block;font-size:3rem;font-weight:800;color:var(--main-color);margin-bottom:0.4rem;}
+        .cs-stat span{font-size:1.3rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+        .cs-section{padding:7rem 7%;border-bottom:1px solid var(--border-color);}
+        .cs-section-alt{background:var(--bg-alt);}
+        .cs-section-top{display:flex;align-items:baseline;gap:2rem;margin-bottom:4rem;}
+        .cs-section-eyebrow{font-size:1.1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;}
+        .cs-section h2{font-size:3rem;font-weight:800;color:var(--text-color);letter-spacing:-0.02em;line-height:1.2;}
+        .cs-section h2 span{color:var(--main-color);}
+        .cs-two-col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+        .cs-body{font-size:1.55rem;color:var(--text-light);line-height:1.8;}
+        .cs-body+.cs-body{margin-top:1.5rem;}
+        .cs-quote{border-left:3px solid var(--main-color);padding:1.8rem 2.2rem;background:rgba(117,78,249,0.04);border-radius:0 1rem 1rem 0;margin:2.5rem 0;}
+        .cs-quote p{font-size:1.6rem;font-style:italic;color:var(--text-color);line-height:1.6;margin-bottom:0.6rem;}
+        .cs-quote cite{font-size:1.25rem;color:var(--main-color);font-style:normal;font-weight:600;}
+        .learnings-list{display:flex;flex-direction:column;gap:1.5rem;}
+        .learning-item{display:flex;gap:2rem;align-items:flex-start;padding:2rem 2.5rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;transition:all 0.3s;}
+        .learning-item:hover{border-color:rgba(117,78,249,0.25);background:rgba(117,78,249,0.02);}
+        .learning-num{font-size:2rem;font-weight:800;color:rgba(117,78,249,0.2);min-width:3rem;line-height:1.2;}
+        .learning-item h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .learning-item p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+        .cs-bottom{display:flex;justify-content:space-between;align-items:center;padding:4rem 7%;background:var(--bg-alt);border-top:1px solid var(--border-color);flex-wrap:wrap;gap:2rem;}
+        .cs-bottom p{font-size:1.6rem;color:var(--text-light);}
+        .cs-bottom-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+
+        /* ===== GLOWING BRAND CARD ===== */
+        .brand-hero{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;overflow:hidden;margin-bottom:5rem;}
+        .brand-visual{height:28rem;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+        .brand-bg{position:absolute;inset:0;background:linear-gradient(135deg,#f8f4f0 0%,#e8f5e9 50%,#fef9e7 100%);}
+        /* website mockup inside brand visual */
+        .site-mockup{position:relative;z-index:2;background:#fff;border-radius:1rem;box-shadow:0 20px 60px rgba(0,0,0,0.15);width:75%;overflow:hidden;border:1px solid #e2e8f0;}
+        .sm-header{background:#fff;padding:0.8rem 1.4rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid #f1f5f9;}
+        .sm-dot{width:0.7rem;height:0.7rem;border-radius:50%;}
+        .sm-logo{font-size:1.1rem;font-weight:800;color:#2d5016;letter-spacing:0.08em;margin-left:0.5rem;}
+        .sm-nav{display:flex;gap:1.2rem;margin-left:auto;}
+        .sm-nav-item{height:0.5rem;width:2.5rem;background:#e2e8f0;border-radius:3rem;}
+        .sm-hero{background:linear-gradient(135deg,#f8f4f0,#e8f5e9);padding:1.5rem 1.4rem;display:flex;gap:1.2rem;align-items:center;}
+        .sm-hero-text{flex:1;}
+        .sm-h1{height:0.8rem;background:#2d5016;border-radius:3rem;width:70%;margin-bottom:0.5rem;}
+        .sm-h2{height:0.6rem;background:#94a3b8;border-radius:3rem;width:50%;margin-bottom:0.5rem;}
+        .sm-h3{height:0.6rem;background:#94a3b8;border-radius:3rem;width:40%;margin-bottom:0.8rem;}
+        .sm-btn{height:1.5rem;background:#2d5016;border-radius:5rem;width:35%;}
+        .sm-hero-img{width:5rem;height:4rem;background:linear-gradient(135deg,#d4e8cc,#a8d4a8);border-radius:0.5rem;flex-shrink:0;}
+        .sm-products{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;padding:0.8rem 1.4rem;}
+        .sm-product{background:#f8fafc;border-radius:0.4rem;overflow:hidden;border:1px solid #f1f5f9;}
+        .sm-product-img{height:2.5rem;background:linear-gradient(135deg,#e8f5e9,#d4e8cc);}
+        .sm-product-info{padding:0.3rem 0.4rem;}
+        .sm-product-name{height:0.4rem;background:#cbd5e1;border-radius:3rem;width:80%;margin-bottom:0.25rem;}
+        .sm-product-price{height:0.4rem;background:#2d5016;border-radius:3rem;width:40%;}
+        .brand-meta{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-top:1px solid var(--border-color);}
+        .bm-item{padding:2rem 2.5rem;border-right:1px solid var(--border-color);}
+        .bm-item:last-child{border-right:none;}
+        .bm-label{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-light);margin-bottom:0.4rem;}
+        .bm-value{font-size:1.45rem;font-weight:700;color:var(--text-color);}
+        .bm-live{color:#10b981;}
+
+        /* ===== FEATURE GRID 3-col ===== */
+        .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+        .feat-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;transition:all 0.3s;}
+        .feat-card:hover{border-color:rgba(117,78,249,0.3);transform:translateY(-3px);box-shadow:0 10px 30px var(--shadow-color);}
+        .feat-icon{width:4.5rem;height:4.5rem;background:rgba(117,78,249,0.08);border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--main-color);margin-bottom:1.5rem;}
+        .feat-card h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:0.7rem;}
+        .feat-card p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+
+        /* ===== TECH STACK — 2-row ===== */
+        .stack-section{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+        .stack-col h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-color);}
+        .stack-items{display:flex;flex-direction:column;gap:1rem;}
+        .stack-item{display:flex;align-items:center;gap:1.2rem;padding:1.2rem 1.6rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:0.8rem;transition:all 0.3s;}
+        .stack-item:hover{border-color:rgba(117,78,249,0.25);}
+        .si-icon{width:3.5rem;height:3.5rem;background:rgba(117,78,249,0.08);border-radius:0.7rem;display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:var(--main-color);flex-shrink:0;}
+        .stack-item strong{display:block;font-size:1.4rem;color:var(--text-color);margin-bottom:0.2rem;}
+        .stack-item span{font-size:1.25rem;color:var(--text-light);}
+        .stack-why{font-size:1.2rem;font-weight:700;color:var(--main-color);margin-left:auto;background:rgba(117,78,249,0.06);border:1px solid rgba(117,78,249,0.15);padding:0.2rem 0.9rem;border-radius:5rem;white-space:nowrap;}
+
+        /* ===== ARCHITECTURE diagram ===== */
+        .arch-diagram{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:4rem;margin-bottom:0;}
+        .arch-row{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+        .arch-layer{flex:1;text-align:center;}
+        .arch-box{background:var(--bg-alt);border:1px solid var(--border-color);border-radius:1rem;padding:1.8rem 1.5rem;margin-bottom:1rem;transition:all 0.3s;}
+        .arch-box:hover{border-color:rgba(117,78,249,0.3);}
+        .arch-box i{font-size:2.4rem;color:var(--main-color);display:block;margin-bottom:0.6rem;}
+        .arch-box strong{display:block;font-size:1.4rem;font-weight:700;color:var(--text-color);margin-bottom:0.3rem;}
+        .arch-box span{font-size:1.2rem;color:var(--text-light);}
+        .arch-label{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);}
+        .arch-arrow{font-size:2.5rem;color:var(--border-color);flex-shrink:0;}
+
+        /* ===== WIREFRAME SECTION ===== */
+        .wireframe-gallery{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+        .wf-frame{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;}
+        .wf-bar{background:var(--bg-alt);padding:0.8rem 1.4rem;border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:0.7rem;}
+        .wf-dot{width:0.9rem;height:0.9rem;border-radius:50%;}
+        .wf-title{font-size:1.15rem;color:var(--text-light);margin:0 auto;font-weight:600;}
+        .wf-img{width:100%;display:block;}
+        .wf-caption{padding:1.2rem 1.6rem;font-size:1.3rem;color:var(--text-light);}
+
+        /* ===== DESIGN DECISIONS vertical ===== */
+        .design-decisions{display:flex;flex-direction:column;gap:2rem;}
+        .dd-item{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.8rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;transition:all 0.3s;}
+        .dd-item:hover{border-color:rgba(117,78,249,0.3);box-shadow:0 8px 25px var(--shadow-color);}
+        .dd-num{width:4.5rem;height:4.5rem;border-radius:1rem;background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:var(--main-color);flex-shrink:0;}
+        .dd-item h4{font-size:1.65rem;font-weight:700;color:var(--text-color);margin-bottom:0.6rem;}
+        .dd-item p{font-size:1.38rem;color:var(--text-light);line-height:1.7;}
+
+        /* trade-off table */
+        .tradeoff-table{width:100%;border-collapse:collapse;border-radius:1.4rem;overflow:hidden;border:1px solid var(--border-color);}
+        .tradeoff-table th{background:var(--bg-alt);padding:1.4rem 2rem;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-light);text-align:left;border-bottom:1px solid var(--border-color);}
+        .tradeoff-table td{padding:1.5rem 2rem;font-size:1.38rem;color:var(--text-light);border-bottom:1px solid var(--border-color);}
+        .tradeoff-table tr:last-child td{border-bottom:none;}
+        .tradeoff-table tr:hover td{background:rgba(117,78,249,0.02);}
+        .tt-decision{font-weight:700;color:var(--text-color);}
+        .tt-pro{color:#10b981;}
+        .tt-con{color:#f59e0b;}
+
+        @media(max-width:1100px){
+            .cs-hero-inner{grid-template-columns:1fr;}
+            .cs-meta-card{min-width:unset;}
+            .cs-stats{grid-template-columns:repeat(2,1fr);}
+            .cs-two-col,.stack-section,.wireframe-gallery{grid-template-columns:1fr;gap:3rem;}
+            .brand-meta{grid-template-columns:1fr 1fr;}
+            .bm-item:nth-child(2){border-right:none;}
+            .features-grid{grid-template-columns:repeat(2,1fr);}
+            .arch-row{flex-wrap:wrap;}
+            .arch-arrow{display:none;}
+        }
+        @media(max-width:650px){
+            .cs-hero{padding:12rem 5% 6rem;}
+            .cs-hero h1{font-size:3.5rem;}
+            .features-grid{grid-template-columns:1fr;}
+            .brand-meta{grid-template-columns:1fr;}
+            .bm-item{border-right:none;border-bottom:1px solid var(--border-color);}
+            .bm-item:last-child{border-bottom:none;}
+            .cs-section{padding:5rem 5%;}
+            .cs-bottom{flex-direction:column;align-items:flex-start;}
+            .dd-item{grid-template-columns:1fr;}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Tomorrow's Web — Glowing</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 3 · Tomorrow's Web</div>
+                <h1>Glowing — <span>Premium Skincare</span> Platform</h1>
+                <p class="cs-hero-desc">A full-stack e-commerce web application built from scratch — JWT authentication, Google OAuth, PayPal sandbox payments, Cloudinary image hosting, admin dashboard, product filtering, persistent cart & wishlist. Live on Vercel.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-live">✓ Live on Vercel</span>
+                    <span class="cs-tag cs-tag-main">Full-Stack</span>
+                    <span class="cs-tag cs-tag-main">Node.js</span>
+                    <span class="cs-tag cs-tag-main">Express</span>
+                    <span class="cs-tag cs-tag-main">MongoDB</span>
+                    <span class="cs-tag">PayPal API</span>
+                    <span class="cs-tag">Google OAuth</span>
+                    <span class="cs-tag">Cloudinary</span>
+                    <span class="cs-tag">JWT · bcrypt</span>
+                    <span class="cs-tag">Vanilla JS</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://glowing-website-live-3quk.vercel.app/" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-globe'></i> Live Website
+                    </a>
+                    <a href="https://github.com/DC-BSU-RAK/assignment-100-tomorrow-s-web-MohdRashid1607.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub
+                    </a>
+                    <a href="https://youtu.be/M5YepaB0_eA" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-play-circle'></i> Code Walkthrough
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Tomorrow's Web</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 3 — 2025/26</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Type</label><p>Full-Stack Web App</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Stack</label><p>HTML·CSS·JS · Node · MongoDB</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Deployed</label><p class="cs-live-tag">✓ Live on Vercel</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>Full</strong><span>Stack App</span></div>
+        <div class="cs-stat"><strong>5+</strong><span>External APIs</span></div>
+        <div class="cs-stat"><strong>Live</strong><span>on Vercel</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- BRAND OVERVIEW -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// The Project</span>
+            <h2>Meet <span>Glowing</span></h2>
+        </div>
+
+        <div class="brand-hero">
+            <div class="brand-visual">
+                <div class="brand-bg"></div>
+                <div class="site-mockup">
+                    <div class="sm-header">
+                        <div class="sm-dot" style="background:#ff5f57;"></div>
+                        <div class="sm-dot" style="background:#febc2e;"></div>
+                        <div class="sm-dot" style="background:#28c840;"></div>
+                        <div class="sm-logo">GLOWING</div>
+                        <div class="sm-nav">
+                            <div class="sm-nav-item"></div>
+                            <div class="sm-nav-item"></div>
+                            <div class="sm-nav-item"></div>
+                            <div class="sm-nav-item"></div>
+                        </div>
+                    </div>
+                    <div class="sm-hero">
+                        <div class="sm-hero-text">
+                            <div class="sm-h1"></div>
+                            <div class="sm-h2"></div>
+                            <div class="sm-h3"></div>
+                            <div class="sm-btn"></div>
+                        </div>
+                        <div class="sm-hero-img"></div>
+                    </div>
+                    <div class="sm-products">
+                        <div class="sm-product"><div class="sm-product-img"></div><div class="sm-product-info"><div class="sm-product-name"></div><div class="sm-product-price"></div></div></div>
+                        <div class="sm-product"><div class="sm-product-img" style="background:linear-gradient(135deg,#fef9e7,#fde68a);"></div><div class="sm-product-info"><div class="sm-product-name"></div><div class="sm-product-price"></div></div></div>
+                        <div class="sm-product"><div class="sm-product-img" style="background:linear-gradient(135deg,#f3e8ff,#ddd6fe);"></div><div class="sm-product-info"><div class="sm-product-name"></div><div class="sm-product-price"></div></div></div>
+                        <div class="sm-product"><div class="sm-product-img" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);"></div><div class="sm-product-info"><div class="sm-product-name"></div><div class="sm-product-price"></div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-meta">
+                <div class="bm-item">
+                    <div class="bm-label">Category</div>
+                    <div class="bm-value">Premium Skincare E-Commerce</div>
+                </div>
+                <div class="bm-item">
+                    <div class="bm-label">Approach</div>
+                    <div class="bm-value">Commercial Realism — Proof of Concept</div>
+                </div>
+                <div class="bm-item">
+                    <div class="bm-label">Architecture</div>
+                    <div class="bm-value">MVC · RESTful API · MongoDB</div>
+                </div>
+                <div class="bm-item">
+                    <div class="bm-label">Status</div>
+                    <div class="bm-value bm-live">✓ Deployed — Vercel</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Glowing was built with one guiding principle: commercial realism over experimental novelty. Rather than building a novel or abstract project, the aim was to produce something that reflects the standards of real professional skincare e-commerce — a platform that genuinely looks and feels like it belongs on the commercial web.</p>
+                <p class="cs-body">The design is deliberately minimal — a restrained palette of neutral tones with soft green and gold accents. Green for natural ingredients and wellness; gold used sparingly for quality and luxury. The Urbanist typeface was selected for its modern readability across all screen sizes.</p>
+                <div class="cs-quote">
+                    <p>"Rather than pursuing experimental novelty, this project intentionally prioritised commercial realism — prioritising reliability and maintainability over conceptual novelty, which reflects professional development environments."</p>
+                    <cite>— Critical Reflection, M.Rashid</cite>
+                </div>
+            </div>
+            <div>
+                <p class="cs-body">Three conceptual principles guided every decision: <strong style="color:var(--text-color)">simplicity</strong> (clean interface, clear navigation, no clutter), <strong style="color:var(--text-color)">trust</strong> (security-first architecture, professional design), and <strong style="color:var(--text-color)">quality</strong> (premium visual execution that feels credible from the first interaction).</p>
+                <p class="cs-body">The intended audience is modern skincare consumers who shop online and expect a smooth, high-quality experience — busy professionals who value fast purchasing, and users who value product information and brand credibility. Every feature was built to serve that user.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8 FEATURES -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Features</span>
+            <h2>What <span>Glowing Does</span></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-user-check'></i></div>
+                <h4>Auth — JWT + Google OAuth</h4>
+                <p>Email/password authentication with JWT for stateless session management, plus Google OAuth via Passport.js. Passwords hashed with bcrypt before database storage.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-credit-card'></i></div>
+                <h4>PayPal Sandbox Payments</h4>
+                <p>Integrated PayPal JavaScript SDK in sandbox mode — full order creation and transaction confirmation flow without processing live financial data.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-image'></i></div>
+                <h4>Cloudinary Image Hosting</h4>
+                <p>Product images uploaded to and served from Cloudinary's CDN — efficient global content delivery and no server storage overhead.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-filter-alt'></i></div>
+                <h4>Filter · Sort · Paginate</h4>
+                <p>Full product browsing system with filtering by category, sorting by price/rating, and pagination — replicating real e-commerce product discovery.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-cart'></i></div>
+                <h4>Persistent Cart & Wishlist</h4>
+                <p>Shopping cart and wishlist stored in localStorage — persisting across pages and sessions using custom JavaScript classes for state synchronisation.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-shield-alt-2'></i></div>
+                <h4>Admin Dashboard — RBAC</h4>
+                <p>Role-based access control protects admin routes. Administrators can manage products, orders, and users through a dedicated panel — separated from user-facing functionality.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-user-circle'></i></div>
+                <h4>User Dashboard</h4>
+                <p>Account details, order history, and profile management — the complete user account experience expected by modern e-commerce shoppers.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-mobile-alt'></i></div>
+                <h4>Fully Responsive</h4>
+                <p>Optimised for desktop, tablet, and mobile. Mobile-friendly navigation with collapsible menus, dynamic layouts, and thumb-friendly interaction targets.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-rss'></i></div>
+                <h4>Blog · Newsletter · Trust</h4>
+                <p>Blog section for skincare content, newsletter subscription, brand value sections (100% Organic · Cruelty-Free · Trusted Ingredients) — the full marketing layer.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WIREFRAMES -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Design Process</span>
+            <h2>Wireframes & <span>Design Iteration</span></h2>
+        </div>
+        <div class="wireframe-gallery" style="margin-bottom:4rem;">
+            <div class="wf-frame">
+                <div class="wf-bar">
+                    <div class="wf-dot" style="background:#ff5f57;"></div>
+                    <div class="wf-dot" style="background:#febc2e;"></div>
+                    <div class="wf-dot" style="background:#28c840;"></div>
+                    <div class="wf-title">Homepage · Shop Page Wireframes</div>
+                </div>
+                <img src="/images/Screenshot 2026-01-02 222405.png" alt="Homepage and Shop wireframes" class="wf-img">
+                <div class="wf-caption">Homepage (left) — hero slider, product grid, category sections. Shop page (right) — filter sidebar, product grid, pagination.</div>
+            </div>
+            <div class="wf-frame">
+                <div class="wf-bar">
+                    <div class="wf-dot" style="background:#ff5f57;"></div>
+                    <div class="wf-dot" style="background:#febc2e;"></div>
+                    <div class="wf-dot" style="background:#28c840;"></div>
+                    <div class="wf-title">Login · About Page Wireframes</div>
+                </div>
+                <img src="/images/Screenshot 2026-01-02 222625.png" alt="Login and About wireframes" class="wf-img">
+                <div class="wf-caption">Login/Signup page (left) — contact info, form, map. About page (right) — brand story, team section, milestone timeline.</div>
+            </div>
+        </div>
+        <p class="cs-body" style="margin-bottom:2rem;">Wireframes were intentionally low-fidelity — focused on layout structure, not colours or typography. Their purpose was to establish visual hierarchy and identify potential usability issues before writing a single line of code.</p>
+        <p class="cs-body">One significant design change during development: the homepage hero section was originally a static layout. During implementation it was redesigned as a slider to allow multiple featured products to be displayed in the same space — improving marketing flexibility while maintaining a clean layout. Product cards were also iterated: initially all interactions were always visible, which felt crowded. Revised so secondary actions (wishlist, add-to-cart) only appear on hover — reducing visual noise significantly.</p>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Stack</span>
+            <h2>Full-Stack <span>Architecture</span></h2>
+        </div>
+        <div class="stack-section" style="margin-bottom:5rem;">
+            <div class="stack-col">
+                <h4>🖥️ Frontend</h4>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bxl-html5'></i></div>
+                        <div><strong>HTML5 · CSS3</strong><span>Semantic markup, responsive design, minimal aesthetic</span></div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bxl-javascript'></i></div>
+                        <div><strong>Vanilla JavaScript</strong><span>Custom classes for cart, wishlist, session — no framework</span></div>
+                        <div class="stack-why">Intentional</div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bx-data'></i></div>
+                        <div><strong>localStorage</strong><span>Persistent cart and wishlist across pages and sessions</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="stack-col">
+                <h4>⚙️ Backend & APIs</h4>
+                <div class="stack-items">
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bxl-nodejs'></i></div>
+                        <div><strong>Node.js · Express.js</strong><span>RESTful API, MVC architecture, route handling</span></div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bx-cylinder'></i></div>
+                        <div><strong>MongoDB · Mongoose</strong><span>Flexible document schema for e-commerce data</span></div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bx-lock-alt'></i></div>
+                        <div><strong>JWT · bcrypt · Passport.js</strong><span>Stateless auth, password hashing, Google OAuth</span></div>
+                    </div>
+                    <div class="stack-item">
+                        <div class="si-icon"><i class='bx bx-credit-card'></i></div>
+                        <div><strong>PayPal SDK · Cloudinary</strong><span>Sandbox payments + cloud image CDN delivery</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture diagram -->
+        <div class="arch-diagram">
+            <div style="font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:2.5rem;text-align:center;">Application Architecture — MVC + RESTful API</div>
+            <div class="arch-row">
+                <div class="arch-layer">
+                    <div class="arch-box"><i class='bx bx-user'></i><strong>User / Browser</strong><span>HTML · CSS · Vanilla JS</span></div>
+                    <div class="arch-label">Client Layer</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-layer">
+                    <div class="arch-box"><i class='bx bx-server'></i><strong>Express Routes</strong><span>REST API · Auth · RBAC</span></div>
+                    <div class="arch-label">Controller Layer</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-layer">
+                    <div class="arch-box"><i class='bx bx-cylinder'></i><strong>MongoDB Atlas</strong><span>Users · Products · Orders</span></div>
+                    <div class="arch-label">Data Layer</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-layer">
+                    <div class="arch-box"><i class='bx bx-cloud'></i><strong>External APIs</strong><span>PayPal · Cloudinary · Google</span></div>
+                    <div class="arch-label">Services Layer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY DECISIONS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Engineering</span>
+            <h2>Key Technical <span>Decisions</span></h2>
+        </div>
+        <div class="design-decisions" style="margin-bottom:5rem;">
+            <div class="dd-item">
+                <div class="dd-num">1</div>
+                <div>
+                    <h4>Vanilla JavaScript over React / Vue</h4>
+                    <p>Deliberately chose plain JavaScript to strengthen foundational understanding — modular design, state management, and event-driven behaviour without abstraction layers. Implementing cart and wishlist as custom classes reinforced understanding of data persistence and UI synchronisation at a level frameworks would have hidden. The trade-off: longer development time for cross-page state management, which would favour a framework in a larger project.</p>
+                </div>
+            </div>
+            <div class="dd-item">
+                <div class="dd-num">2</div>
+                <div>
+                    <h4>JWT Authentication — Stateless by Design</h4>
+                    <p>JWT provides stateless session management aligned with the RESTful architecture. A signed token is issued on login and included in subsequent request headers. This simplifies horizontal scaling but introduces known limitations — no built-in token revocation or refresh mechanisms — which would require resolution before production deployment.</p>
+                </div>
+            </div>
+            <div class="dd-item">
+                <div class="dd-num">3</div>
+                <div>
+                    <h4>MVC over Microservices</h4>
+                    <p>MVC architecture was chosen over microservices or serverless functions due to the scope of a single-contributor project. It provides a clear, organised codebase with effective separation of concerns, without the operational complexity of distributed services. Under high traffic, service decomposition would become necessary — but for a proof of concept, MVC offered the right balance of clarity and flexibility.</p>
+                </div>
+            </div>
+            <div class="dd-item">
+                <div class="dd-num">4</div>
+                <div>
+                    <h4>PayPal Sandbox — Demonstrable Without Risk</h4>
+                    <p>PayPal's sandbox mode demonstrates a complete end-to-end payment flow — order creation, confirmation, success handling — without processing live financial data. The decision acknowledges this is conceptual rather than production-ready, flagging PCI-DSS compliance and fraud prevention as required additions for a live deployment.</p>
+                </div>
+            </div>
+            <div class="dd-item">
+                <div class="dd-num">5</div>
+                <div>
+                    <h4>Cloudinary for Media — CDN at No Cost</h4>
+                    <p>Rather than storing product images on the server, Cloudinary enables global CDN delivery and eliminates server storage overhead — a production-standard approach even in an academic context. The trade-off is vendor dependency, which introduces considerations around service availability and long-term cost in a commercial scenario.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trade-off table -->
+        <h3 style="font-size:2rem;font-weight:800;color:var(--text-color);margin-bottom:2.5rem;letter-spacing:-0.02em;">Decision Trade-offs</h3>
+        <div style="overflow-x:auto;">
+            <table class="tradeoff-table">
+                <thead>
+                    <tr>
+                        <th style="width:30%;">Decision</th>
+                        <th>Benefit</th>
+                        <th>Trade-off</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tt-decision">Vanilla JS (no framework)</td>
+                        <td class="tt-pro">Deep understanding · Small bundle · Full control</td>
+                        <td class="tt-con">Slower to scale · Manual state management</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-decision">JWT Auth (stateless)</td>
+                        <td class="tt-pro">Stateless · RESTful · Scalable</td>
+                        <td class="tt-con">No token revocation · No refresh mechanism</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-decision">MVC Architecture</td>
+                        <td class="tt-pro">Clear separation · Easy to reason about</td>
+                        <td class="tt-con">Limits scalability under high load</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-decision">PayPal Sandbox</td>
+                        <td class="tt-pro">Full payment flow demonstrated safely</td>
+                        <td class="tt-con">Not production-ready · No PCI-DSS</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-decision">Cloudinary CDN</td>
+                        <td class="tt-pro">Global delivery · No server storage</td>
+                        <td class="tt-con">Vendor dependency · Cost at scale</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Building a real product forces real engineering decisions</h4>
+                    <p>Choosing between JWT and sessions, MVC and microservices, Vanilla JS and React — these weren't academic exercises. They were trade-offs with real consequences for performance, scalability, and maintainability. Making them consciously, and being able to justify them, is what professional development looks like.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Vanilla JavaScript teaches you what frameworks hide</h4>
+                    <p>Implementing cart state synchronisation across pages without React revealed exactly what component-based frameworks solve — and why they exist. Understanding the problem first, then reaching for the abstraction, produces far better developers than starting with the tool.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Design and development must be planned together</h4>
+                    <p>The wireframing phase directly shaped the data models and API structure. Pages with filter + pagination required specific MongoDB query design from the start — not as an afterthought. Separating design from development planning is the mistake that causes rework.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Security isn't an add-on — it's an architecture decision</h4>
+                    <p>bcrypt, JWT, Google OAuth, RBAC, environment variables — every security layer had to be designed into the architecture from day one. Retrofitting security onto an existing system is exponentially harder than building with it in mind from the start.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>The gap between "proof of concept" and "production" is clearly defined</h4>
+                    <p>This project deliberately identified what it would take to make Glowing a real commercial product: token refresh, PCI-DSS compliance, automated testing, CI/CD pipelines, rate limiting, monitoring. Knowing the gap is the first step to closing it — and that self-awareness is the most valuable output of the project.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 3 · Tomorrow's Web · Bath Spa University RAK</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="research-project.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Research</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

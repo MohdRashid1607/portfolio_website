@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Lab 2 — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        .cs-hero { padding:14rem 7% 8rem; background:var(--bg-color); position:relative; overflow:hidden; }
+        .cs-hero::before { content:''; position:absolute; top:-20rem; right:-10rem; width:60rem; height:60rem; background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%); pointer-events:none; }
+        .cs-breadcrumb { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); margin-bottom:3rem; }
+        .cs-breadcrumb a { color:var(--main-color); font-weight:500; }
+        .cs-breadcrumb a:hover { text-decoration:underline; }
+        .cs-breadcrumb i { font-size:1.6rem; }
+        .cs-hero-inner { display:grid; grid-template-columns:1fr auto; gap:6rem; align-items:start; max-width:120rem; }
+        .cs-year-badge { display:inline-block; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.4rem; border-radius:5rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.8rem; }
+        .cs-hero h1 { font-size:5rem; font-weight:800; color:var(--text-color); line-height:1.1; letter-spacing:-0.03em; margin-bottom:2rem; }
+        .cs-hero h1 span { color:var(--main-color); }
+        .cs-hero-desc { font-size:1.7rem; color:var(--text-light); line-height:1.7; max-width:60rem; margin-bottom:3rem; }
+        .cs-tags { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:3.5rem; }
+        .cs-tag { font-size:1.25rem; padding:0.5rem 1.4rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:500; }
+        .cs-tag-main { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); }
+        .cs-hero-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .cs-meta-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; min-width:26rem; box-shadow:0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display:flex; flex-direction:column; gap:2rem; }
+        .cs-meta-item label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.4rem; }
+        .cs-meta-item p { font-size:1.45rem; font-weight:600; color:var(--text-color); }
+        .cs-meta-divider { height:1px; background:var(--border-color); }
+        .cs-grade { font-size:2.4rem !important; font-weight:800 !important; color:var(--main-color) !important; }
+
+        .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--bg-alt); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); }
+        .cs-stat { padding:3rem 4rem; border-right:1px solid var(--border-color); text-align:center; }
+        .cs-stat:last-child { border-right:none; }
+        .cs-stat strong { display:block; font-size:3rem; font-weight:800; color:var(--main-color); margin-bottom:0.4rem; }
+        .cs-stat span { font-size:1.3rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+
+        .cs-section { padding:7rem 7%; border-bottom:1px solid var(--border-color); }
+        .cs-section-alt { background:var(--bg-alt); }
+        .cs-section-top { display:flex; align-items:baseline; gap:2rem; margin-bottom:4rem; }
+        .cs-section-eyebrow { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.12em; white-space:nowrap; }
+        .cs-section h2 { font-size:3rem; font-weight:800; color:var(--text-color); letter-spacing:-0.02em; line-height:1.2; }
+        .cs-section h2 span { color:var(--main-color); }
+        .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+        .cs-body { font-size:1.55rem; color:var(--text-light); line-height:1.8; }
+        .cs-body + .cs-body { margin-top:1.5rem; }
+        .cs-quote { border-left:3px solid var(--main-color); padding:1.8rem 2.2rem; background:rgba(117,78,249,0.04); border-radius:0 1rem 1rem 0; margin:2.5rem 0; }
+        .cs-quote p { font-size:1.6rem; font-style:italic; color:var(--text-color); line-height:1.6; margin-bottom:0.6rem; }
+        .cs-quote cite { font-size:1.25rem; color:var(--main-color); font-style:normal; font-weight:600; }
+
+        /* APP PREVIEW */
+        .app-window { background:#1a1a2e; border-radius:1.4rem; overflow:hidden; border:1px solid rgba(255,255,255,0.06); box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+        .app-titlebar { background:#16213e; padding:1rem 1.6rem; display:flex; align-items:center; gap:1rem; }
+        .w-dot { width:1.2rem; height:1.2rem; border-radius:50%; }
+        .w-red{background:#ff5f57;} .w-yellow{background:#febc2e;} .w-green{background:#28c840;}
+        .app-title-text { font-size:1.2rem; color:rgba(255,255,255,0.35); margin:0 auto; font-family:monospace; }
+        .app-body { padding:2.5rem; }
+        .poke-logo { font-size:2.2rem; font-weight:800; color:#fff; text-align:center; margin-bottom:0.4rem; letter-spacing:0.05em; }
+        .poke-logo span { color:#f59e0b; }
+        .poke-sub { text-align:center; font-size:1.2rem; color:rgba(255,255,255,0.35); margin-bottom:2rem; }
+        .poke-nav { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .poke-btn { padding:1.2rem; border-radius:0.8rem; text-align:center; font-size:1.3rem; font-weight:700; color:#fff; cursor:pointer; transition:all 0.2s; }
+        .pb-red { background:linear-gradient(135deg,#ef4444,#b91c1c); }
+        .pb-blue { background:linear-gradient(135deg,#3b82f6,#1d4ed8); }
+        .pb-yellow { background:linear-gradient(135deg,#f59e0b,#d97706); }
+        .pb-green { background:linear-gradient(135deg,#10b981,#047857); }
+        .poke-divider { height:1px; background:rgba(255,255,255,0.06); margin:2rem 0; }
+        .poke-status { display:flex; align-items:center; gap:0.8rem; font-size:1.1rem; color:rgba(255,255,255,0.35); }
+        .poke-dot { width:0.7rem; height:0.7rem; border-radius:50%; background:#10b981; }
+
+        /* FEATURES GRID */
+        .features-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+        .feature-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.8rem; transition:all 0.3s; position:relative; overflow:hidden; }
+        .feature-card::after { content:''; position:absolute; top:0; right:0; width:8rem; height:8rem; border-radius:50%; opacity:0.04; transform:translate(30%,-30%); }
+        .fc-red::after { background:#ef4444; }
+        .fc-blue::after { background:#3b82f6; }
+        .fc-yellow::after { background:#f59e0b; }
+        .fc-green::after { background:#10b981; }
+        .feature-card:hover { transform:translateY(-4px); box-shadow:0 12px 35px var(--shadow-color); border-color:rgba(117,78,249,0.3); }
+        .feature-num { font-size:3.5rem; font-weight:800; color:rgba(117,78,249,0.1); line-height:1; margin-bottom:1.2rem; }
+        .feature-icon { width:5rem; height:5rem; border-radius:1.2rem; display:flex; align-items:center; justify-content:center; font-size:2.4rem; margin-bottom:1.5rem; }
+        .fi-red { background:rgba(239,68,68,0.1); color:#ef4444; }
+        .fi-blue { background:rgba(59,130,246,0.1); color:#3b82f6; }
+        .fi-yellow { background:rgba(245,158,11,0.1); color:#f59e0b; }
+        .fi-green { background:rgba(16,185,129,0.1); color:#10b981; }
+        .feature-card h4 { font-size:1.8rem; font-weight:800; color:var(--text-color); margin-bottom:0.8rem; }
+        .feature-card p { font-size:1.4rem; color:var(--text-light); line-height:1.65; }
+
+        /* TIMELINE */
+        .timeline { display:flex; flex-direction:column; gap:0; position:relative; }
+        .timeline::before { content:''; position:absolute; left:3.2rem; top:0; bottom:0; width:2px; background:var(--border-color); }
+        .tl-item { display:flex; gap:3rem; align-items:flex-start; padding:2.5rem 0; position:relative; }
+        .tl-item:first-child { padding-top:0; }
+        .tl-dot { width:6.4rem; height:6.4rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:800; color:#fff; flex-shrink:0; position:relative; z-index:1; border:3px solid var(--bg-color); }
+        .td-plan { background:linear-gradient(135deg,#754ef9,#a855f7); }
+        .td-design { background:linear-gradient(135deg,#06b6d4,#0891b2); }
+        .td-dev { background:linear-gradient(135deg,#f59e0b,#d97706); }
+        .td-test { background:linear-gradient(135deg,#ef4444,#b91c1c); }
+        .td-final { background:linear-gradient(135deg,#10b981,#047857); }
+        .tl-content { flex:1; padding-top:0.8rem; }
+        .tl-label { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem; }
+        .tl-content h4 { font-size:1.7rem; font-weight:700; color:var(--text-color); margin-bottom:0.6rem; }
+        .tl-content p { font-size:1.38rem; color:var(--text-light); line-height:1.65; }
+        .tl-days { display:inline-block; font-size:1.1rem; background:rgba(117,78,249,0.08); color:var(--main-color); border:1px solid rgba(117,78,249,0.2); padding:0.2rem 1rem; border-radius:5rem; font-weight:700; margin-top:0.8rem; }
+
+        /* TECH STACK */
+        .tech-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .tech-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; text-align:center; }
+        .tech-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); transform:translateY(-3px); }
+        .tech-emoji { font-size:3.5rem; display:block; margin-bottom:1.2rem; }
+        .tech-card h4 { font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:0.6rem; }
+        .tech-card p { font-size:1.3rem; color:var(--text-light); line-height:1.6; }
+        .tech-type { display:inline-block; font-size:1.1rem; padding:0.2rem 0.9rem; border-radius:5rem; background:rgba(117,78,249,0.06); color:var(--main-color); border:1px solid rgba(117,78,249,0.15); font-weight:600; margin-top:0.8rem; }
+
+        /* BUGS */
+        .bugs-list { display:flex; flex-direction:column; gap:2rem; }
+        .bug-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; overflow:hidden; transition:all 0.3s; }
+        .bug-card:hover { border-color:rgba(117,78,249,0.25); box-shadow:0 8px 25px var(--shadow-color); }
+        .bug-header { display:flex; align-items:center; gap:1.5rem; padding:1.8rem 2.4rem; border-bottom:1px solid var(--border-color); }
+        .bug-icon { width:3.8rem; height:3.8rem; border-radius:0.8rem; background:rgba(239,68,68,0.1); display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:#ef4444; flex-shrink:0; }
+        .bug-header h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); flex:1; }
+        .bug-status { font-size:1.1rem; font-weight:700; color:#10b981; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); padding:0.25rem 1rem; border-radius:5rem; white-space:nowrap; }
+        .bug-body { padding:2rem 2.4rem; display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+        .bug-col label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-light); margin-bottom:0.5rem; }
+        .bug-col p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        /* REFLECTION */
+        .reflection-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:3rem; }
+        .refl-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .refl-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .refl-card h4 { font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:1.2rem; display:flex; align-items:center; gap:1rem; }
+        .refl-card h4 i { font-size:2rem; color:var(--main-color); }
+        .refl-list { display:flex; flex-direction:column; gap:0.8rem; }
+        .refl-item { display:flex; gap:0.8rem; align-items:flex-start; font-size:1.35rem; color:var(--text-light); line-height:1.6; }
+        .refl-item i { font-size:1.4rem; flex-shrink:0; margin-top:0.2rem; }
+        .refl-item-pos i { color:#10b981; }
+        .refl-item-neg i { color:#f59e0b; }
+
+        /* LEARNINGS */
+        .learnings-list { display:flex; flex-direction:column; gap:1.5rem; }
+        .learning-item { display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .learning-item:hover { border-color:rgba(117,78,249,0.25); background:rgba(117,78,249,0.02); }
+        .learning-num { font-size:2rem; font-weight:800; color:rgba(117,78,249,0.2); min-width:3rem; line-height:1.2; }
+        .learning-item h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .learning-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        .cs-bottom { display:flex; justify-content:space-between; align-items:center; padding:4rem 7%; background:var(--bg-alt); border-top:1px solid var(--border-color); flex-wrap:wrap; gap:2rem; }
+        .cs-bottom p { font-size:1.6rem; color:var(--text-light); }
+        .cs-bottom-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+        @media (max-width:1100px) {
+            .cs-hero-inner { grid-template-columns:1fr; }
+            .cs-meta-card { min-width:unset; }
+            .cs-stats { grid-template-columns:repeat(2,1fr); }
+            .cs-two-col { grid-template-columns:1fr; gap:3rem; }
+            .features-grid, .tech-grid, .reflection-grid { grid-template-columns:1fr; }
+            .bug-body { grid-template-columns:1fr; }
+        }
+        @media (max-width:650px) {
+            .cs-hero { padding:12rem 5% 6rem; }
+            .cs-hero h1 { font-size:3.5rem; }
+            .cs-section { padding:5rem 5%; }
+            .cs-bottom { flex-direction:column; align-items:flex-start; }
+            .tl-item { gap:1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Code Lab 2</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 2 · Module</div>
+                <h1>Code <span>Lab 2</span></h1>
+                <p class="cs-hero-desc">A fully functional Pokémon data-driven desktop application built with Python — featuring a Pokédex, a Quiz Game, a Battle Simulator, and a Battle League. Built with tkinter for the GUI, pygame for background music, and a preloaded Pokémon dataset for real interactivity.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">Python</span>
+                    <span class="cs-tag cs-tag-main">tkinter</span>
+                    <span class="cs-tag cs-tag-main">pygame</span>
+                    <span class="cs-tag cs-tag-main">GUI</span>
+                    <span class="cs-tag">Data-Driven App</span>
+                    <span class="cs-tag">API Integration</span>
+                    <span class="cs-tag">Game Logic</span>
+                    <span class="cs-tag">OOP</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://github.com/CodeLab-II/skills-portfolio-MohdRashid1607.git" target="_blank" class="btn btn-primary">
+                        <i class='bx bxl-github'></i> GitHub Repo
+                    </a>
+                    <a href="https://youtu.be/9XWwrSaPWXE" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-play-circle'></i> Walkthrough Video
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Code Lab 2</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 2 — 2023/24</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Language</label><p>Python 🐍</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>App Features</label><p>4 Modules</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Build Time</label><p>8 Days</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>4</strong><span>App Features</span></div>
+        <div class="cs-stat"><strong>8</strong><span>Days to Build</span></div>
+        <div class="cs-stat"><strong>4</strong><span>Bugs Debugged</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Overview</span>
+            <h2>About This <span>Project</span></h2>
+        </div>
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Code Lab 2 was the moment Python stopped being an exercise language and became a real creative tool. The brief was to build a data-driven application — and the result was a fully interactive Pokémon desktop app with four distinct modules, a themed GUI, and background music.</p>
+                <p class="cs-body">The application was built in 8 days following a structured development plan — from initial API research and wireframing through to testing, debugging, and a final user walkthrough video. Every module required a different set of Python skills: from data retrieval and randomisation to GUI event handling and music playback.</p>
+                <div class="cs-quote">
+                    <p>"The creation of the Pokémon Data-Driven Application was a thought-provoking journey that combined creativity with technical problem solving — proving that Python can be as expressive as it is functional."</p>
+                    <cite>— Critical Reflection, M.Rashid</cite>
+                </div>
+            </div>
+            <div>
+                <!-- App window mockup -->
+                <div class="app-window">
+                    <div class="app-titlebar">
+                        <div class="w-dot w-red"></div>
+                        <div class="w-dot w-yellow"></div>
+                        <div class="w-dot w-green"></div>
+                        <span class="app-title-text">PokéDEX App — Python tkinter</span>
+                    </div>
+                    <div class="app-body">
+                        <div class="poke-logo">Poké<span>DEX</span></div>
+                        <div class="poke-sub">Choose your mode</div>
+                        <div class="poke-nav">
+                            <div class="poke-btn pb-red">📖 Pokédex</div>
+                            <div class="poke-btn pb-blue">❓ Quiz Game</div>
+                            <div class="poke-btn pb-yellow">⚔️ Battle Sim</div>
+                            <div class="poke-btn pb-green">🏆 Battle League</div>
+                        </div>
+                        <div class="poke-divider"></div>
+                        <div class="poke-status">
+                            <div class="poke-dot"></div>
+                            <span>pygame music running · dataset loaded</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4 FEATURES -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// App Modules</span>
+            <h2>4 Core <span>Features</span></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card fc-red">
+                <div class="feature-icon fi-red"><i class='bx bx-book-open'></i></div>
+                <h4>📖 Pokédex</h4>
+                <p>Search and retrieve Pokémon information from a preloaded dataset. Users can look up stats, types, and details for any Pokémon — functioning as a full in-app encyclopaedia. The foundation module that all others build upon.</p>
+            </div>
+            <div class="feature-card fc-blue">
+                <div class="feature-icon fi-blue"><i class='bx bx-question-mark'></i></div>
+                <h4>❓ Quiz Game</h4>
+                <p>A Pokémon-themed multiple choice quiz with randomised questions pulled from the dataset. Tracks the player's score across all questions and displays the final result at the end — fixed after a label update bug was debugged.</p>
+            </div>
+            <div class="feature-card fc-yellow">
+                <div class="feature-icon fi-yellow"><i class='bx bx-crossed-swords'></i></div>
+                <h4>⚔️ Battle Simulator</h4>
+                <p>Simulates a one-off battle between two Pokémon using randomised stats and battle logic. Calculates the winner and displays the result — giving users an interactive way to pit Pokémon against each other.</p>
+            </div>
+            <div class="feature-card fc-green">
+                <div class="feature-icon fi-green"><i class='bx bx-trophy'></i></div>
+                <h4>🏆 Battle League</h4>
+                <p>A multi-round competitive mode where Pokémon battle through a full league bracket. Tracks progression round-by-round and displays results after each match — rebuilt after the "Next Round" button bug was identified and fixed.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Tech Stack</span>
+            <h2>Libraries & <span>Tools Used</span></h2>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <span class="tech-emoji">🖥️</span>
+                <h4>tkinter</h4>
+                <p>Python's built-in GUI toolkit — used to build the entire desktop interface including buttons, frames, labels, and navigation between modules.</p>
+                <div class="tech-type">Built-in · GUI</div>
+            </div>
+            <div class="tech-card">
+                <span class="tech-emoji">🎵</span>
+                <h4>pygame</h4>
+                <p>Integrated for background music playback — initialized with <code style="font-family:monospace;color:var(--main-color)">pygame.mixer</code> before launch to ensure seamless audio across all modules.</p>
+                <div class="tech-type">pip install · Audio</div>
+            </div>
+            <div class="tech-card">
+                <span class="tech-emoji">🎲</span>
+                <h4>random</h4>
+                <p>Python's standard library random module — used for battle outcome logic and quiz question randomisation, ensuring every session feels different.</p>
+                <div class="tech-type">Standard Library · Logic</div>
+            </div>
+            <div class="tech-card">
+                <span class="tech-emoji">🖼️</span>
+                <h4>PIL / ImageTk</h4>
+                <p>Pillow library used to process and load images within the tkinter interface — enabling Pokémon imagery to display correctly within the GUI frames.</p>
+                <div class="tech-type">pip install · Images</div>
+            </div>
+            <div class="tech-card">
+                <span class="tech-emoji">🌐</span>
+                <h4>requests</h4>
+                <p>HTTP library for API calls — used to fetch Pokémon data from the PokéAPI where needed, enabling the app to retrieve live or supplementary data.</p>
+                <div class="tech-type">pip install · API</div>
+            </div>
+            <div class="tech-card">
+                <span class="tech-emoji">⚙️</span>
+                <h4>subprocess · os</h4>
+                <p>Standard library modules for system-level operations — managing file paths, launching subprocesses, and handling the application's runtime environment.</p>
+                <div class="tech-type">Standard Library · System</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEV TIMELINE -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Process</span>
+            <h2>8-Day <span>Build Timeline</span></h2>
+        </div>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-dot td-plan">1</div>
+                <div class="tl-content">
+                    <div class="tl-label">Day 1</div>
+                    <h4>Planning & API Research</h4>
+                    <p>Evaluated available APIs and selected the PokéAPI as the data source. Researched similar applications, identified required libraries and tools, and outlined the full feature set and project milestones.</p>
+                    <span class="tl-days">Planning Phase</span>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot td-design">2</div>
+                <div class="tl-content">
+                    <div class="tl-label">Days 2–3</div>
+                    <h4>Design & Wireframing</h4>
+                    <p>Created wireframes for all GUI components in Figma — before and after iterations. Drafted a flowchart illustrating app navigation across modules. Defined core requirements for user interaction and data integration.</p>
+                    <span class="tl-days">Design Phase · 2 Days</span>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot td-dev">3</div>
+                <div class="tl-content">
+                    <div class="tl-label">Days 4–7</div>
+                    <h4>Development — 1 Module per Day</h4>
+                    <p>Set up the main tkinter application framework, then built one module per day: <strong style="color:var(--text-color)">Day 4</strong> — Pokédex · <strong style="color:var(--text-color)">Day 5</strong> — Quiz Game · <strong style="color:var(--text-color)">Day 6</strong> — Battle Simulator · <strong style="color:var(--text-color)">Day 7</strong> — Battle League. Background graphics and navigation were wired together on Day 6.</p>
+                    <span class="tl-days">Development Phase · 4 Days</span>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot td-test">4</div>
+                <div class="tl-content">
+                    <div class="tl-label">Day 7–8</div>
+                    <h4>Testing & Debugging</h4>
+                    <p>Wrote a test plan and created test cases for each module. Identified and fixed 4 bugs — including the background music silent launch, the blank quiz results label, and two Battle League progression issues.</p>
+                    <span class="tl-days">Testing Phase · 2 Days</span>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot td-final">5</div>
+                <div class="tl-content">
+                    <div class="tl-label">Day 8</div>
+                    <h4>Finalisation & Walkthrough</h4>
+                    <p>Added background music, improved visual aesthetics, conducted user testing and incorporated feedback. Recorded the technical description and walkthrough videos for submission.</p>
+                    <span class="tl-days">Finalisation · 1 Day</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BUGS DEBUGGED -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Debugging Log</span>
+            <h2>Bugs <span>Fixed</span></h2>
+        </div>
+        <div class="bugs-list">
+            <div class="bug-card">
+                <div class="bug-header">
+                    <div class="bug-icon"><i class='bx bx-music'></i></div>
+                    <h4>Background Music Silent on Launch</h4>
+                    <span class="bug-status">✓ Fixed</span>
+                </div>
+                <div class="bug-body">
+                    <div class="bug-col">
+                        <label>The Bug</label>
+                        <p>Background music failed to play on application launch despite being correctly loaded in the project directory. No console errors were shown — the failure was completely silent.</p>
+                    </div>
+                    <div class="bug-col">
+                        <label>The Fix</label>
+                        <p>Fixed by reinitialising the <code style="font-family:monospace;color:var(--main-color)">pygame.mixer</code> module in the setup code before playback begins — ensuring music only starts if it isn't already active.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bug-card">
+                <div class="bug-header">
+                    <div class="bug-icon"><i class='bx bx-question-mark'></i></div>
+                    <h4>Quiz Final Score Not Displaying</h4>
+                    <span class="bug-status">✓ Fixed</span>
+                </div>
+                <div class="bug-body">
+                    <div class="bug-col">
+                        <label>The Bug</label>
+                        <p>After the final quiz question, the score was not shown — the label remained blank and the user had no way to see their result, making the quiz feel broken at the end.</p>
+                    </div>
+                    <div class="bug-col">
+                        <label>The Fix</label>
+                        <p>A missing widget update after the last question was identified. Added a score calculation and label update after every question — correctly displaying the final result on completion.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bug-card">
+                <div class="bug-header">
+                    <div class="bug-icon"><i class='bx bx-skip-next'></i></div>
+                    <h4>Battle League "Next Round" Unresponsive</h4>
+                    <span class="bug-status">✓ Fixed</span>
+                </div>
+                <div class="bug-body">
+                    <div class="bug-col">
+                        <label>The Bug</label>
+                        <p>The "Next Round" button in the Battle League became unresponsive after the first click — trapping users in round one and making the entire league mode non-functional.</p>
+                    </div>
+                    <div class="bug-col">
+                        <label>The Fix</label>
+                        <p>Fixed by introducing a round-tracking parameter that dynamically updates the round counter on each click — allowing the button to progress through all rounds and display results after each.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Critical Reflection</span>
+            <h2>What Worked & What <span>Could Improve</span></h2>
+        </div>
+        <div class="reflection-grid">
+            <div class="refl-card">
+                <h4><i class='bx bx-check-shield'></i> What Was Compelling</h4>
+                <div class="refl-list">
+                    <div class="refl-item refl-item-pos"><i class='bx bx-check-circle'></i> Engaging mix of education and entertainment across 4 distinct modules</div>
+                    <div class="refl-item refl-item-pos"><i class='bx bx-check-circle'></i> User-friendly tkinter GUI with consistent theming and clear navigation</div>
+                    <div class="refl-item refl-item-pos"><i class='bx bx-check-circle'></i> Randomisation in battles and quizzes ensures every session feels unique</div>
+                    <div class="refl-item refl-item-pos"><i class='bx bx-check-circle'></i> Background music added immersion and matched the Pokémon concept perfectly</div>
+                    <div class="refl-item refl-item-pos"><i class='bx bx-check-circle'></i> Sophisticated error handling prevents crashes on invalid inputs</div>
+                </div>
+            </div>
+            <div class="refl-card">
+                <h4><i class='bx bx-wrench'></i> What Could Be Improved</h4>
+                <div class="refl-list">
+                    <div class="refl-item refl-item-neg"><i class='bx bx-right-arrow-circle'></i> More advanced GUI styling with customtkinter or animated transitions</div>
+                    <div class="refl-item refl-item-neg"><i class='bx bx-right-arrow-circle'></i> Expand Pokédex by integrating live PokéAPI for comprehensive data</div>
+                    <div class="refl-item refl-item-neg"><i class='bx bx-right-arrow-circle'></i> Add Pokémon images and sound effects during battles and quizzes</div>
+                    <div class="refl-item refl-item-neg"><i class='bx bx-right-arrow-circle'></i> Battle League could include type advantages and team customisation</div>
+                    <div class="refl-item refl-item-neg"><i class='bx bx-right-arrow-circle'></i> Add music controls — mute, unmute, and volume adjustment</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Building a real app requires architecture, not just code</h4>
+                    <p>Splitting the app into four separate modules (Pokédex, Quiz, Battle Sim, League) forced real thinking about structure — how modules talk to each other, how state is shared, and how the GUI connects everything.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Silent bugs are the hardest to find</h4>
+                    <p>The music bug produced no error — the app just ran silently. Learning to debug without error messages — tracing logic, checking initialisation order, and isolating components — was the most valuable debugging lesson of the module.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>GUI state management is a discipline of its own</h4>
+                    <p>The Battle League "Next Round" bug revealed how easy it is to lose track of state in an event-driven GUI. Tracking round numbers explicitly with parameters — rather than implicitly — fixed it and taught a principle that applies far beyond Python.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>A structured plan produces a better product</h4>
+                    <p>The 8-day timeline — with one module per development day — meant no feature was rushed or squeezed. Planning the build before writing any code was the single biggest difference between Code Lab 1 and Code Lab 2.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>User experience matters even in desktop Python apps</h4>
+                    <p>Background music, consistent theming, and clear navigation turned a functional script into something that felt like a real product. Polish isn't decoration — it's the difference between a program and an application.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 2 · Code Lab 2 · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="web-development-1.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Web Dev 1</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

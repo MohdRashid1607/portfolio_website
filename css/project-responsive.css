@@ -1,0 +1,158 @@
+/* ================================================
+   PROJECT PAGES — SHARED RESPONSIVE CSS
+   Applied to all pages in /pages/ by linking this file.
+   These supplement the base style.css media queries.
+   ================================================ */
+
+/* ── Laptop / Tablet L ───────────────────────── */
+@media (max-width: 1100px) {
+    .cs-hero-inner { grid-template-columns: 1fr; gap: 4rem; }
+    .cs-meta-card { min-width: unset; max-width: 100%; }
+    .cs-stats { grid-template-columns: repeat(2, 1fr); }
+    .cs-two-col,
+    .stack-section,
+    .wireframe-gallery { grid-template-columns: 1fr; gap: 3rem; }
+    .brand-meta { grid-template-columns: 1fr 1fr; }
+    .bm-item:nth-child(2) { border-right: none; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .arch-row { flex-wrap: wrap; gap: 1.5rem; }
+    .arch-arrow { display: none; }
+    .arch-layer { flex: 1 1 40%; }
+}
+
+/* ── Tablet ───────────────────────────────────── */
+@media (max-width: 900px) {
+    .cs-hero { padding: 13rem 5% 7rem; }
+    .cs-hero h1 { font-size: 4rem; }
+    .cs-section { padding: 6rem 5%; }
+    .cs-stats { grid-template-columns: repeat(2, 1fr); }
+    .cs-stat { padding: 2.5rem 2rem; }
+    .cs-section h2 { font-size: 2.6rem; }
+    .cs-bottom { padding: 3.5rem 5%; }
+}
+
+/* ── Tablet S / Mobile L ──────────────────────── */
+@media (max-width: 768px) {
+    .cs-hero { padding: 11rem 4% 5rem; }
+    .cs-hero h1 { font-size: 3.2rem; }
+    .cs-hero-desc { font-size: 1.5rem; }
+    .cs-section { padding: 5rem 4%; }
+    .cs-section h2 { font-size: 2.4rem; }
+    .cs-section-top { flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+
+    /* Stats: 2-column grid on tablet */
+    .cs-stats { grid-template-columns: repeat(2, 1fr); }
+    .cs-stat { padding: 2rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border-color); }
+    .cs-stat:nth-child(odd) { border-right: 1px solid var(--border-color); }
+    .cs-stat:last-child,
+    .cs-stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    .cs-stat strong { font-size: 2.4rem; }
+
+    /* Feature grid: 1 column */
+    .features-grid { grid-template-columns: 1fr; }
+
+    /* Brand meta: 1 column */
+    .brand-meta { grid-template-columns: 1fr; }
+    .bm-item { border-right: none !important; border-bottom: 1px solid var(--border-color); }
+    .bm-item:last-child { border-bottom: none; }
+
+    /* Design decisions */
+    .dd-item { grid-template-columns: 1fr; gap: 1rem; }
+    .dd-num { width: 3.5rem; height: 3.5rem; font-size: 1.5rem; }
+
+    /* Bottom bar */
+    .cs-bottom { flex-direction: column; align-items: flex-start; padding: 3rem 4%; gap: 1.5rem; }
+    .cs-bottom-links { flex-wrap: wrap; }
+
+    /* Hero links */
+    .cs-hero-links { flex-direction: column; gap: 1rem; }
+    .cs-hero-links .btn { justify-content: center; width: 100%; max-width: 32rem; }
+
+    /* Meta card */
+    .cs-meta-card { padding: 2rem; }
+
+    /* Architecture */
+    .arch-layer { flex: 1 1 100%; }
+    .arch-diagram { padding: 2.5rem 2rem; }
+}
+
+/* ── Mobile L ─────────────────────────────────── */
+@media (max-width: 580px) {
+    .cs-hero { padding: 10rem 4% 4rem; }
+    .cs-hero h1 { font-size: 2.8rem; }
+    .cs-hero-desc { font-size: 1.45rem; }
+    .cs-year-badge { font-size: 1.1rem; }
+
+    /* Stats: single column */
+    .cs-stats { grid-template-columns: 1fr 1fr; }
+    .cs-stat { padding: 1.8rem 1rem; }
+    .cs-stat strong { font-size: 2rem; }
+    .cs-stat span { font-size: 1.1rem; }
+
+    /* Sections */
+    .cs-section { padding: 4rem 4%; }
+    .cs-section h2 { font-size: 2.2rem; }
+
+    /* Learning items */
+    .learning-item { padding: 1.5rem 1.8rem; gap: 1.5rem; }
+    .learning-num { font-size: 1.6rem; }
+
+    /* Trade-off table: horizontal scroll */
+    .tradeoff-table { font-size: 1.2rem; }
+    .tradeoff-table th,
+    .tradeoff-table td { padding: 1.2rem 1rem; }
+
+    /* Brand visual */
+    .brand-visual { height: 20rem; }
+
+    /* Stack items */
+    .stack-item { gap: 1rem; padding: 1rem 1.2rem; }
+    .stack-why { display: none; }
+}
+
+/* ── Mobile M / S ─────────────────────────────── */
+@media (max-width: 450px) {
+    .cs-hero { padding: 9rem 4% 3rem; }
+    .cs-hero h1 { font-size: 2.4rem; }
+    .cs-stats { grid-template-columns: 1fr 1fr; }
+    .cs-section { padding: 3.5rem 4%; }
+    .cs-section h2 { font-size: 2rem; }
+    .cs-bottom { padding: 2.5rem 4%; }
+
+    /* Breadcrumb: truncate on very small screens */
+    .cs-breadcrumb { flex-wrap: wrap; font-size: 1.2rem; }
+
+    /* Tags: wrap nicely */
+    .cs-tags { gap: 0.6rem; }
+    .cs-tag { font-size: 1.1rem; padding: 0.4rem 1rem; }
+
+    /* Quote */
+    .cs-quote { padding: 1.4rem 1.6rem; }
+    .cs-quote p { font-size: 1.4rem; }
+
+    /* Feat cards */
+    .feat-card { padding: 2rem 1.8rem; }
+    .feat-card h4 { font-size: 1.5rem; }
+
+    /* Learning items */
+    .learning-item { padding: 1.2rem 1.4rem; }
+    .learning-item h4 { font-size: 1.4rem; }
+
+    /* Meta card rows */
+    .cs-meta-card { padding: 1.6rem; }
+    .cs-meta-item p { font-size: 1.3rem; }
+    .cs-meta-item label { font-size: 1rem; }
+
+    /* Bottom */
+    .cs-bottom-links { flex-direction: column; }
+    .cs-bottom-links .btn { justify-content: center; }
+}
+
+/* ── Mobile S ─────────────────────────────────── */
+@media (max-width: 360px) {
+    .cs-hero h1 { font-size: 2.2rem; }
+    .cs-section h2 { font-size: 1.9rem; }
+    .cs-stats { grid-template-columns: 1fr; }
+    .cs-stat { border-right: none !important; border-bottom: 1px solid var(--border-color); }
+    .cs-stat:last-child { border-bottom: none; }
+}

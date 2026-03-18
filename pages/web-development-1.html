@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development 1 — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        .cs-hero { padding: 14rem 7% 8rem; background: var(--bg-color); position: relative; overflow: hidden; }
+        .cs-hero::before { content:''; position:absolute; top:-20rem; right:-10rem; width:60rem; height:60rem; background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%); pointer-events:none; }
+        .cs-breadcrumb { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); margin-bottom:3rem; }
+        .cs-breadcrumb a { color:var(--main-color); font-weight:500; }
+        .cs-breadcrumb a:hover { text-decoration:underline; }
+        .cs-breadcrumb i { font-size:1.6rem; }
+        .cs-hero-inner { display:grid; grid-template-columns:1fr auto; gap:6rem; align-items:start; max-width:120rem; }
+        .cs-year-badge { display:inline-block; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.4rem; border-radius:5rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.8rem; }
+        .cs-hero h1 { font-size:5rem; font-weight:800; color:var(--text-color); line-height:1.1; letter-spacing:-0.03em; margin-bottom:2rem; }
+        .cs-hero h1 span { color:var(--main-color); }
+        .cs-hero-desc { font-size:1.7rem; color:var(--text-light); line-height:1.7; max-width:60rem; margin-bottom:3rem; }
+        .cs-tags { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:3.5rem; }
+        .cs-tag { font-size:1.25rem; padding:0.5rem 1.4rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:500; }
+        .cs-tag-main { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); }
+        .cs-hero-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .cs-meta-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; min-width:26rem; box-shadow:0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display:flex; flex-direction:column; gap:2rem; }
+        .cs-meta-item label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.4rem; }
+        .cs-meta-item p { font-size:1.45rem; font-weight:600; color:var(--text-color); }
+        .cs-meta-divider { height:1px; background:var(--border-color); }
+        .cs-grade { font-size:2.4rem !important; font-weight:800 !important; color:var(--main-color) !important; }
+
+        .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--bg-alt); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); }
+        .cs-stat { padding:3rem 4rem; border-right:1px solid var(--border-color); text-align:center; }
+        .cs-stat:last-child { border-right:none; }
+        .cs-stat strong { display:block; font-size:3rem; font-weight:800; color:var(--main-color); margin-bottom:0.4rem; }
+        .cs-stat span { font-size:1.3rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+
+        .cs-section { padding:7rem 7%; border-bottom:1px solid var(--border-color); }
+        .cs-section-alt { background:var(--bg-alt); }
+        .cs-section-top { display:flex; align-items:baseline; gap:2rem; margin-bottom:4rem; }
+        .cs-section-eyebrow { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.12em; white-space:nowrap; }
+        .cs-section h2 { font-size:3rem; font-weight:800; color:var(--text-color); letter-spacing:-0.02em; line-height:1.2; }
+        .cs-section h2 span { color:var(--main-color); }
+        .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+        .cs-body { font-size:1.55rem; color:var(--text-light); line-height:1.8; }
+        .cs-body + .cs-body { margin-top:1.5rem; }
+        .cs-quote { border-left:3px solid var(--main-color); padding:1.8rem 2.2rem; background:rgba(117,78,249,0.04); border-radius:0 1rem 1rem 0; margin:2.5rem 0; }
+        .cs-quote p { font-size:1.6rem; font-style:italic; color:var(--text-color); line-height:1.6; margin-bottom:0.6rem; }
+        .cs-quote cite { font-size:1.25rem; color:var(--main-color); font-style:normal; font-weight:600; }
+
+        /* BROWSER PREVIEW */
+        .browser-mockup { background:#1e1e2e; border-radius:1.4rem; overflow:hidden; border:1px solid rgba(255,255,255,0.06); box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+        .browser-bar { background:#2a2a3e; padding:1rem 1.6rem; display:flex; align-items:center; gap:1rem; }
+        .b-dot { width:1.2rem; height:1.2rem; border-radius:50%; }
+        .b-red { background:#ff5f57; } .b-yellow { background:#febc2e; } .b-green { background:#28c840; }
+        .browser-url { flex:1; background:rgba(255,255,255,0.06); border-radius:0.6rem; padding:0.4rem 1.2rem; font-size:1.2rem; color:rgba(255,255,255,0.35); font-family:monospace; margin:0 1rem; }
+        .browser-body { padding:2rem 2.4rem; }
+        .html-line { font-family:'Courier New',monospace; font-size:1.3rem; line-height:1.8; }
+        .hl-tag { color:#ff7b72; }
+        .hl-attr { color:#79c0ff; }
+        .hl-val { color:#a5d6ff; }
+        .hl-txt { color:#e6edf3; }
+        .hl-cm { color:#8b949e; }
+        .hl-css { color:#d2a8ff; }
+        .hl-num { color:#ffa657; }
+
+        /* CHAPTERS GRID */
+        .chapters-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .chapter-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; overflow:hidden; transition:all 0.3s; }
+        .chapter-card:hover { border-color:rgba(117,78,249,0.3); transform:translateY(-4px); box-shadow:0 12px 35px var(--shadow-color); }
+        .chapter-thumb { height:10rem; display:flex; align-items:center; justify-content:center; position:relative; }
+        .chapter-thumb i { font-size:4rem; color:rgba(255,255,255,0.25); position:relative; z-index:1; }
+        .ch-num { position:absolute; top:1.2rem; left:1.4rem; font-size:1rem; font-weight:800; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.1em; }
+        .ct-1 { background:linear-gradient(135deg,#1a0a3d,#754ef9); }
+        .ct-2 { background:linear-gradient(135deg,#0f2027,#2c5364); }
+        .ct-3 { background:linear-gradient(135deg,#0f3460,#16213e); }
+        .ct-4 { background:linear-gradient(135deg,#1d1d2e,#4a1942); }
+        .ct-5 { background:linear-gradient(135deg,#11998e,#1a3a3a); }
+        .ct-6 { background:linear-gradient(135deg,#f24e1e,#6b1a0a); }
+        .chapter-body { padding:2rem 2.2rem; }
+        .chapter-num-label { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.6rem; }
+        .chapter-card h4 { font-size:1.65rem; font-weight:700; color:var(--text-color); margin-bottom:1.2rem; }
+        .exercise-list { display:flex; flex-direction:column; gap:0.6rem; }
+        .ex-item { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); }
+        .ex-item i { font-size:1.4rem; flex-shrink:0; }
+        .ex-main i { color:var(--main-color); }
+        .ex-bonus i { color:#f59e0b; }
+        .ex-bonus { color:var(--text-light); }
+        .ex-label-bonus { font-size:1rem; background:rgba(245,158,11,0.1); color:#f59e0b; border:1px solid rgba(245,158,11,0.2); padding:0.1rem 0.6rem; border-radius:3rem; font-weight:700; margin-left:0.4rem; }
+
+        /* CERT CARDS */
+        .cert-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .cert-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; text-align:center; transition:all 0.3s; position:relative; overflow:hidden; }
+        .cert-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+        .cert-card:nth-child(1)::before { background:linear-gradient(90deg,#f97316,#ef4444); }
+        .cert-card:nth-child(2)::before { background:linear-gradient(90deg,#3b82f6,#6366f1); }
+        .cert-card:nth-child(3)::before { background:linear-gradient(90deg,#f59e0b,#eab308); }
+        .cert-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px var(--shadow-color); border-color:rgba(117,78,249,0.3); }
+        .cert-icon { font-size:4rem; margin-bottom:1.5rem; display:block; }
+        .cert-card h4 { font-size:1.8rem; font-weight:800; color:var(--text-color); margin-bottom:0.6rem; }
+        .cert-card p { font-size:1.35rem; color:var(--text-light); line-height:1.6; margin-bottom:1.4rem; }
+        .cert-badge { display:inline-flex; align-items:center; gap:0.5rem; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.2rem; border-radius:5rem; }
+
+        /* SKILLS */
+        .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .skill-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .skill-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .skill-icon { width:4.5rem; height:4.5rem; background:rgba(117,78,249,0.08); border-radius:1rem; display:flex; align-items:center; justify-content:center; font-size:2.2rem; color:var(--main-color); margin-bottom:1.5rem; }
+        .skill-card h4 { font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:0.7rem; }
+        .skill-card p { font-size:1.35rem; color:var(--text-light); line-height:1.6; margin-bottom:1.3rem; }
+        .skill-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+        .skill-tag { font-size:1.1rem; padding:0.25rem 0.9rem; border-radius:5rem; background:rgba(117,78,249,0.06); color:var(--main-color); border:1px solid rgba(117,78,249,0.15); font-weight:500; }
+
+        /* LEARNINGS */
+        .learnings-list { display:flex; flex-direction:column; gap:1.5rem; }
+        .learning-item { display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .learning-item:hover { border-color:rgba(117,78,249,0.25); background:rgba(117,78,249,0.02); }
+        .learning-num { font-size:2rem; font-weight:800; color:rgba(117,78,249,0.2); min-width:3rem; line-height:1.2; }
+        .learning-item h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .learning-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        .cs-bottom { display:flex; justify-content:space-between; align-items:center; padding:4rem 7%; background:var(--bg-alt); border-top:1px solid var(--border-color); flex-wrap:wrap; gap:2rem; }
+        .cs-bottom p { font-size:1.6rem; color:var(--text-light); }
+        .cs-bottom-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+        @media (max-width:1100px) {
+            .cs-hero-inner { grid-template-columns:1fr; }
+            .cs-meta-card { min-width:unset; }
+            .cs-stats { grid-template-columns:repeat(2,1fr); }
+            .cs-two-col { grid-template-columns:1fr; gap:3rem; }
+            .chapters-grid, .cert-grid, .skills-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        @media (max-width:650px) {
+            .cs-hero { padding:12rem 5% 6rem; }
+            .cs-hero h1 { font-size:3.5rem; }
+            .chapters-grid, .cert-grid, .skills-grid { grid-template-columns:1fr; }
+            .cs-section { padding:5rem 5%; }
+            .cs-bottom { flex-direction:column; align-items:flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Web Development 1</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 1 · Module</div>
+                <h1>Web <span>Development 1</span></h1>
+                <p class="cs-hero-desc">A structured, hands-on introduction to front-end web development — 6 chapters covering HTML, CSS, navigation, images, page layout, embedded content, and JavaScript. Every chapter paired a mandatory exercise with a bonus challenge. Three certificates earned.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">HTML5</span>
+                    <span class="cs-tag cs-tag-main">CSS3</span>
+                    <span class="cs-tag cs-tag-main">JavaScript</span>
+                    <span class="cs-tag">Page Layout</span>
+                    <span class="cs-tag">Navigation</span>
+                    <span class="cs-tag">Embedded Content</span>
+                    <span class="cs-tag">Responsive Design</span>
+                    <span class="cs-tag">DOM Manipulation</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="../index.html#contact" class="btn btn-primary">
+                        <i class='bx bxl-github'></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Web Development 1</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 1 — 2022/23</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Languages</label><p>HTML · CSS · JavaScript</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Chapters</label><p>6 Chapters</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Certificates</label><p>HTML · CSS · JavaScript</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>6</strong><span>Chapters</span></div>
+        <div class="cs-stat"><strong>12+</strong><span>Exercises</span></div>
+        <div class="cs-stat"><strong>3</strong><span>Certificates</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Overview</span>
+            <h2>About This <span>Module</span></h2>
+        </div>
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Web Development 1 was the module where the web became real — not as something to consume, but as something to build. Starting from the very first HTML tag and ending with interactive JavaScript applications, this module laid the technical foundation for everything I've built since.</p>
+                <p class="cs-body">Each of the six chapters introduced a new layer of front-end development — from HTML structure and CSS styling, through multi-page navigation and media embedding, all the way to writing JavaScript logic for a petrol calculator and an RGB colour guessing game.</p>
+                <div class="cs-quote">
+                    <p>"Every website you have ever visited was built with the same three languages. Understanding HTML, CSS, and JavaScript isn't just technical skill — it's learning to read and write the language of the web."</p>
+                    <cite>— Web Development 1, M.Rashid</cite>
+                </div>
+            </div>
+            <div>
+                <!-- Browser mockup -->
+                <div class="browser-mockup">
+                    <div class="browser-bar">
+                        <div class="b-dot b-red"></div>
+                        <div class="b-dot b-yellow"></div>
+                        <div class="b-dot b-green"></div>
+                        <div class="browser-url">localhost/recipe-page/index.html</div>
+                    </div>
+                    <div class="browser-body">
+                        <div class="html-line"><span class="hl-cm">&lt;!-- Ch.1 — Recipe Page --&gt;</span></div>
+                        <div class="html-line"><span class="hl-tag">&lt;h1</span> <span class="hl-attr">class</span>=<span class="hl-val">"title"</span><span class="hl-tag">&gt;</span><span class="hl-txt">My Recipe</span><span class="hl-tag">&lt;/h1&gt;</span></div>
+                        <div class="html-line" style="margin-top:0.6rem;"><span class="hl-cm">/* Ch.3 — Image styling */</span></div>
+                        <div class="html-line"><span class="hl-css">img</span> {</div>
+                        <div class="html-line">&nbsp;&nbsp;<span class="hl-attr">width</span>: <span class="hl-num">100%</span>;</div>
+                        <div class="html-line">&nbsp;&nbsp;<span class="hl-attr">border-radius</span>: <span class="hl-num">8px</span>;</div>
+                        <div class="html-line">}</div>
+                        <div class="html-line" style="margin-top:0.6rem;"><span class="hl-cm">// Ch.6 — Petrol Calculator</span></div>
+                        <div class="html-line"><span class="hl-tag">function</span> <span class="hl-css">calcCost</span>(<span class="hl-attr">litres</span>, <span class="hl-attr">price</span>) {</div>
+                        <div class="html-line">&nbsp;&nbsp;<span class="hl-tag">return</span> <span class="hl-attr">litres</span> * <span class="hl-attr">price</span>;</div>
+                        <div class="html-line">}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAPTERS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Curriculum</span>
+            <h2>All <span>6 Chapters</span></h2>
+        </div>
+        <div class="chapters-grid">
+
+            <div class="chapter-card">
+                <div class="chapter-thumb ct-1">
+                    <span class="ch-num">Chapter 01</span>
+                    <i class='bx bxl-html5'></i>
+                </div>
+                <div class="chapter-body">
+                    <div class="chapter-num-label">Chapter 01</div>
+                    <h4>Introduction to HTML & CSS</h4>
+                    <div class="exercise-list">
+                        <div class="ex-item ex-main"><i class='bx bx-check-circle'></i> Recipe Page <em style="font-size:1.1rem;color:var(--main-color);">(Mandatory)</em></div>
+                        <div class="ex-item ex-bonus"><i class='bx bx-star'></i> HTML & CSS Resource <span class="ex-label-bonus">Bonus</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-thumb ct-2">
+                    <span class="ch-num">Chapter 02</span>
+                    <i class='bx bx-link'></i>
+                </div>
+                <div class="chapter-body">
+                    <div class="chapter-num-label">Chapter 02</div>
+                    <h4>Links & Navigation</h4>
+                    <div class="exercise-list">
+                        <div class="ex-item ex-main"><i class='bx bx-check-circle'></i> One Page Website <em style="font-size:1.1rem;color:var(--main-color);">(Mandatory)</em></div>
+                        <div class="ex-item ex-bonus"><i class='bx bx-star'></i> Multi-Page Website <span class="ex-label-bonus">Bonus</span></div>
+                        <div class="ex-item ex-bonus" style="padding-left:2.2rem;font-size:1.25rem;color:var(--text-light);">Index · Plot · Cast · Characters · Review</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-thumb ct-3">
+                    <span class="ch-num">Chapter 03</span>
+                    <i class='bx bx-image'></i>
+                </div>
+                <div class="chapter-body">
+                    <div class="chapter-num-label">Chapter 03</div>
+                    <h4>Images</h4>
+                    <div class="exercise-list">
+                        <div class="ex-item ex-main"><i class='bx bx-check-circle'></i> Three Images Layout <em style="font-size:1.1rem;color:var(--main-color);">(Mandatory)</em></div>
+                        <div class="ex-item ex-bonus"><i class='bx bx-star'></i> Styling Those Divs <span class="ex-label-bonus">Bonus</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-thumb ct-4">
+                    <span class="ch-num">Chapter 04</span>
+                    <i class='bx bx-layout'></i>
+                </div>
+                <div class="chapter-body">
+                    <div class="chapter-num-label">Chapter 04</div>
+                    <h4>Page Layout</h4>
+                    <div class="exercise-list">
+                        <div class="ex-item ex-main"><i class='bx bx-check-circle'></i> Structuring a Webpage <em style="font-size:1.1rem;color:var(--main-color);">(Mandatory)</em></div>
+                        <div class="ex-item ex-bonus"><i class='bx bx-star'></i> Study Planner <span class="ex-label-bonus">Bonus</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-thumb ct-5">
+                    <span class="ch-num">Chapter 05</span>
+                    <i class='bx bx-video'></i>
+                </div>
+                <div class="chapter-body">
+                    <div class="chapter-num-label">Chapter 05</div>
+                    <h4>Embedded Content</h4>
+                    <div class="exercise-list">
+                        <div class="ex-item ex-main"><i class='bx bx-check-circle'></i> Embed Video <em style="font-size:1.1rem;color:var(--main-color);">(Mandatory)</em></div>
+                        <div class="ex-item ex-bonus"><i class='bx bx-star'></i> Alan Partridge Soundboard <span class="ex-label-bonus">Bonus</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter-card">
+                <div class="chapter-thumb ct-6">
+                    <span class="ch-num">Chapter 06</span>
+                    <i class='bx bxl-javascript'></i>
+                </div>
+                <div class="chapter-body">
+                    <div class="chapter-num-label">Chapter 06</div>
+                    <h4>JavaScript</h4>
+                    <div class="exercise-list">
+                        <div class="ex-item ex-main"><i class='bx bx-check-circle'></i> Petrol Calculator <em style="font-size:1.1rem;color:var(--main-color);">(Mandatory)</em></div>
+                        <div class="ex-item ex-bonus"><i class='bx bx-star'></i> RGB Colour Guessing Game <span class="ex-label-bonus">Bonus</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CERTIFICATES -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Achievements</span>
+            <h2>3 Completion <span>Certificates</span></h2>
+        </div>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <span class="cert-icon">🟧</span>
+                <h4>HTML Certificate</h4>
+                <p>Certified completion of all HTML chapters — mastering document structure, semantic elements, forms, and multi-page site architecture.</p>
+                <div class="cert-badge"><i class='bx bx-medal'></i> Certified</div>
+            </div>
+            <div class="cert-card">
+                <span class="cert-icon">🟦</span>
+                <h4>CSS Certificate</h4>
+                <p>Certified completion of all CSS chapters — covering selectors, box model, layout techniques, image styling, and responsive design principles.</p>
+                <div class="cert-badge"><i class='bx bx-medal'></i> Certified</div>
+            </div>
+            <div class="cert-card">
+                <span class="cert-icon">🟨</span>
+                <h4>JavaScript Certificate</h4>
+                <p>Certified completion of all JavaScript chapters — covering variables, functions, DOM manipulation, events, and interactive application logic.</p>
+                <div class="cert-badge"><i class='bx bx-medal'></i> Certified</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKILLS GAINED -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Skills Gained</span>
+            <h2>Front-End Foundations <span>Mastered</span></h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon"><i class='bx bxl-html5'></i></div>
+                <h4>HTML5 Structure</h4>
+                <p>Semantic markup, document structure, forms, tables, and building multi-page site architectures with proper internal linking.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Semantic HTML</span>
+                    <span class="skill-tag">Forms</span>
+                    <span class="skill-tag">Nav</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class='bx bxl-css3'></i></div>
+                <h4>CSS3 Styling</h4>
+                <p>Selectors, the box model, flexbox layout, image styling, typography, and applying visual hierarchy to real webpage designs.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Flexbox</span>
+                    <span class="skill-tag">Box Model</span>
+                    <span class="skill-tag">Selectors</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class='bx bxl-javascript'></i></div>
+                <h4>JavaScript Logic</h4>
+                <p>Functions, variables, DOM manipulation, event listeners, and building interactive tools — from calculators to colour games.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">DOM</span>
+                    <span class="skill-tag">Functions</span>
+                    <span class="skill-tag">Events</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class='bx bx-link'></i></div>
+                <h4>Multi-Page Navigation</h4>
+                <p>Building both single-page and multi-page websites with consistent navigation — including a full 6-page movie fan site with dedicated sections.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Anchor Tags</span>
+                    <span class="skill-tag">File Paths</span>
+                    <span class="skill-tag">Nav Bar</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class='bx bx-video'></i></div>
+                <h4>Embedded Media</h4>
+                <p>Embedding video, audio, and iframes — including building an interactive audio soundboard with multiple embedded sound elements.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">iframe</span>
+                    <span class="skill-tag">Audio</span>
+                    <span class="skill-tag">Video</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon"><i class='bx bx-layout'></i></div>
+                <h4>Page Layout</h4>
+                <p>Structuring complex webpages with semantic layout elements, building a study planner UI, and applying grid and flexbox for consistent page structure.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Grid</span>
+                    <span class="skill-tag">Flexbox</span>
+                    <span class="skill-tag">Sections</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>HTML, CSS, and JavaScript each do one job — and do it well</h4>
+                    <p>The separation of structure (HTML), presentation (CSS), and behaviour (JavaScript) is one of the most elegant design decisions in web technology. Understanding why they're separate makes you better at using all three.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>The bonus exercises built more confidence than the mandatory ones</h4>
+                    <p>The RGB colour guessing game and the multi-page movie site pushed beyond the brief. Choosing to do bonus work meant wrestling with harder problems — and the extra struggle produced extra skill.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Layout is the hardest skill to develop</h4>
+                    <p>Chapter 4 (Page Layout) was the most challenging — understanding how elements flow, stack, and interact on screen requires a mental model that takes real practice to build. Flexbox clicked slowly, then all at once.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>JavaScript makes the web feel alive</h4>
+                    <p>The shift from static HTML/CSS to interactive JavaScript was the most exciting moment in the module. Writing a function that responds to user input — the petrol calculator, the colour game — made the browser feel like a canvas, not a document.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>This module is why I build websites today</h4>
+                    <p>Web Development 1 is directly responsible for the portfolio you're reading right now. Every HTML element, CSS property, and JavaScript function used on this site traces back to the foundations built in this module.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 1 · Web Development 1 · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="ideation-ux-design.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Ideation & UX</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

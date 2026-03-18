@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Storytelling — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        .cs-hero { padding: 14rem 7% 8rem; background: var(--bg-color); position: relative; overflow: hidden; }
+        .cs-hero::before { content: ''; position: absolute; top: -20rem; right: -10rem; width: 60rem; height: 60rem; background: radial-gradient(circle, rgba(117,78,249,0.07) 0%, transparent 70%); pointer-events: none; }
+        .cs-breadcrumb { display: flex; align-items: center; gap: 0.8rem; font-size: 1.3rem; color: var(--text-light); margin-bottom: 3rem; }
+        .cs-breadcrumb a { color: var(--main-color); font-weight: 500; }
+        .cs-breadcrumb a:hover { text-decoration: underline; }
+        .cs-breadcrumb i { font-size: 1.6rem; color: var(--text-light); }
+        .cs-hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 6rem; align-items: start; max-width: 120rem; }
+        .cs-year-badge { display: inline-block; font-size: 1.2rem; font-weight: 700; color: var(--main-color); background: rgba(117,78,249,0.08); border: 1px solid rgba(117,78,249,0.2); padding: 0.4rem 1.4rem; border-radius: 5rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.8rem; }
+        .cs-hero h1 { font-size: 5rem; font-weight: 800; color: var(--text-color); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 2rem; }
+        .cs-hero h1 span { color: var(--main-color); }
+        .cs-hero-desc { font-size: 1.7rem; color: var(--text-light); line-height: 1.7; max-width: 60rem; margin-bottom: 3rem; }
+        .cs-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 3.5rem; }
+        .cs-tag { font-size: 1.25rem; padding: 0.5rem 1.4rem; border-radius: 5rem; background: var(--bg-alt); color: var(--text-light); border: 1px solid var(--border-color); font-weight: 500; }
+        .cs-tag-main { background: rgba(117,78,249,0.08); color: var(--main-color); border-color: rgba(117,78,249,0.2); }
+        .cs-hero-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        .cs-meta-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.6rem; padding: 3rem; min-width: 26rem; box-shadow: 0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display: flex; flex-direction: column; gap: 2rem; }
+        .cs-meta-item label { display: block; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.4rem; }
+        .cs-meta-item p { font-size: 1.45rem; font-weight: 600; color: var(--text-color); }
+        .cs-meta-divider { height: 1px; background: var(--border-color); }
+        .cs-grade { font-size: 2.4rem !important; font-weight: 800 !important; color: var(--main-color) !important; }
+        .cs-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--bg-alt); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .cs-stat { padding: 3rem 4rem; border-right: 1px solid var(--border-color); text-align: center; }
+        .cs-stat:last-child { border-right: none; }
+        .cs-stat strong { display: block; font-size: 3rem; font-weight: 800; color: var(--main-color); margin-bottom: 0.4rem; }
+        .cs-stat span { font-size: 1.3rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+        .cs-section { padding: 7rem 7%; border-bottom: 1px solid var(--border-color); }
+        .cs-section-alt { background: var(--bg-alt); }
+        .cs-section-top { display: flex; align-items: baseline; gap: 2rem; margin-bottom: 4rem; }
+        .cs-section-eyebrow { font-size: 1.1rem; font-weight: 700; color: var(--main-color); text-transform: uppercase; letter-spacing: 0.12em; white-space: nowrap; }
+        .cs-section h2 { font-size: 3rem; font-weight: 800; color: var(--text-color); letter-spacing: -0.02em; line-height: 1.2; }
+        .cs-section h2 span { color: var(--main-color); }
+        .cs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+        .cs-body { font-size: 1.55rem; color: var(--text-light); line-height: 1.8; }
+        .cs-body + .cs-body { margin-top: 1.5rem; }
+        .cs-quote { border-left: 3px solid var(--main-color); padding: 1.8rem 2.2rem; background: rgba(117,78,249,0.04); border-radius: 0 1rem 1rem 0; margin: 2.5rem 0; }
+        .cs-quote p { font-size: 1.6rem; font-style: italic; color: var(--text-color); line-height: 1.6; margin-bottom: 0.6rem; }
+        .cs-quote cite { font-size: 1.25rem; color: var(--main-color); font-style: normal; font-weight: 600; }
+        .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .del-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.4rem; overflow: hidden; transition: all 0.3s; }
+        .del-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px var(--shadow-color); border-color: rgba(117,78,249,0.3); }
+        .del-thumb { height: 14rem; display: flex; align-items: center; justify-content: center; }
+        .del-thumb i { font-size: 5rem; color: rgba(255,255,255,0.35); }
+        .dt-1 { background: linear-gradient(135deg, #1a0a3d, #754ef9); }
+        .dt-2 { background: linear-gradient(135deg, #0f2027, #2c5364); }
+        .dt-3 { background: linear-gradient(135deg, #f24e1e, #a259ff); }
+        .dt-4 { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .dt-5 { background: linear-gradient(135deg, #360033, #0b8793); }
+        .dt-6 { background: linear-gradient(135deg, #1d1d1d, #4f4f4f); }
+        .dt-7 { background: linear-gradient(135deg, #f953c6, #b91d73); }
+        .dt-8 { background: linear-gradient(135deg, #0f3460, #754ef9); }
+        .del-body { padding: 2rem 2.2rem; }
+        .del-body h4 { font-size: 1.55rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.6rem; }
+        .del-body p { font-size: 1.3rem; color: var(--text-light); line-height: 1.55; margin-bottom: 1.2rem; }
+        .del-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; color: var(--main-color); font-weight: 600; transition: gap 0.2s; }
+        .del-link:hover { gap: 1rem; }
+        .del-tag { display: inline-block; font-size: 1.1rem; padding: 0.2rem 1rem; border-radius: 5rem; background: rgba(117,78,249,0.08); color: var(--main-color); font-weight: 600; margin-bottom: 0.8rem; }
+        .reflect-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .reflect-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.4rem; padding: 2.5rem; transition: all 0.3s; }
+        .reflect-card:hover { border-color: rgba(117,78,249,0.3); transform: translateY(-4px); box-shadow: 0 12px 35px var(--shadow-color); }
+        .reflect-icon { width: 4.5rem; height: 4.5rem; background: rgba(117,78,249,0.08); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--main-color); margin-bottom: 1.5rem; }
+        .reflect-card h4 { font-size: 1.6rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.7rem; }
+        .reflect-card p { font-size: 1.35rem; color: var(--text-light); line-height: 1.6; }
+        .learnings-list { display: flex; flex-direction: column; gap: 1.5rem; }
+        .learning-item { display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2.5rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.2rem; transition: all 0.3s; }
+        .learning-item:hover { border-color: rgba(117,78,249,0.25); background: rgba(117,78,249,0.02); }
+        .learning-num { font-size: 2rem; font-weight: 800; color: rgba(117,78,249,0.2); min-width: 3rem; line-height: 1.2; }
+        .learning-item h4 { font-size: 1.55rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.4rem; }
+        .learning-item p { font-size: 1.35rem; color: var(--text-light); line-height: 1.65; }
+        .cs-bottom { display: flex; justify-content: space-between; align-items: center; padding: 4rem 7%; background: var(--bg-alt); border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 2rem; }
+        .cs-bottom p { font-size: 1.6rem; color: var(--text-light); }
+        .cs-bottom-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        @media (max-width: 1100px) {
+            .cs-hero-inner { grid-template-columns: 1fr; }
+            .cs-meta-card { min-width: unset; }
+            .cs-stats { grid-template-columns: repeat(2, 1fr); }
+            .cs-two-col { grid-template-columns: 1fr; gap: 3rem; }
+            .deliverables-grid, .reflect-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 650px) {
+            .cs-hero { padding: 12rem 5% 6rem; }
+            .cs-hero h1 { font-size: 3.5rem; }
+            .deliverables-grid, .reflect-grid { grid-template-columns: 1fr; }
+            .cs-section { padding: 5rem 5%; }
+            .cs-bottom { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Digital Storytelling</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 1 · Module</div>
+                <h1>Digital <span>Storytelling</span></h1>
+                <p class="cs-hero-desc">A semester-long exploration of how stories are told through digital media — from interactive Twine adventures and stop-motion animation, to Bitsy games, short films, and photography. Every medium. Every format. Every story.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">Twine</span>
+                    <span class="cs-tag cs-tag-main">Bitsy</span>
+                    <span class="cs-tag cs-tag-main">Stop Motion</span>
+                    <span class="cs-tag cs-tag-main">Photoshop</span>
+                    <span class="cs-tag">Film Production</span>
+                    <span class="cs-tag">Photography</span>
+                    <span class="cs-tag">Non-Linear Narrative</span>
+                    <span class="cs-tag">Game Design</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://sway.cloud.microsoft/P8zgwRmAySLCkygi" target="_blank" class="btn btn-primary"><i class='bx bx-link-external'></i> View Sway Portfolio</a>
+                    <a href="https://drive.google.com/drive/folders/1T4nPsAsZIHR7-vpQcx8vwDCyXRub_XeA" target="_blank" class="btn btn-secondary">Google Drive <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Digital Storytelling</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 1 — 2022/23</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Tools Used</label><p>Twine · Bitsy · Photoshop</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Deliverables</label><p>8 Projects</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>Year 1</strong><span>Programme Year</span></div>
+        <div class="cs-stat"><strong>8+</strong><span>Deliverables</span></div>
+        <div class="cs-stat"><strong>5+</strong><span>Mediums Used</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Overview</span>
+            <h2>About This <span>Module</span></h2>
+        </div>
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Digital Storytelling isn't just about writing — it's about choosing the right medium to carry a story. This module challenged me to tell stories across radically different formats: interactive games, stop-motion animation, short films, photography, and non-linear branching narratives.</p>
+                <p class="cs-body">From asking the fundamental question — "What qualifies as a story?" — to building a fully playable Twine adventure with 25 interconnected passages, this module reshaped how I think about narrative and user experience.</p>
+                <div class="cs-quote">
+                    <p>"Stories have a profound impact on our lives. They guide us by providing examples to follow, inform us about the world, inspire our passions, and teach us lessons about resilience, teamwork, and perseverance."</p>
+                    <cite>— M.Rashid, Reflective Commentary</cite>
+                </div>
+            </div>
+            <div>
+                <p class="cs-body">The module explored critical theory first — how stories affect audiences by guiding, informing, inspiring, teaching, warning, and moving them — before applying those ideas to real digital outputs across multiple platforms.</p>
+                <p class="cs-body">A standout realisation: <strong style="color:var(--text-color)">computing and storytelling are not separate disciplines.</strong> The Bitsy game, the Twine adventure, the stop-motion film — all proved that code can be a medium for emotion, not just function.</p>
+                <p class="cs-body" style="margin-top:1.5rem;">The capstone was a collaborative short film — "Welcome to Bath Spa University, RAK" — a real advertisement requiring script development, filming, and production planning, which received positive feedback from viewers upon completion.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHAT IS A STORY -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Theory</span>
+            <h2>What Qualifies as a <span>"Story"?</span></h2>
+        </div>
+        <div class="reflect-grid">
+            <div class="reflect-card">
+                <div class="reflect-icon"><i class='bx bx-git-branch'></i></div>
+                <h4>Narrative Structure</h4>
+                <p>A story follows a structured format — beginning, middle, and end — giving audiences a sense of journey and resolution that feels complete.</p>
+            </div>
+            <div class="reflect-card">
+                <div class="reflect-icon"><i class='bx bx-user'></i></div>
+                <h4>Characters</h4>
+                <p>Stories feature characters who grow, change, or face challenges. Their journeys create connection and allow audiences to see reflections of themselves.</p>
+            </div>
+            <div class="reflect-card">
+                <div class="reflect-icon"><i class='bx bx-transfer'></i></div>
+                <h4>Conflict & Tension</h4>
+                <p>Most stories involve conflict — internal, external, or both — that drives the plot forward and keeps audiences emotionally invested.</p>
+            </div>
+            <div class="reflect-card">
+                <div class="reflect-icon"><i class='bx bx-bulb'></i></div>
+                <h4>Theme</h4>
+                <p>Stories explore moral, philosophical, or social themes — giving audiences ideas and values to carry beyond the narrative itself.</p>
+            </div>
+            <div class="reflect-card">
+                <div class="reflect-icon"><i class='bx bx-heart'></i></div>
+                <h4>Emotion & Engagement</h4>
+                <p>Good stories evoke genuine emotions — joy, sadness, excitement, fear, empathy. Emotional engagement is what separates a story from mere information.</p>
+            </div>
+            <div class="reflect-card">
+                <div class="reflect-icon"><i class='bx bx-broadcast'></i></div>
+                <h4>Medium of Communication</h4>
+                <p>Stories exist across written word, visual art, film, music, and interactive games. The medium shapes the experience just as much as the narrative.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELIVERABLES -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Deliverables</span>
+            <h2>What I <span>Created</span></h2>
+        </div>
+        <div class="deliverables-grid">
+            <div class="del-card">
+                <div class="del-thumb dt-1"><i class='bx bx-git-merge'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Non-Linear Narrative</div>
+                    <h4>Extraction: Twine Adventure</h4>
+                    <p>An interactive Twine game translating the intense action of "Extraction" into a branching narrative with 25 passages and multiple player-driven endings.</p>
+                    <a href="#" class="del-link">View on itch.io <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-2"><i class='bx bx-video'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Collaborative Film</div>
+                    <h4>Welcome to BathSpa RAK</h4>
+                    <p>A team-produced advertisement for Bath Spa University RAK — from brainstorming and scripting to filming and post-production, receiving positive audience feedback.</p>
+                    <a href="#" class="del-link">Watch on YouTube <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-3"><i class='bx bx-joystick'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Game Design</div>
+                    <h4>Bitsy Maze Game</h4>
+                    <p>A five-room maze built in Bitsy, featuring a distinct monster in each room — each space designed to maintain a cohesive yet varied experience for the player.</p>
+                    <a href="#" class="del-link">Play on itch.io <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-4"><i class='bx bx-film'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Animation</div>
+                    <h4>Stop Motion Animation</h4>
+                    <p>A stop-motion short crafted with pens, pencils, erasers, and sharpeners — animating inanimate stationery objects frame-by-frame into an enchanting visual narrative.</p>
+                    <a href="#" class="del-link">Watch on YouTube <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-5"><i class='bx bx-time'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Video</div>
+                    <h4>Time Lapse</h4>
+                    <p>A time-lapse video exploring how compressing or expanding time can alter the emotional and narrative impact of a visual story.</p>
+                    <a href="#" class="del-link">Watch on YouTube <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-6"><i class='bx bx-camera'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Photography · Photoshop</div>
+                    <h4>Photography & Photo Editing</h4>
+                    <p>A series of photographs edited in Photoshop — exploring how composition, lighting, and post-processing choices construct visual stories without words.</p>
+                    <a href="https://drive.google.com/drive/folders/1T4nPsAsZIHR7-vpQcx8vwDCyXRub_XeA" target="_blank" class="del-link">View in Drive <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-7"><i class='bx bx-play-circle'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Analysis</div>
+                    <h4>Commercial Storytelling — Nike "The Last Game"</h4>
+                    <p>An analysis of Nike's 2014 World Cup ad — how it uses a dystopian future and legendary players to argue that creativity and risk-taking are the soul of sport.</p>
+                    <a href="#" class="del-link">View Analysis <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-8"><i class='bx bx-book-open'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Portfolio</div>
+                    <h4>Reflective Sway Portfolio</h4>
+                    <p>A full reflective portfolio documenting the entire module — critical responses, project write-ups, embedded media, and a self-reflection on growth and challenges faced.</p>
+                    <a href="https://sway.cloud.microsoft/P8zgwRmAySLCkygi" target="_blank" class="del-link">View Sway <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Computing is a medium for emotion, not just function</h4>
+                    <p>The Bitsy game and Twine adventure proved that code can carry narrative weight. Writing branching logic and designing rooms isn't just technical — it's storytelling with a different kind of pen.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>The medium shapes the story as much as the content does</h4>
+                    <p>The same concept told through stop-motion, a video game, or a short film creates completely different experiences. Choosing the right medium is a creative decision, not an afterthought.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Non-linear narratives demand deeper design thinking</h4>
+                    <p>Building a Twine game with 25 passages required planning every branch, every consequence, and every dead end. The most demanding design challenge of the module — and the most rewarding.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Collaboration multiplies creative output</h4>
+                    <p>The BathSpa RAK advertisement required real teamwork — script writing, filming logistics, and production coordination. The final product was far stronger than anything I could have built alone.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Adaptability across platforms is a core creative skill</h4>
+                    <p>Navigating Bitsy, Twine, Photoshop, stop-motion rigs, and video editing simultaneously demanded platform adaptability — a skill that carries directly into professional development work.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 1 · Digital Storytelling · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="digital-visual-design.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Visual Design</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

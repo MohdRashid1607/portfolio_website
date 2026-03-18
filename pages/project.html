@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+    <!-- swiper css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- box icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Main CSS (one level up since this file is in /pages/) -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* ===== PROJECTS PAGE SPECIFIC ===== */
+
+        .projects-hero {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 14rem 7% 7rem;
+            background: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects-hero::before {
+            content: '';
+            position: absolute;
+            top: -10rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70rem;
+            height: 70rem;
+            background: radial-gradient(circle, rgba(117,78,249,0.08) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .projects-hero > * { position: relative; z-index: 1; }
+
+        .projects-hero h1 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-hero h1 span { color: var(--main-color); }
+
+        .projects-hero > p {
+            font-size: 1.7rem;
+            color: var(--text-light);
+            max-width: 55rem;
+            line-height: 1.7;
+            margin-bottom: 4rem;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--main-color);
+            line-height: 1;
+        }
+
+        .hero-stat span {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+
+        /* ===== MAIN SECTION ===== */
+        .projects-main {
+            padding: 6rem 7% 10rem;
+            background: var(--bg-alt);
+        }
+
+        /* ===== FILTER BAR ===== */
+        .projects-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 6rem;
+            padding-bottom: 3rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .filter-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-right: 0.5rem;
+        }
+
+        .pf-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 5rem;
+            font-size: 1.35rem;
+            font-weight: 600;
+            border: 2px solid var(--border-color);
+            color: var(--text-light);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pf-btn:hover { border-color: var(--main-color); color: var(--main-color); }
+        .pf-btn.active { background: var(--main-color); border-color: var(--main-color); color: white; }
+
+        /* ===== YEAR GROUP ===== */
+        .year-group { margin-bottom: 8rem; }
+
+        .year-group-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .year-badge {
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 0.5rem 1.8rem;
+            border-radius: 5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            white-space: nowrap;
+            color: white;
+        }
+
+        .badge-y3 { background: var(--gradient); }
+        .badge-y2 { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+        .badge-y1 { background: linear-gradient(135deg, #10b981, #34d399); }
+
+        .year-group-header h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .year-line { flex: 1; height: 1px; background: var(--border-color); }
+
+        /* ===== PROJECTS GRID ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.8rem;
+        }
+
+        /* ===== PROJECT CARD ===== */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px var(--shadow-color);
+            border-color: rgba(117,78,249,0.35);
+        }
+
+        .project-card-thumb {
+            width: 100%;
+            height: 19rem;
+            background: linear-gradient(135deg, #1a0a3d 0%, #2d1b69 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumb-icon { font-size: 6rem; color: rgba(117,78,249,0.35); }
+
+        .project-card-body {
+            padding: 2.2rem 2.4rem 2.4rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+        }
+
+        .p-cat-tag {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--main-color);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .p-year-tag {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            background: var(--bg-alt);
+            padding: 0.2rem 1rem;
+            border-radius: 5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.9rem;
+            line-height: 1.3;
+        }
+
+        .project-card-body p {
+            font-size: 1.38rem;
+            color: var(--text-light);
+            line-height: 1.65;
+            margin-bottom: 1.6rem;
+            flex: 1;
+        }
+
+        .p-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .p-tech-tags span {
+            font-size: 1.1rem;
+            padding: 0.3rem 1rem;
+            border-radius: 5rem;
+            background: rgba(117,78,249,0.07);
+            color: var(--main-color);
+            font-weight: 600;
+            border: 1px solid rgba(117,78,249,0.12);
+        }
+
+        .project-card-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn-case {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1rem 1.5rem;
+            background: var(--main-color);
+            color: white;
+            border-radius: 0.9rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-case:hover { background: var(--main-hover); transform: translateY(-2px); }
+
+        .btn-gh {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-color);
+            color: var(--text-light);
+            border-radius: 0.9rem;
+            font-size: 1.6rem;
+            transition: all 0.3s;
+        }
+
+        .btn-gh:hover { border-color: var(--main-color); color: var(--main-color); }
+
+        /* ===== BACK BAR ===== */
+        .projects-back-bar {
+            text-align: center;
+            padding: 6rem 7%;
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .projects-back-bar p {
+            font-size: 1.6rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 650px) {
+            .projects-hero h1 { font-size: 3.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .projects-main { padding: 4rem 5% 8rem; }
+            .hero-stats-row { gap: 3rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="projects-hero">
+        <div class="section-eyebrow center">// 3 Years of Building</div>
+        <h1>All <span>Projects</span></h1>
+        <p>From Year 1 experiments to real client work — every project represents a step forward in my creative computing journey.</p>
+        <div class="hero-stats-row">
+            <div class="hero-stat"><strong>20+</strong><span>Projects</span></div>
+            <div class="hero-stat"><strong>3</strong><span>Years</span></div>
+            <div class="hero-stat"><strong>8+</strong><span>Technologies</span></div>
+            <div class="hero-stat"><strong>4</strong><span>Real Client</span></div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS MAIN ===== -->
+    <div class="projects-main">
+
+        <div class="projects-filter-bar">
+            <span class="filter-label">Filter:</span>
+            <button class="pf-btn active" data-pf="all">All (15)</button>
+            <button class="pf-btn" data-pf="web">Web Dev</button>
+            <button class="pf-btn" data-pf="design">UI/UX</button>
+            <button class="pf-btn" data-pf="game">Game Dev</button>
+            <button class="pf-btn" data-pf="python">Python</button>
+            <button class="pf-btn" data-pf="year3">Year 3</button>
+            <button class="pf-btn" data-pf="year2">Year 2</button>
+            <button class="pf-btn" data-pf="year1">Year 1</button>
+        </div>
+
+        <!-- YEAR 3 -->
+        <div class="year-group" id="group-year3">
+            <div class="year-group-header">
+                <span class="year-badge badge-y3">Year 3</span>
+                <h2>Final Year — 2025-present</h2>
+                <div class="year-line"></div>
+            </div>
+            <div class="projects-grid">
+
+                <!-- ✅ Research Project — LIVE -->
+                <div class="project-card" data-cat="design" data-yr="year3">
+                    <div class="project-card-thumb">
+                        <img src="/images/Research Poster - MUHAMMAD ABDUL RASHID.png" alt="Research Project screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Research · Academic</span><span class="p-year-tag">Year 3</span></div>
+                        <h3>Research Project</h3>
+                        <p>4,000-word quantitative study — how generative AI's confident tone erodes Zero-Trust security behaviour. 100 participants. Published poster.</p>
+                        <div class="p-tech-tags"><span>Cybersecurity</span><span>GenAI</span><span>Survey Research</span></div>
+                        <div class="project-card-links">
+                            <a href="research-project.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="../index.html#contact" class="btn-gh"><i class='bx bx-file-blank'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Machine Learning — LIVE -->
+                <div class="project-card" data-cat="python" data-yr="year3">
+                    <div class="project-card-thumb">
+                        <img src="/images/kaggle.png" alt="Machine Learning screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Python · ML</span><span class="p-year-tag">Year 3</span></div>
+                        <h3>Machine Learning</h3>
+                        <p>Fraud detection (97% accuracy + Gradio app) + 2 Kaggle experiments — regression, multi-class classification, Random Forest, LightGBM.</p>
+                        <div class="p-tech-tags"><span>scikit-learn</span><span>Gradio</span><span>Kaggle</span></div>
+                        <div class="project-card-links">
+                            <a href="machine-learning.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://github.com/DC-BSU-RAK/assessment-2-machine-learning-model-60-MohdRashid1607.git" target="_blank" class="btn-gh"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Tomorrow's Web — Glowing — LIVE -->
+                <div class="project-card" data-cat="web" data-yr="year3">
+                    <div class="project-card-thumb">
+                        <img src="/images/tomorrows-web.png" alt="Tomorrow's Web — Glowing screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Full-Stack · E-Commerce</span><span class="p-year-tag">Year 3</span></div>
+                        <h3>Tomorrow's Web — Glowing</h3>
+                        <p>Premium skincare e-commerce platform — JWT auth, Google OAuth, PayPal sandbox, Cloudinary, MongoDB, admin dashboard. Live on Vercel.</p>
+                        <div class="p-tech-tags"><span>Node.js</span><span>MongoDB</span><span>PayPal</span><span>Vercel</span></div>
+                        <div class="project-card-links">
+                            <a href="tomorrows-web.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://glowing-website-live-3quk.vercel.app/" target="_blank" class="btn-gh"><i class='bx bx-globe'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- YEAR 2 -->
+        <div class="year-group" id="group-year2">
+            <div class="year-group-header">
+                <span class="year-badge badge-y2">Year 2</span>
+                <h2>Second Year — 2024/25</h2>
+                <div class="year-line"></div>
+            </div>
+            <div class="projects-grid">
+                <!-- ✅ Code Lab 2 — LIVE -->
+                <div class="project-card" data-cat="python" data-yr="year2">
+                    <div class="project-card-thumb">
+                        <img src="/images/pokedex.png" alt="Code Lab 2 screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Python · GUI</span><span class="p-year-tag">Year 2</span></div>
+                        <h3>Code Lab 2</h3>
+                        <p>Pokémon data-driven desktop app — Pokédex, Quiz, Battle Simulator & League. Built with Python, tkinter & pygame in 8 days.</p>
+                        <div class="p-tech-tags"><span>Python</span><span>tkinter</span><span>pygame</span></div>
+                        <div class="project-card-links">
+                            <a href="code-lab-2.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://github.com/CodeLab-II/skills-portfolio-MohdRashid1607.git" target="_blank" class="btn-gh"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ✅ Web Development 2 — LIVE -->
+                <div class="project-card" data-cat="web" data-yr="year2">
+                    <div class="project-card-thumb">
+                        <img src="/images/book-website.png" alt="Web Development 2 screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Web Dev · Full-Stack</span><span class="p-year-tag">Year 2</span></div>
+                        <h3>Web Development 2</h3>
+                        <p>Clone tasks + full-stack bookshop app live on Vercel — Node.js, Express, MongoDB, bcrypt auth, 4 responsive breakpoints.</p>
+                        <div class="p-tech-tags"><span>Node.js</span><span>MongoDB</span><span>Vercel</span></div>
+                        <div class="project-card-links">
+                            <a href="web-dev-2.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://book-website-woad.vercel.app/" target="_blank" class="btn-gh"><i class='bx bx-globe'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ✅ Indie Game Design — LIVE -->
+                <div class="project-card" data-cat="game" data-yr="year2">
+                    <div class="project-card-thumb">
+                        <img src="/images/game.png" alt="Indie Game Design screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Game Dev</span><span class="p-year-tag">Year 2</span></div>
+                        <h3>Indie Game Design</h3>
+                        <p>Flappy Bird built from scratch in Unity — 5 C# scripts, physics, collision, parallax scrolling & live on itch.io. + Stanley Parable analysis.</p>
+                        <div class="p-tech-tags"><span>Unity</span><span>C#</span><span>itch.io</span></div>
+                        <div class="project-card-links">
+                            <a href="indie-game-design.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://m7hammad.itch.io/flappy-bird" target="_blank" class="btn-gh"><i class='bx bx-joystick'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ✅ Creative Industry Challenge — LIVE -->
+                <div class="project-card" data-cat="design" data-yr="year2">
+                    <div class="project-card-thumb">
+                        <img src="/images/primemarket.png" alt="Creative Industry Challenge screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Real Client · Branding</span><span class="p-year-tag">Year 2</span></div>
+                        <h3>Creative Industry Challenge</h3>
+                        <p>Led advertising, poster design & social media for Prime Arcade — a real property launch campaign for Prime Marketing & Construction.</p>
+                        <div class="p-tech-tags"><span>Canva</span><span>Brand Design</span><span>Social Media</span></div>
+                        <div class="project-card-links">
+                            <a href="creative-industry-challenge.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="../index.html#contact" class="btn-gh"><i class='bx bx-briefcase'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ✅ Emerging Technologies — LIVE -->
+                <div class="project-card" data-cat="python" data-yr="year2">
+                    <div class="project-card-thumb">
+                        <img src="/images/flourish.png" alt="Emerging Technologies screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Data Viz · AI</span><span class="p-year-tag">Year 2</span></div>
+                        <h3>Emerging Technologies</h3>
+                        <p>Olympic data story in Flourish (5 chart types) + KFC chatbot in Dialogflow (16+ intents) + eSports debate (for & against).</p>
+                        <div class="p-tech-tags"><span>Flourish</span><span>Dialogflow</span><span>eSports</span></div>
+                        <div class="project-card-links">
+                            <a href="emerging-technologies.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://public.flourish.studio/story/3066085/" target="_blank" class="btn-gh"><i class='bx bx-line-chart'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ✅ Smartphone App Design — LIVE -->
+                <div class="project-card" data-cat="design" data-yr="year2">
+                    <div class="project-card-thumb">
+                        <img src="/images/app.png" alt="Smartphone App Design screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Android · Mobile</span><span class="p-year-tag">Year 2</span></div>
+                        <h3>Smartphone App Design</h3>
+                        <p>Two Android apps in Jetpack Compose — ColorMix (RGB colour blending) and FitTrack (offline fitness tracker with Room Database).</p>
+                        <div class="p-tech-tags"><span>Kotlin</span><span>Compose</span><span>Room DB</span></div>
+                        <div class="project-card-links">
+                            <a href="smartphone-apps.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://github.com/DC-BSU-RAK/nan-calculator-MohdRashid1607.git" target="_blank" class="btn-gh"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YEAR 1 -->
+        <div class="year-group" id="group-year1">
+            <div class="year-group-header">
+                <span class="year-badge badge-y1">Year 1</span>
+                <h2>First Year — 2023/24</h2>
+                <div class="year-line"></div>
+            </div>
+            <div class="projects-grid">
+
+                <!-- ✅ 1. Digital Visual Design -->
+                <div class="project-card" data-cat="design" data-yr="year1">
+                    <div class="project-card-thumb">
+                        <img src="/images/digital-visual-design.png" alt="Digital Visual Design screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta">
+                            <span class="p-cat-tag">UI/UX · Design</span>
+                            <span class="p-year-tag">Year 1</span>
+                        </div>
+                        <h3>Digital Visual Design</h3>
+                        <p>Colour theory, typography, Gestalt psychology, wireframing, and real website redesigns in Canva & Figma.</p>
+                        <div class="p-tech-tags"><span>Canva</span><span>Figma</span><span>Typography</span><span>Wireframing</span></div>
+                        <div class="project-card-links">
+                            <a href="digital-visual-design.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://sway.cloud.microsoft/P8zgwRmAySLCkygi" target="_blank" class="btn-gh"><i class='bx bx-link-external'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ 2. Digital Storytelling -->
+                <div class="project-card" data-cat="design" data-yr="year1">
+                    <div class="project-card-thumb">
+                        <img src="/images/twine.png" alt="Digital Storytelling screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta">
+                            <span class="p-cat-tag">Storytelling · Game</span>
+                            <span class="p-year-tag">Year 1</span>
+                        </div>
+                        <h3>Digital Storytelling</h3>
+                        <p>Twine adventure with 25 passages, Bitsy maze game, stop-motion animation, promo video & commercial analysis.</p>
+                        <div class="p-tech-tags"><span>Twine</span><span>Bitsy</span><span>Stop Motion</span><span>Video</span></div>
+                        <div class="project-card-links">
+                            <a href="digital-storytelling.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="#" class="btn-gh"><i class='bx bx-link-external'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Code Lab 1 — LIVE -->
+                <div class="project-card" data-cat="python" data-yr="year1">
+                    <div class="project-card-thumb">
+                        <img src="/images/python.png" alt="Code Lab 1 screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Python</span><span class="p-year-tag">Year 1</span></div>
+                        <h3>Code Lab 1</h3>
+                        <p>7 chapters of Python — variables, data structures, control flow, dictionaries, loops, and functions.</p>
+                        <div class="p-tech-tags"><span>Python</span><span>Functions</span><span>Loops</span><span>Dicts</span></div>
+                        <div class="project-card-links">
+                            <a href="code-lab-1.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://github.com/Bath-Spa-Students/programming-skills-portfolio-lmfmfombeo" target="_blank" class="btn-gh"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Creative Coding — LIVE -->
+                <div class="project-card" data-cat="design" data-yr="year1">
+                    <div class="project-card-thumb">
+                        <img src="/images/p5.png" alt="Creative Coding screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Creative Coding</span><span class="p-year-tag">Year 1</span></div>
+                        <h3>Creative Coding</h3>
+                        <p>Ben Fry case study + 10 live p5.js projects — generative art, audio viz, data viz, mouse trails, and a browser game.</p>
+                        <div class="p-tech-tags"><span>p5.js</span><span>JavaScript</span><span>Generative Art</span></div>
+                        <div class="project-card-links">
+                            <a href="creative-coding.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://github.com/MohdRashid1607/Creative-Coding.git" target="_blank" class="btn-gh"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Ideation & UX Design — LIVE -->
+                <div class="project-card" data-cat="design" data-yr="year1">
+                    <div class="project-card-thumb">
+                        <img src="/images/figmaa.png" alt="Ideation & UX Design screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">UX · Ideation</span><span class="p-year-tag">Year 1</span></div>
+                        <h3>Ideation & UX Design</h3>
+                        <p>4 live ideation challenges + full UX process for FITNESS app — user research, competitor analysis, hi-fi Figma prototype & user testing.</p>
+                        <div class="p-tech-tags"><span>Figma</span><span>UX Research</span><span>Prototyping</span></div>
+                        <div class="project-card-links">
+                            <a href="ideation-ux-design.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="https://sway.cloud.microsoft/KaVzAA9SsF8rXrEO?ref=Link" target="_blank" class="btn-gh"><i class='bx bx-link-external'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ Web Development 1 — LIVE -->
+                <div class="project-card" data-cat="web" data-yr="year1">
+                    <div class="project-card-thumb">
+                        <img src="/images/code.png" alt="Web Development 1 screenshot">
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-card-meta"><span class="p-cat-tag">Web Dev</span><span class="p-year-tag">Year 1</span></div>
+                        <h3>Web Development 1</h3>
+                        <p>6 chapters of HTML, CSS & JavaScript — recipe pages, multi-page sites, layouts, embedded media, calculators & games. 3 certificates.</p>
+                        <div class="p-tech-tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div>
+                        <div class="project-card-links">
+                            <a href="web-development-1.html" class="btn-case"><i class='bx bx-file'></i> Case Study</a>
+                            <a href="#" class="btn-gh"><i class='bx bxl-github'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== BACK BAR ===== -->
+    <div class="projects-back-bar">
+        <p>Want to work together or see more?</p>
+        <a href="../index.html#portfolio" class="btn btn-primary">
+            <i class='bx bx-arrow-back'></i> Back to Portfolio
+        </a>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
+                <a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
+                <a href="#" target="_blank"><i class='bx bxl-instagram'></i></a>
+                <a href="#" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                <a href="#" target="_blank"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop">
+                <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* ===== DARK MODE ===== */
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+
+    /* ===== MOBILE MENU ===== */
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+
+    /* ===== FILTER ===== */
+    const pfBtns = document.querySelectorAll('.pf-btn');
+    const allCards = document.querySelectorAll('.project-card');
+    const yearGroups = document.querySelectorAll('.year-group');
+
+    pfBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            pfBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-pf');
+
+            allCards.forEach(card => {
+                const show = filter === 'all' || card.getAttribute('data-cat') === filter || card.getAttribute('data-yr') === filter;
+                card.style.display = show ? 'flex' : 'none';
+            });
+
+            yearGroups.forEach(group => {
+                const hasVisible = [...group.querySelectorAll('.project-card')].some(c => c.style.display !== 'none');
+                group.style.display = hasVisible ? '' : 'none';
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>

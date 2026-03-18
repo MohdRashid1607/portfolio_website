@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Visual Design — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+
+    <style>
+        /* ===== HERO ===== */
+        .cs-hero {
+            padding: 14rem 7% 8rem;
+            background: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cs-hero::before {
+            content: '';
+            position: absolute;
+            top: -20rem;
+            right: -10rem;
+            width: 60rem;
+            height: 60rem;
+            background: radial-gradient(circle, rgba(117,78,249,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cs-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .cs-breadcrumb a { color: var(--main-color); font-weight: 500; }
+        .cs-breadcrumb a:hover { text-decoration: underline; }
+        .cs-breadcrumb i { font-size: 1.6rem; color: var(--text-light); }
+
+        .cs-hero-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 6rem;
+            align-items: start;
+            max-width: 120rem;
+        }
+
+        .cs-year-badge {
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--main-color);
+            background: rgba(117,78,249,0.08);
+            border: 1px solid rgba(117,78,249,0.2);
+            padding: 0.4rem 1.4rem;
+            border-radius: 5rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+        }
+
+        .cs-hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+
+        .cs-hero h1 span { color: var(--main-color); }
+
+        .cs-hero-desc {
+            font-size: 1.7rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 60rem;
+            margin-bottom: 3rem;
+        }
+
+        .cs-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .cs-tag {
+            font-size: 1.25rem;
+            padding: 0.5rem 1.4rem;
+            border-radius: 5rem;
+            background: var(--bg-alt);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .cs-tag-main {
+            background: rgba(117,78,249,0.08);
+            color: var(--main-color);
+            border-color: rgba(117,78,249,0.2);
+        }
+
+        .cs-hero-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Meta card on the right */
+        .cs-meta-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.6rem;
+            padding: 3rem;
+            min-width: 26rem;
+            box-shadow: 0 4px 24px var(--shadow-soft);
+        }
+
+        .cs-meta-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cs-meta-item label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .cs-meta-item p {
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .cs-meta-divider {
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .cs-grade {
+            font-size: 2.4rem !important;
+            font-weight: 800 !important;
+            color: var(--main-color) !important;
+        }
+
+        /* ===== STATS ROW ===== */
+        .cs-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cs-stat {
+            padding: 3rem 4rem;
+            border-right: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .cs-stat:last-child { border-right: none; }
+
+        .cs-stat strong {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--main-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .cs-stat span {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 600;
+        }
+
+        /* ===== SECTIONS ===== */
+        .cs-section {
+            padding: 7rem 7%;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cs-section-alt { background: var(--bg-alt); }
+
+        .cs-section-top {
+            display: flex;
+            align-items: baseline;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .cs-section-eyebrow {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--main-color);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            white-space: nowrap;
+        }
+
+        .cs-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-color);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .cs-section h2 span { color: var(--main-color); }
+
+        /* Two col */
+        .cs-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .cs-body {
+            font-size: 1.55rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .cs-body + .cs-body { margin-top: 1.5rem; }
+
+        /* Quote */
+        .cs-quote {
+            border-left: 3px solid var(--main-color);
+            padding: 1.8rem 2.2rem;
+            background: rgba(117,78,249,0.04);
+            border-radius: 0 1rem 1rem 0;
+            margin: 2.5rem 0;
+        }
+
+        .cs-quote p {
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 0.6rem;
+        }
+
+        .cs-quote cite {
+            font-size: 1.25rem;
+            color: var(--main-color);
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Week cards */
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .week-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.4rem;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .week-card:hover {
+            border-color: rgba(117,78,249,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px var(--shadow-color);
+        }
+
+        .week-num {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--main-color);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+        }
+
+        .week-card h4 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .week-card p {
+            font-size: 1.35rem;
+            color: var(--text-light);
+            line-height: 1.65;
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .principle-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.4rem;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .principle-card:hover {
+            border-color: rgba(117,78,249,0.3);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .principle-icon {
+            width: 4.5rem;
+            height: 4.5rem;
+            background: rgba(117,78,249,0.08);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--main-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .principle-card h4 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.7rem;
+        }
+
+        .principle-card p {
+            font-size: 1.35rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Deliverables */
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .del-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.4rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .del-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px var(--shadow-color);
+            border-color: rgba(117,78,249,0.3);
+        }
+
+        .del-thumb {
+            height: 14rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .del-thumb i { font-size: 5rem; color: rgba(255,255,255,0.35); }
+
+        .dt-1 { background: linear-gradient(135deg, #00c4cc, #7d2ae8); }
+        .dt-2 { background: linear-gradient(135deg, #f24e1e, #a259ff); }
+        .dt-3 { background: linear-gradient(135deg, #754ef9, #a855f7); }
+        .dt-4 { background: linear-gradient(135deg, #0f2027, #2c5364); }
+        .dt-5 { background: linear-gradient(135deg, #1d1d1d, #4f4f4f); }
+        .dt-6 { background: linear-gradient(135deg, #1a1a2e, #754ef9); }
+
+        .del-body { padding: 2rem 2.2rem; }
+
+        .del-body h4 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .del-body p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            line-height: 1.55;
+            margin-bottom: 1.2rem;
+        }
+
+        .del-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            color: var(--main-color);
+            font-weight: 600;
+            transition: gap 0.2s;
+        }
+
+        .del-link:hover { gap: 1rem; }
+
+        /* Learnings */
+        .learnings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .learning-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            padding: 2rem 2.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .learning-item:hover {
+            border-color: rgba(117,78,249,0.25);
+            background: rgba(117,78,249,0.02);
+        }
+
+        .learning-num {
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(117,78,249,0.2);
+            min-width: 3rem;
+            line-height: 1.2;
+        }
+
+        .learning-item h4 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .learning-item p {
+            font-size: 1.35rem;
+            color: var(--text-light);
+            line-height: 1.65;
+        }
+
+        /* Bottom CTA */
+        .cs-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4rem 7%;
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .cs-bottom p {
+            font-size: 1.6rem;
+            color: var(--text-light);
+        }
+
+        .cs-bottom-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .cs-hero-inner { grid-template-columns: 1fr; }
+            .cs-meta-card { min-width: unset; }
+            .cs-stats { grid-template-columns: repeat(2, 1fr); }
+            .cs-two-col { grid-template-columns: 1fr; gap: 3rem; }
+            .weeks-grid, .principles-grid, .deliverables-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 650px) {
+            .cs-hero { padding: 12rem 5% 6rem; }
+            .cs-hero h1 { font-size: 3.5rem; }
+            .weeks-grid, .principles-grid, .deliverables-grid { grid-template-columns: 1fr; }
+            .cs-section { padding: 5rem 5%; }
+            .cs-bottom { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Digital Visual Design</span>
+        </div>
+
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 1 · Module</div>
+                <h1>Digital <span>Visual</span> Design</h1>
+                <p class="cs-hero-desc">
+                    A semester-long journey through the fundamentals of visual communication — from dots, lines and shapes to Gestalt psychology, typography, and real-world redesigns using Canva and Figma.
+                </p>
+
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">Canva</span>
+                    <span class="cs-tag cs-tag-main">Figma</span>
+                    <span class="cs-tag cs-tag-main">Visual Design</span>
+                    <span class="cs-tag">Typography</span>
+                    <span class="cs-tag">Colour Theory</span>
+                    <span class="cs-tag">Gestalt Psychology</span>
+                    <span class="cs-tag">Wireframing</span>
+                </div>
+
+                <div class="cs-hero-links">
+                    <a href="https://sway.cloud.microsoft/P8zgwRmAySLCkygi" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-link-external'></i> View Sway Portfolio
+                    </a>
+                    <a href="https://bathspa-cc.my.canva.site/bathspa-rak" target="_blank" class="btn btn-secondary">
+                        View Canva Website <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item">
+                        <label>Module</label>
+                        <p>Digital Visual Design</p>
+                    </div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item">
+                        <label>Year</label>
+                        <p>Year 1 — 2022/23</p>
+                    </div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item">
+                        <label>Duration</label>
+                        <p>17 Weeks</p>
+                    </div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item">
+                        <label>Tools Used</label>
+                        <p>Canva · Figma · Sway</p>
+                    </div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item">
+                        <label>Grade</label>
+                        <p class="cs-grade">A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>Year 1</strong><span>Programme Year</span></div>
+        <div class="cs-stat"><strong>17</strong><span>Weeks</span></div>
+        <div class="cs-stat"><strong>6+</strong><span>Deliverables</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- ===== OVERVIEW ===== -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Overview</span>
+            <h2>About This <span>Module</span></h2>
+        </div>
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">
+                    Digital Visual Design is the creative symphony of digital elements — a synchronised ballet of colours, typography, imagery, and layout inside digital spaces. It's the intentional creation of visual components to evoke feelings, convey messages, and influence user experiences.
+                </p>
+                <p class="cs-body">
+                    This module introduced the core principles of visual communication — from understanding how users perceive information, to building real website redesigns in Canva and Figma.
+                </p>
+                <div class="cs-quote">
+                    <p>"Problems with visual design can turn users off so quickly that they never discover all the smart choices you made with navigation or interaction design."</p>
+                    <cite>— Jesse James Garrett</cite>
+                </div>
+            </div>
+            <div>
+                <p class="cs-body">
+                    The module was structured as a reflective portfolio — each week building on the last. Starting from atomic design elements (dots, lines, shapes) all the way up to full website redesigns for BathSpa RAK University.
+                </p>
+                <p class="cs-body">
+                    The key insight: <strong style="color:var(--text-color)">"Every object on a digital screen is a design decision."</strong> Learning to make those decisions intentionally — not accidentally — was the heart of this module.
+                </p>
+                <p class="cs-body" style="margin-top:1.5rem;">
+                    Deliverables included weekly reflective commentaries, design exercises, A4 poster creation, reverse wireframing, page tracing, and two website redesigns — all documented in a Microsoft Sway portfolio.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== WEEK BY WEEK ===== -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Journey</span>
+            <h2>Week by <span>Week</span></h2>
+        </div>
+        <div class="weeks-grid">
+            <div class="week-card">
+                <div class="week-num">Week 3</div>
+                <h4>What is Digital Visual Design?</h4>
+                <p>Identified and reflected on physical graphic design in the real world. Explored how colourful boards guide, inform, and create ambiance — the first lens for seeing design's cultural importance.</p>
+            </div>
+            <div class="week-card">
+                <div class="week-num">Week 5</div>
+                <h4>Elements — Dots, Lines & Shapes</h4>
+                <p>Practiced the atomic building blocks of visual design. Explored how individual elements can be manipulated to convey meaning, evoke emotion, and achieve visual balance.</p>
+            </div>
+            <div class="week-card">
+                <div class="week-num">Week 7</div>
+                <h4>Contrast, Hierarchy & Typography</h4>
+                <p>Learned how contrast and hierarchy guide user attention and prioritise content. Understood that effective typography is essential for readability and communicating tone.</p>
+            </div>
+            <div class="week-card">
+                <div class="week-num">Week 9</div>
+                <h4>Gestalt Psychology</h4>
+                <p>Explored how users perceive visual information as cohesive wholes rather than separate parts. Applied proximity and similarity principles to make interfaces more intuitive.</p>
+            </div>
+            <div class="week-card">
+                <div class="week-num">Week 11</div>
+                <h4>Reverse Wireframing & Page Trace</h4>
+                <p>Reverse engineered existing web designs to understand the decision-making behind layouts. A revealing exercise in seeing structure beneath the surface of professional designs.</p>
+            </div>
+            <div class="week-card">
+                <div class="week-num">Week 13–17</div>
+                <h4>Canva & Figma Website Redesign</h4>
+                <p>Redesigned the BathSpa RAK University homepage in both Canva and Figma — applying all learned principles into real, deliverable outputs. The culmination of the module.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DESIGN PRINCIPLES ===== -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Core Concepts</span>
+            <h2>Principles <span>Mastered</span></h2>
+        </div>
+        <div class="principles-grid">
+            <div class="principle-card">
+                <div class="principle-icon"><i class='bx bx-palette'></i></div>
+                <h4>Colour Theory</h4>
+                <p>The psychological impact of colour in design — how it evokes emotion, guides attention, and communicates brand identity.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon"><i class='bx bx-font'></i></div>
+                <h4>Typography</h4>
+                <p>Effective typography improves readability, communicates tone, and preserves visual appeal. Essential for user participation and impactful communication.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon"><i class='bx bx-contrast'></i></div>
+                <h4>Contrast & Hierarchy</h4>
+                <p>The right contrast and hierarchy direct user attention, prioritise content, and create a smooth user experience that feels effortless.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon"><i class='bx bx-shape-circle'></i></div>
+                <h4>Gestalt Psychology</h4>
+                <p>Users perceive visuals as cohesive wholes. Grouping similar elements through proximity and similarity makes interfaces more readable and intuitive.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon"><i class='bx bx-image-alt'></i></div>
+                <h4>Imagery</h4>
+                <p>The right imagery communicates ideas, generates emotion, and creates an eye-catching experience. Selective visuals improve the design's overall impact.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon"><i class='bx bx-grid-alt'></i></div>
+                <h4>Form Follows Function</h4>
+                <p>Every layout decision is guided by content objectives. Design must be deliberate and purposeful — never decorative for its own sake.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DELIVERABLES ===== -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Deliverables</span>
+            <h2>What I <span>Built</span></h2>
+        </div>
+        <div class="deliverables-grid">
+            <div class="del-card">
+                <div class="del-thumb dt-1"><i class='bx bxl-figma'></i></div>
+                <div class="del-body">
+                    <h4>Canva Website Redesign</h4>
+                    <p>Redesigned the BathSpa RAK University homepage applying colour, typography, hierarchy, and layout principles.</p>
+                    <a href="https://bathspa-cc.my.canva.site/bathspa-rak" target="_blank" class="del-link">View Live <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-2"><i class='bx bx-vector'></i></div>
+                <div class="del-body">
+                    <h4>Figma Website Redesign</h4>
+                    <p>Recreated the same redesign in Figma — exploring its more advanced prototyping and precise layout capabilities.</p>
+                    <a href="#" class="del-link">View Figma <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-3"><i class='bx bx-image'></i></div>
+                <div class="del-body">
+                    <h4>4× A4 Creative Computing Posters</h4>
+                    <p>Four A4 posters applying visual design principles. Self-rated 9/10 for composition and aesthetic quality.</p>
+                    <a href="https://drive.google.com/drive/folders/1T4nPsAsZIHR7-vpQcx8vwDCyXRub_XeA" target="_blank" class="del-link">View in Drive <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-4"><i class='bx bx-layout'></i></div>
+                <div class="del-body">
+                    <h4>Reverse Wireframing</h4>
+                    <p>Broke down existing web designs into wireframe structures — reverse engineering real-world layout decisions.</p>
+                    <a href="https://drive.google.com/drive/folders/1T4nPsAsZIHR7-vpQcx8vwDCyXRub_XeA" target="_blank" class="del-link">View in Drive <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-5"><i class='bx bx-copy-alt'></i></div>
+                <div class="del-body">
+                    <h4>Page Trace</h4>
+                    <p>Traced the visual elements of real webpages to deeply understand spacing, alignment, and composition decisions.</p>
+                    <a href="https://drive.google.com/drive/folders/1T4nPsAsZIHR7-vpQcx8vwDCyXRub_XeA" target="_blank" class="del-link">View in Drive <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-6"><i class='bx bx-book-open'></i></div>
+                <div class="del-body">
+                    <h4>Reflective Sway Portfolio</h4>
+                    <p>Weekly commentaries documenting all 17 weeks of learning, challenges, and growth — compiled into a Sway portfolio.</p>
+                    <a href="https://sway.cloud.microsoft/P8zgwRmAySLCkygi" target="_blank" class="del-link">View Sway <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== KEY LEARNINGS ===== -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Every design element is a deliberate decision</h4>
+                    <p>From button colour to font weight — nothing should be accidental. This module shifted my mindset to always ask "why" before placing anything on screen.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Gestalt psychology makes interfaces intuitive</h4>
+                    <p>Understanding how users group and perceive information changed how I approach layout. Proximity, similarity, and continuity are invisible forces that make or break a UI.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Visual design is the first layer of trust</h4>
+                    <p>Bad visual design turns users off before they reach your features. First impressions are visual, not functional — and this portfolio itself is proof of that principle.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Reverse wireframing reveals invisible structure</h4>
+                    <p>Breaking down existing designs taught me to see beneath the surface of any UI and understand the structural logic behind professional layouts.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Canva and Figma serve different stages</h4>
+                    <p>Canva is fast and expressive — great for quick visual work. Figma is precise and built for professional product design, prototyping, and collaboration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BOTTOM ===== -->
+    <div class="cs-bottom">
+        <p>Year 1 · Digital Visual Design · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary">
+                <i class='bx bx-grid-alt'></i> All Projects
+            </a>
+            <a href="../index.html#contact" class="btn btn-primary">
+                Let's Work Together <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop">
+                <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* Dark mode */
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+
+    /* Mobile menu */
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+
+</body>
+</html>

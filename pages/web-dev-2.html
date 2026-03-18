@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development 2 — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* ===== BASE ===== */
+        .cs-hero { padding:14rem 7% 8rem; background:var(--bg-color); position:relative; overflow:hidden; }
+        .cs-hero::before { content:''; position:absolute; top:-20rem; right:-10rem; width:60rem; height:60rem; background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%); pointer-events:none; }
+        .cs-breadcrumb { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); margin-bottom:3rem; }
+        .cs-breadcrumb a { color:var(--main-color); font-weight:500; }
+        .cs-breadcrumb a:hover { text-decoration:underline; }
+        .cs-breadcrumb i { font-size:1.6rem; }
+        .cs-hero-inner { display:grid; grid-template-columns:1fr auto; gap:6rem; align-items:start; max-width:120rem; }
+        .cs-year-badge { display:inline-block; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.4rem; border-radius:5rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.8rem; }
+        .cs-hero h1 { font-size:5rem; font-weight:800; color:var(--text-color); line-height:1.1; letter-spacing:-0.03em; margin-bottom:2rem; }
+        .cs-hero h1 span { color:var(--main-color); }
+        .cs-hero-desc { font-size:1.7rem; color:var(--text-light); line-height:1.7; max-width:60rem; margin-bottom:3rem; }
+        .cs-tags { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:3.5rem; }
+        .cs-tag { font-size:1.25rem; padding:0.5rem 1.4rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:500; }
+        .cs-tag-main { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); }
+        .cs-hero-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .cs-meta-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; min-width:26rem; box-shadow:0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display:flex; flex-direction:column; gap:2rem; }
+        .cs-meta-item label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.4rem; }
+        .cs-meta-item p { font-size:1.45rem; font-weight:600; color:var(--text-color); }
+        .cs-meta-divider { height:1px; background:var(--border-color); }
+        .cs-grade { font-size:2.4rem !important; font-weight:800 !important; color:var(--main-color) !important; }
+        .cs-live { color:#10b981 !important; }
+
+        /* STATS */
+        .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--bg-alt); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); }
+        .cs-stat { padding:3rem 4rem; border-right:1px solid var(--border-color); text-align:center; }
+        .cs-stat:last-child { border-right:none; }
+        .cs-stat strong { display:block; font-size:3rem; font-weight:800; color:var(--main-color); margin-bottom:0.4rem; }
+        .cs-stat span { font-size:1.3rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+
+        /* JUMP NAV */
+        .assessment-divider { display:flex; align-items:center; gap:2rem; padding:3rem 7%; background:var(--bg-color); border-bottom:1px solid var(--border-color); position:sticky; top:7rem; z-index:10; backdrop-filter:blur(10px); flex-wrap:wrap; }
+        .assessment-pill { display:inline-flex; align-items:center; gap:0.8rem; font-size:1.3rem; font-weight:700; padding:0.7rem 2rem; border-radius:5rem; border:2px solid; cursor:pointer; transition:all 0.2s; text-decoration:none; }
+        .pill-sa1 { color:#06b6d4; border-color:#06b6d4; background:rgba(6,182,212,0.06); }
+        .pill-sa1:hover { background:rgba(6,182,212,0.12); }
+        .pill-sa2 { color:var(--main-color); border-color:var(--main-color); background:rgba(117,78,249,0.06); }
+        .pill-sa2:hover { background:rgba(117,78,249,0.12); }
+        .assessment-divider p { font-size:1.4rem; color:var(--text-light); }
+
+        /* ASSESSMENT BANDS */
+        .assessment-band { padding:4rem 7%; border-bottom:1px solid var(--border-color); }
+        .band-sa1 { background:linear-gradient(135deg,rgba(6,182,212,0.05) 0%,transparent 60%); border-left:4px solid #06b6d4; }
+        .band-sa2 { background:linear-gradient(135deg,rgba(117,78,249,0.05) 0%,transparent 60%); border-left:4px solid var(--main-color); }
+        .band-inner { display:flex; align-items:center; gap:3rem; flex-wrap:wrap; }
+        .band-badge-sa1 { font-size:1.2rem; font-weight:800; color:#06b6d4; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.25); padding:0.6rem 1.6rem; border-radius:5rem; text-transform:uppercase; letter-spacing:0.08em; white-space:nowrap; }
+        .band-badge-sa2 { font-size:1.2rem; font-weight:800; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.6rem 1.6rem; border-radius:5rem; text-transform:uppercase; letter-spacing:0.08em; white-space:nowrap; }
+        .band-title { font-size:2.2rem; font-weight:800; color:var(--text-color); }
+        .band-desc { font-size:1.45rem; color:var(--text-light); max-width:70rem; }
+        .band-weight { font-size:3rem; font-weight:800; color:var(--text-color); margin-left:auto; }
+        .band-weight span { font-size:1.3rem; font-weight:600; color:var(--text-light); display:block; text-align:right; }
+
+        /* SECTIONS */
+        .cs-section { padding:7rem 7%; border-bottom:1px solid var(--border-color); }
+        .cs-section-alt { background:var(--bg-alt); }
+        .cs-section-top { display:flex; align-items:baseline; gap:2rem; margin-bottom:4rem; }
+        .cs-section-eyebrow { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.12em; white-space:nowrap; }
+        .cs-section h2 { font-size:3rem; font-weight:800; color:var(--text-color); letter-spacing:-0.02em; line-height:1.2; }
+        .cs-section h2 span { color:var(--main-color); }
+        .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+        .cs-body { font-size:1.55rem; color:var(--text-light); line-height:1.8; }
+        .cs-body + .cs-body { margin-top:1.5rem; }
+        .cs-quote { border-left:3px solid var(--main-color); padding:1.8rem 2.2rem; background:rgba(117,78,249,0.04); border-radius:0 1rem 1rem 0; margin:2.5rem 0; }
+        .cs-quote p { font-size:1.6rem; font-style:italic; color:var(--text-color); line-height:1.6; margin-bottom:0.6rem; }
+        .cs-quote cite { font-size:1.25rem; color:var(--main-color); font-style:normal; font-weight:600; }
+
+        /* ===== SA1 — CLONE TASKS ===== */
+        /* two task cards side by side, wide */
+        .clone-tasks { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
+        .clone-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; overflow:hidden; transition:all 0.3s; }
+        .clone-card:hover { border-color:rgba(6,182,212,0.35); box-shadow:0 12px 40px var(--shadow-color); transform:translateY(-4px); }
+        .clone-thumb { height:18rem; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+        /* Task 1 — LinkedIn style */
+        .ct-linkedin { background:linear-gradient(135deg,#0077b5 0%,#004471 100%); }
+        .linkedin-mock { background:#fff; border-radius:0.8rem; width:80%; padding:1.8rem; box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+        .lm-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.2rem; }
+        .lm-logo { width:3rem; height:3rem; background:#0077b5; border-radius:0.4rem; display:flex; align-items:center; justify-content:center; }
+        .lm-logo i { font-size:1.8rem; color:#fff; }
+        .lm-nav { display:flex; gap:1.2rem; margin-left:auto; }
+        .lm-nav-item { width:2rem; height:0.5rem; background:#e0e0e0; border-radius:3rem; }
+        .lm-hero-bar { height:0.8rem; background:#e0e0e0; border-radius:3rem; margin-bottom:0.6rem; width:80%; }
+        .lm-hero-bar.short { width:55%; }
+        .lm-btn { height:2.4rem; background:#0077b5; border-radius:1.5rem; width:40%; margin-top:1rem; }
+        /* Task 2 — generic web clone */
+        .ct-web { background:linear-gradient(135deg,#1a0a3d,#754ef9); }
+        .web-mock { background:#fff; border-radius:0.8rem; width:80%; padding:1.8rem; box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+        .wm-header { display:flex; align-items:center; gap:0.8rem; margin-bottom:1.2rem; padding-bottom:1.2rem; border-bottom:1px solid #f0f0f0; }
+        .wm-dot { width:1rem; height:1rem; border-radius:50%; }
+        .wm-logo-bar { height:1rem; background:#754ef9; border-radius:3rem; width:6rem; }
+        .wm-nav-items { display:flex; gap:0.8rem; margin-left:auto; }
+        .wm-nav-item { height:0.8rem; background:#e0e0e0; border-radius:3rem; width:3.5rem; }
+        .wm-hero { height:5rem; background:linear-gradient(135deg,rgba(117,78,249,0.1),rgba(117,78,249,0.05)); border-radius:0.5rem; margin-bottom:1rem; display:flex; align-items:center; padding:0 1rem; gap:0.6rem; }
+        .wm-hero-line { height:0.7rem; background:#d0c4fb; border-radius:3rem; }
+        .wm-cards { display:flex; gap:0.6rem; }
+        .wm-card-mini { flex:1; height:3rem; background:#f5f5f5; border-radius:0.4rem; border:1px solid #e0e0e0; }
+        .clone-body { padding:2.5rem; }
+        .clone-num { font-size:1.1rem; font-weight:700; color:#06b6d4; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.6rem; }
+        .clone-card h4 { font-size:1.8rem; font-weight:700; color:var(--text-color); margin-bottom:0.8rem; }
+        .clone-card p { font-size:1.38rem; color:var(--text-light); line-height:1.65; margin-bottom:1.6rem; }
+        .clone-links { display:flex; gap:1rem; flex-wrap:wrap; }
+        .cl-btn { display:inline-flex; align-items:center; gap:0.5rem; font-size:1.2rem; font-weight:700; padding:0.6rem 1.4rem; border-radius:0.6rem; text-decoration:none; transition:all 0.2s; }
+        .cl-primary { background:var(--main-color); color:#fff; }
+        .cl-primary:hover { background:#5f3dd4; }
+        .cl-secondary { background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); }
+        .cl-secondary:hover { border-color:var(--main-color); color:var(--main-color); }
+
+        /* cert strip */
+        .cert-strip { display:flex; align-items:center; gap:2rem; padding:2.5rem 3rem; background:rgba(6,182,212,0.04); border:1px solid rgba(6,182,212,0.15); border-radius:1.2rem; margin-top:3rem; }
+        .cert-strip i { font-size:3rem; color:#06b6d4; flex-shrink:0; }
+        .cert-strip strong { display:block; font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:0.3rem; }
+        .cert-strip p { font-size:1.35rem; color:var(--text-light); }
+        .cert-strip a { display:inline-flex; align-items:center; gap:0.5rem; font-size:1.25rem; font-weight:700; color:#06b6d4; margin-left:auto; white-space:nowrap; }
+        .cert-strip a:hover { text-decoration:underline; }
+
+        /* ===== SA2 — BOOKSHOP APP ===== */
+        /* browser mockup */
+        .browser-wrap { border-radius:1.4rem; overflow:hidden; border:1px solid var(--border-color); box-shadow:0 8px 32px var(--shadow-color); margin-bottom:4rem; }
+        .browser-bar { background:#f5f5f5; padding:1rem 1.8rem; display:flex; align-items:center; gap:1rem; border-bottom:1px solid var(--border-color); }
+        .b-dot { width:1.2rem; height:1.2rem; border-radius:50%; }
+        .b-red{background:#ff5f57;} .b-yellow{background:#febc2e;} .b-green{background:#28c840;}
+        .b-url { flex:1; background:#fff; border:1px solid var(--border-color); border-radius:0.5rem; padding:0.4rem 1.4rem; font-size:1.25rem; color:var(--text-light); margin:0 1.5rem; font-family:monospace; display:flex; align-items:center; gap:0.5rem; }
+        .b-url i { color:#10b981; font-size:1.4rem; }
+        .b-dark-toggle { background:var(--main-color); color:#fff; border:none; border-radius:5rem; font-size:1.1rem; font-weight:700; padding:0.4rem 1.2rem; cursor:pointer; }
+        .book-site { background:var(--bg-color); }
+        .book-nav { display:flex; align-items:center; gap:2rem; padding:1.5rem 2.5rem; background:var(--card-bg); border-bottom:1px solid var(--border-color); }
+        .book-logo { font-size:1.6rem; font-weight:800; color:var(--main-color); }
+        .book-nav-links { display:flex; gap:2rem; margin-left:auto; }
+        .bnl { font-size:1.2rem; color:var(--text-light); font-weight:500; }
+        .book-hero { padding:3rem 2.5rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; background:var(--bg-alt); }
+        .bh-left h2 { font-size:2rem; font-weight:800; color:var(--text-color); margin-bottom:0.8rem; line-height:1.2; }
+        .bh-left p { font-size:1.2rem; color:var(--text-light); margin-bottom:1.4rem; line-height:1.5; }
+        .bh-btns { display:flex; gap:0.8rem; }
+        .bh-btn-p { background:var(--main-color); color:#fff; border:none; border-radius:0.5rem; padding:0.7rem 1.6rem; font-size:1.1rem; font-weight:700; cursor:pointer; }
+        .bh-btn-s { background:transparent; color:var(--main-color); border:1px solid var(--main-color); border-radius:0.5rem; padding:0.7rem 1.6rem; font-size:1.1rem; font-weight:700; cursor:pointer; }
+        .bh-right { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; }
+        .bh-book { background:var(--card-bg); border:1px solid var(--border-color); border-radius:0.8rem; padding:1rem; text-align:center; }
+        .bh-book-cover { height:5rem; border-radius:0.4rem; margin-bottom:0.5rem; }
+        .bh-book-title { font-size:1rem; font-weight:700; color:var(--text-color); }
+        .bh-book-price { font-size:0.9rem; color:var(--main-color); font-weight:700; }
+        .book-section-bar { padding:1rem 2.5rem; display:flex; gap:1.5rem; }
+        .bsb-item { font-size:1rem; color:var(--text-light); padding:0.4rem 1rem; background:var(--bg-alt); border-radius:5rem; border:1px solid var(--border-color); }
+        .bsb-item.active { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); font-weight:700; }
+
+        /* features grid — 3 col */
+        .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .feat-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .feat-card:hover { border-color:rgba(117,78,249,0.3); transform:translateY(-3px); box-shadow:0 10px 30px var(--shadow-color); }
+        .feat-icon { width:4.5rem; height:4.5rem; background:rgba(117,78,249,0.08); border-radius:1rem; display:flex; align-items:center; justify-content:center; font-size:2.2rem; color:var(--main-color); margin-bottom:1.5rem; }
+        .feat-card h4 { font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:0.7rem; }
+        .feat-card p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        /* devices — horizontal scrolling pill row */
+        .devices-row { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; }
+        .device-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; text-align:center; transition:all 0.3s; }
+        .device-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .device-icon { font-size:3.5rem; color:var(--main-color); margin-bottom:1.2rem; display:block; }
+        .device-card h4 { font-size:1.5rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .device-card p { font-size:1.25rem; color:var(--text-light); }
+
+        /* tech stack — two rows */
+        .tech-cols { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:2rem; }
+        .tech-col { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .tech-col:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .tech-col-label { font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:1.2rem; }
+        .tech-col h4 { font-size:1.5rem; font-weight:700; color:var(--text-color); margin-bottom:0.8rem; }
+        .tech-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+        .tech-tag { font-size:1.1rem; padding:0.25rem 0.9rem; border-radius:5rem; background:rgba(117,78,249,0.06); color:var(--main-color); border:1px solid rgba(117,78,249,0.15); font-weight:600; }
+
+        /* dev decisions */
+        .decisions-list { display:flex; flex-direction:column; gap:2rem; }
+        .decision-item { display:grid; grid-template-columns:auto 1fr; gap:2rem; align-items:start; padding:2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; transition:all 0.3s; }
+        .decision-item:hover { border-color:rgba(117,78,249,0.25); box-shadow:0 8px 25px var(--shadow-color); }
+        .decision-num { width:4.5rem; height:4.5rem; background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); border-radius:1rem; display:flex; align-items:center; justify-content:center; font-size:1.8rem; font-weight:800; color:var(--main-color); flex-shrink:0; }
+        .decision-item h4 { font-size:1.65rem; font-weight:700; color:var(--text-color); margin-bottom:0.6rem; }
+        .decision-item p { font-size:1.38rem; color:var(--text-light); line-height:1.7; }
+
+        /* reflection 3-col */
+        .refl-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .refl-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .refl-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .refl-type { font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1.2rem; padding:0.3rem 1rem; border-radius:5rem; display:inline-block; }
+        .rt-success { background:rgba(16,185,129,0.08); color:#10b981; border:1px solid rgba(16,185,129,0.2); }
+        .rt-limit { background:rgba(245,158,11,0.08); color:#f59e0b; border:1px solid rgba(245,158,11,0.2); }
+        .rt-future { background:rgba(117,78,249,0.08); color:var(--main-color); border:1px solid rgba(117,78,249,0.2); }
+        .refl-card h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.7rem; }
+        .refl-card p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        /* learnings */
+        .learnings-list { display:flex; flex-direction:column; gap:1.5rem; }
+        .learning-item { display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .learning-item:hover { border-color:rgba(117,78,249,0.25); background:rgba(117,78,249,0.02); }
+        .learning-num { font-size:2rem; font-weight:800; color:rgba(117,78,249,0.2); min-width:3rem; line-height:1.2; }
+        .learning-item h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .learning-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        .cs-bottom { display:flex; justify-content:space-between; align-items:center; padding:4rem 7%; background:var(--bg-alt); border-top:1px solid var(--border-color); flex-wrap:wrap; gap:2rem; }
+        .cs-bottom p { font-size:1.6rem; color:var(--text-light); }
+        .cs-bottom-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+        @media (max-width:1100px) {
+            .cs-hero-inner { grid-template-columns:1fr; }
+            .cs-meta-card { min-width:unset; }
+            .cs-stats { grid-template-columns:repeat(2,1fr); }
+            .cs-two-col, .clone-tasks { grid-template-columns:1fr; }
+            .features-grid, .refl-grid { grid-template-columns:repeat(2,1fr); }
+            .devices-row, .tech-cols { grid-template-columns:repeat(2,1fr); }
+            .band-weight { margin-left:0; }
+            .book-hero { grid-template-columns:1fr; }
+        }
+        @media (max-width:650px) {
+            .cs-hero { padding:12rem 5% 6rem; }
+            .cs-hero h1 { font-size:3.5rem; }
+            .features-grid, .refl-grid, .devices-row, .tech-cols { grid-template-columns:1fr; }
+            .cs-section { padding:5rem 5%; }
+            .cs-bottom { flex-direction:column; align-items:flex-start; }
+            .cert-strip { flex-direction:column; align-items:flex-start; }
+            .cert-strip a { margin-left:0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Web Development 2</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 2 · Module</div>
+                <h1>Web <span>Development 2</span></h1>
+                <p class="cs-hero-desc">Two assessments — SA1: cloning real websites to master advanced HTML & CSS, earning a LinkedIn certificate. SA2: a full-stack responsive bookshop application live on Vercel, built with Node.js, Express, and MongoDB.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">HTML · CSS</span>
+                    <span class="cs-tag cs-tag-main">JavaScript</span>
+                    <span class="cs-tag cs-tag-main">Node.js</span>
+                    <span class="cs-tag cs-tag-main">Express.js</span>
+                    <span class="cs-tag cs-tag-main">MongoDB</span>
+                    <span class="cs-tag">Responsive Design</span>
+                    <span class="cs-tag">bcrypt</span>
+                    <span class="cs-tag">Vercel</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://book-website-woad.vercel.app/" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-globe'></i> Live Website
+                    </a>
+                    <a href="https://github.com/mohdrashid2004/book-website.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub
+                    </a>
+                    <a href="https://youtu.be/naN2WlPRXa0" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-play-circle'></i> Walkthrough
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Web Development 2</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 2 — 2024/25</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>SA1</label><p>Clone Tasks · LinkedIn Cert</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>SA2 Stack</label><p>Node · Express · MongoDB</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Deployed</label><p class="cs-live">✓ Live on Vercel</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>2</strong><span>Assessments</span></div>
+        <div class="cs-stat"><strong>4</strong><span>Target Devices</span></div>
+        <div class="cs-stat"><strong>Live</strong><span>on Vercel</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- JUMP NAV -->
+    <div class="assessment-divider">
+        <p>Jump to:</p>
+        <a href="#sa1" class="assessment-pill pill-sa1"><i class='bx bx-copy-alt'></i> SA1 — Clone Tasks</a>
+        <a href="#sa2" class="assessment-pill pill-sa2"><i class='bx bx-store'></i> SA2 — Bookshop App</a>
+    </div>
+
+    <!-- ══════════════════════════
+         SA1 — CLONE TASKS
+    ══════════════════════════ -->
+    <div id="sa1" class="assessment-band band-sa1">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-sa1">Assessment 1 · SA1</div>
+                <div class="band-title" style="margin-top:0.8rem;">Clone Tasks — Advanced HTML & CSS</div>
+                <div class="band-desc" style="margin-top:0.6rem;">Cloning real-world websites to master advanced HTML and CSS techniques — studying production-grade layouts, then reproducing them from scratch.</div>
+            </div>
+            <div class="band-weight">SA1<span>Clone Tasks</span></div>
+        </div>
+    </div>
+
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#06b6d4;">// Tasks</span>
+            <h2>Two Clone <span style="color:#06b6d4;">Challenges</span></h2>
+        </div>
+        <div class="clone-tasks">
+            <!-- Task 1 -->
+            <div class="clone-card">
+                <div class="clone-thumb ct-linkedin">
+                    <div class="linkedin-mock">
+                        <div class="lm-header">
+                            <div class="lm-logo"><i class='bx bxl-linkedin'></i></div>
+                            <div class="lm-nav">
+                                <div class="lm-nav-item"></div>
+                                <div class="lm-nav-item"></div>
+                                <div class="lm-nav-item"></div>
+                            </div>
+                        </div>
+                        <div class="lm-hero-bar"></div>
+                        <div class="lm-hero-bar short"></div>
+                        <div class="lm-btn"></div>
+                    </div>
+                </div>
+                <div class="clone-body">
+                    <div class="clone-num">Task 01</div>
+                    <h4>LinkedIn Homepage Clone</h4>
+                    <p>Recreated the LinkedIn homepage from scratch using only HTML and CSS — matching the layout, navigation, hero section, typography, and responsive behaviour of the real production site.</p>
+                    <div class="clone-links">
+                        <a href="https://youtu.be/Jbx3fv9I9qQ" target="_blank" class="cl-btn cl-primary"><i class='bx bx-play'></i> Watch Demo</a>
+                        <a href="https://github.com/MohdRashid1607/WEB-DEV-II_SA-1_Clone-Tasks.git" target="_blank" class="cl-btn cl-secondary"><i class='bx bxl-github'></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2 -->
+            <div class="clone-card">
+                <div class="clone-thumb ct-web">
+                    <div class="web-mock">
+                        <div class="wm-header">
+                            <div class="wm-dot" style="background:#ff5f57;"></div>
+                            <div class="wm-dot" style="background:#febc2e;"></div>
+                            <div class="wm-dot" style="background:#28c840;"></div>
+                            <div class="wm-logo-bar"></div>
+                            <div class="wm-nav-items">
+                                <div class="wm-nav-item"></div>
+                                <div class="wm-nav-item"></div>
+                                <div class="wm-nav-item"></div>
+                            </div>
+                        </div>
+                        <div class="wm-hero">
+                            <div class="wm-hero-line" style="width:55%;"></div>
+                        </div>
+                        <div class="wm-cards">
+                            <div class="wm-card-mini"></div>
+                            <div class="wm-card-mini"></div>
+                            <div class="wm-card-mini"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clone-body">
+                    <div class="clone-num">Task 02</div>
+                    <h4>Website Clone — Task 2</h4>
+                    <p>Second clone task reproducing the layout, styling, and structure of a real website — focusing on advanced CSS grid, flexbox composition, and pixel-perfect reproduction of the original design.</p>
+                    <div class="clone-links">
+                        <a href="https://youtu.be/BIiks7ndnbg" target="_blank" class="cl-btn cl-primary"><i class='bx bx-play'></i> Watch Demo</a>
+                        <a href="https://github.com/MohdRashid1607/WEB-DEV-II_SA-1_Clone-Tasks.git" target="_blank" class="cl-btn cl-secondary"><i class='bx bxl-github'></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LinkedIn Certificate -->
+        <div class="cert-strip">
+            <i class='bx bxl-linkedin-square'></i>
+            <div>
+                <strong>LinkedIn Learning Certificate Earned</strong>
+                <p>Completed the associated LinkedIn Learning course as part of SA1 — building and certifying advanced HTML & CSS skills alongside the clone tasks.</p>
+            </div>
+            <a href="https://drive.google.com/drive/folders/1zRT7T7dk8h6PbWEbOgbtsaCVmwuTw_IC" target="_blank">
+                View Certificate <i class='bx bx-right-arrow-alt'></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════
+         SA2 — BOOKSHOP APP
+    ══════════════════════════ -->
+    <div id="sa2" class="assessment-band band-sa2">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-sa2">Assessment 2 · SA2</div>
+                <div class="band-title" style="margin-top:0.8rem;">Multi-Device Bookshop Application</div>
+                <div class="band-desc" style="margin-top:0.6rem;">A full-stack responsive bookshop website — live on Vercel — with Node.js backend, MongoDB database, secure authentication, and support for 4 device breakpoints.</div>
+            </div>
+            <div class="band-weight">SA2<span>Multi-Device App</span></div>
+        </div>
+    </div>
+
+    <!-- BROWSER MOCKUP -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// App Preview</span>
+            <h2>The <span>Bookshop App</span></h2>
+        </div>
+        <div class="browser-wrap">
+            <div class="browser-bar">
+                <div class="b-dot b-red"></div>
+                <div class="b-dot b-yellow"></div>
+                <div class="b-dot b-green"></div>
+                <div class="b-url">
+                    <i class='bx bx-lock-alt'></i>
+                    book-website-woad.vercel.app
+                </div>
+                <button class="b-dark-toggle">Light / Dark</button>
+            </div>
+            <div class="book-site">
+                <div class="book-nav">
+                    <div class="book-logo">📚 BookShop</div>
+                    <div class="book-nav-links">
+                        <span class="bnl">Home</span>
+                        <span class="bnl">Featured</span>
+                        <span class="bnl">Discounts</span>
+                        <span class="bnl">New Books</span>
+                        <span class="bnl">Login</span>
+                    </div>
+                </div>
+                <div class="book-hero">
+                    <div class="bh-left">
+                        <h2>Discover Your<br>Next Great Read</h2>
+                        <p>Browse hundreds of titles across every genre. Featured picks, new arrivals, and exclusive discounts — all in one place.</p>
+                        <div class="bh-btns">
+                            <button class="bh-btn-p">Shop Now</button>
+                            <button class="bh-btn-s">Sign Up</button>
+                        </div>
+                    </div>
+                    <div class="bh-right">
+                        <div class="bh-book">
+                            <div class="bh-book-cover" style="background:linear-gradient(135deg,#754ef9,#a855f7);"></div>
+                            <div class="bh-book-title">Fiction</div>
+                            <div class="bh-book-price">$12.99</div>
+                        </div>
+                        <div class="bh-book">
+                            <div class="bh-book-cover" style="background:linear-gradient(135deg,#06b6d4,#0891b2);"></div>
+                            <div class="bh-book-title">Science</div>
+                            <div class="bh-book-price">$9.99</div>
+                        </div>
+                        <div class="bh-book">
+                            <div class="bh-book-cover" style="background:linear-gradient(135deg,#f59e0b,#d97706);"></div>
+                            <div class="bh-book-title">History</div>
+                            <div class="bh-book-price"><s style="color:var(--text-light);font-size:0.9em;">$15</s> $8.99</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-section-bar">
+                    <div class="bsb-item active">Featured Books</div>
+                    <div class="bsb-item">Discounts</div>
+                    <div class="bsb-item">New Arrivals</div>
+                    <div class="bsb-item">Customer Reviews</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6 FEATURES -->
+        <div class="features-grid">
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-home'></i></div>
+                <h4>Home Section</h4>
+                <p>Header with navigation links, hero area with book title, image, description, and action buttons — plus a Light/Dark theme toggle.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-star'></i></div>
+                <h4>Featured Books</h4>
+                <p>Highlights popular books with images, descriptions, and action buttons for further exploration — the main shop showcase.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-tag'></i></div>
+                <h4>Discount Section</h4>
+                <p>Books on sale with both original and discounted prices clearly displayed — encouraging conversions with visible savings.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-book-add'></i></div>
+                <h4>New Arrivals</h4>
+                <p>Latest releases section allowing customers to discover new books — keeping the storefront feeling fresh and regularly updated.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-comment-dots'></i></div>
+                <h4>Customer Feedback</h4>
+                <p>Testimonials from readers giving new visitors social proof — highlighting quality and appeal to drive trust and conversions.</p>
+            </div>
+            <div class="feat-card">
+                <div class="feat-icon"><i class='bx bx-user-plus'></i></div>
+                <h4>Login / Sign Up</h4>
+                <p>Secure authentication with hashed passwords via bcrypt — forms separated into their own page after iterative design feedback.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TARGET DEVICES -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Responsive</span>
+            <h2>4 Target <span>Devices</span></h2>
+        </div>
+        <div class="devices-row">
+            <div class="device-card">
+                <i class='bx bx-desktop device-icon'></i>
+                <h4>Large Desktop</h4>
+                <p>1440px viewport — full two-column layouts, expanded navigation, maximum content density.</p>
+            </div>
+            <div class="device-card">
+                <i class='bx bx-laptop device-icon'></i>
+                <h4>Desktop</h4>
+                <p>1024px viewport — standard desktop experience with full grid and navigation visible.</p>
+            </div>
+            <div class="device-card">
+                <i class='bx bx-tab device-icon'></i>
+                <h4>Tablet</h4>
+                <p>768px viewport — adjusted grid columns, adapted font sizes and spacing for touch use.</p>
+            </div>
+            <div class="device-card">
+                <i class='bx bx-mobile-alt device-icon'></i>
+                <h4>Large Mobile</h4>
+                <p>425px viewport — single-column stacked layout, full-width buttons, compact navigation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Stack</span>
+            <h2>Full-Stack <span>Architecture</span></h2>
+        </div>
+        <div class="tech-cols">
+            <div class="tech-col">
+                <div class="tech-col-label">Frontend</div>
+                <h4>HTML · CSS · JS</h4>
+                <div class="tech-tags">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Remix Icons</span>
+                    <span class="tech-tag">Font Awesome</span>
+                </div>
+            </div>
+            <div class="tech-col">
+                <div class="tech-col-label">Backend</div>
+                <h4>Node · Express</h4>
+                <div class="tech-tags">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">bcrypt</span>
+                    <span class="tech-tag">dotenv</span>
+                    <span class="tech-tag">CORS</span>
+                </div>
+            </div>
+            <div class="tech-col">
+                <div class="tech-col-label">Database</div>
+                <h4>MongoDB Atlas</h4>
+                <div class="tech-tags">
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Mongoose</span>
+                    <span class="tech-tag">Atlas Cloud</span>
+                </div>
+            </div>
+            <div class="tech-col">
+                <div class="tech-col-label">Deployment</div>
+                <h4>Vercel</h4>
+                <div class="tech-tags">
+                    <span class="tech-tag">Vercel</span>
+                    <span class="tech-tag">GitHub</span>
+                    <span class="tech-tag">Environment Vars</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEVELOPMENT DECISIONS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Process</span>
+            <h2>5 Key Development <span>Decisions</span></h2>
+        </div>
+        <div class="decisions-list">
+            <div class="decision-item">
+                <div class="decision-num">1</div>
+                <div>
+                    <h4>Responsive Header — horizontal on desktop, collapsed on mobile</h4>
+                    <p>The header includes the logo and navigation bar displayed horizontally on desktop screens. For tablet and mobile viewports, the navigation collapses into a hamburger-style menu — a deliberate decision to prioritise screen real estate on smaller devices without sacrificing discoverability.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <div class="decision-num">2</div>
+                <div>
+                    <h4>Two-column intro layout that stacks on mobile</h4>
+                    <p>The introduction section uses a two-column grid on larger screens — image on one side, description on the other. On smaller devices, this collapses to a single stacked column. This was chosen over a single-column layout across all sizes to make better use of the wider screen real estate on desktops.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <div class="decision-num">3</div>
+                <div>
+                    <h4>Authentication forms moved to a separate page</h4>
+                    <p>Initially, the sign-up and login forms were integrated into the homepage. After testing, they were moved to a dedicated authentication page — reducing visual clutter on the home screen and giving the forms more focused design attention. Passwords are hashed with bcrypt before storage in MongoDB.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <div class="decision-num">4</div>
+                <div>
+                    <h4>Media queries throughout — grids on desktop, stacked on mobile</h4>
+                    <p>Media queries were applied extensively to adjust layouts, font sizes, and spacing at each of the four breakpoints. Grid layouts used on desktop and tablet screens were replaced with vertical stacks on mobile — ensuring each device feels purpose-built rather than merely scaled down.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <div class="decision-num">5</div>
+                <div>
+                    <h4>MongoDB Atlas chosen for scalable cloud data storage</h4>
+                    <p>MongoDB Atlas was selected over a local database for its scalability, ease of cloud integration, and native compatibility with Mongoose schemas. Peer-based schema validation was implemented to enforce data integrity on user registration and login endpoints.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRITICAL REFLECTION -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Critical <span>Analysis</span></h2>
+        </div>
+        <div class="refl-grid">
+            <div class="refl-card">
+                <div class="refl-type rt-success">✓ Successes</div>
+                <h4>Responsive & Accessible</h4>
+                <p>The website adapts seamlessly to all four device sizes — responsive layout, consistent theming, and the dark mode toggle all received positive feedback. The core bookshop functionality works reliably across all breakpoints.</p>
+            </div>
+            <div class="refl-card">
+                <div class="refl-type rt-limit">⚠ Limitations</div>
+                <h4>Missing Engagement Features</h4>
+                <p>The absence of book reviews, user ratings, or personalised recommendations limits user engagement. The payment and shopping cart flow is incomplete — users can browse but can't purchase. Search and filtering could be deeper.</p>
+            </div>
+            <div class="refl-card">
+                <div class="refl-type rt-future">→ Future Improvements</div>
+                <h4>Cart, Payments & Reviews</h4>
+                <p>A shopping cart with payment integration (Stripe), a user review system, and personalised recommendations would significantly increase the site's competitiveness. Improved search and filter functionality would also enhance the browsing experience.</p>
+            </div>
+        </div>
+        <div class="cs-quote" style="margin-top:3rem;">
+            <p>"This project significantly boosted my understanding of web development — particularly in integrating a secure backend with a responsive frontend. The most valuable lesson was how every layer of the stack must be designed with the other layers in mind."</p>
+            <cite>— Personal Reflection, M.Rashid</cite>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Takeaways</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Cloning teaches more than building from scratch</h4>
+                    <p>Reproducing LinkedIn's homepage forced a deep reading of every layout decision — spacing, colour, typography hierarchy, nav behaviour. You can't fake pixel-perfect reproduction. Studying then rebuilding is one of the most efficient ways to level up CSS skills.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Full-stack means thinking in layers</h4>
+                    <p>The bookshop app required frontend, backend, database, authentication, and deployment to work together. A bug in one layer surfaces as a symptom in another. Understanding how each layer affects the others is what separates a full-stack developer from a frontend one.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Responsive design is architecture, not an afterthought</h4>
+                    <p>Supporting four breakpoints from day one shaped every layout decision — two-column vs stacked, hamburger vs full nav, grid vs flex. Responsive design that works at every size has to be planned before the first div is written, not added at the end.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Security belongs in the foundation</h4>
+                    <p>Implementing bcrypt password hashing, environment variables for credentials, and CORS configuration wasn't optional — it was part of the brief. These security decisions can't be retrofitted later without significant rework.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Deployment is part of development</h4>
+                    <p>Getting the app live on Vercel with a working MongoDB Atlas connection required understanding environment variables, build pipelines, and production vs development config. Shipping to a real URL was when the project truly felt finished.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 2 · Web Development 2 · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="indie-game-design.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Indie Game</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerging Technologies — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* BASE */
+        .cs-hero{padding:14rem 7% 8rem;background:var(--bg-color);position:relative;overflow:hidden;}
+        .cs-hero::before{content:'';position:absolute;top:-20rem;right:-10rem;width:60rem;height:60rem;background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%);pointer-events:none;}
+        .cs-breadcrumb{display:flex;align-items:center;gap:0.8rem;font-size:1.3rem;color:var(--text-light);margin-bottom:3rem;}
+        .cs-breadcrumb a{color:var(--main-color);font-weight:500;}
+        .cs-breadcrumb a:hover{text-decoration:underline;}
+        .cs-breadcrumb i{font-size:1.6rem;}
+        .cs-hero-inner{display:grid;grid-template-columns:1fr auto;gap:6rem;align-items:start;max-width:120rem;}
+        .cs-year-badge{display:inline-block;font-size:1.2rem;font-weight:700;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.4rem 1.4rem;border-radius:5rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.8rem;}
+        .cs-hero h1{font-size:5rem;font-weight:800;color:var(--text-color);line-height:1.1;letter-spacing:-0.03em;margin-bottom:2rem;}
+        .cs-hero h1 span{color:var(--main-color);}
+        .cs-hero-desc{font-size:1.7rem;color:var(--text-light);line-height:1.7;max-width:60rem;margin-bottom:3rem;}
+        .cs-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-bottom:3.5rem;}
+        .cs-tag{font-size:1.25rem;padding:0.5rem 1.4rem;border-radius:5rem;background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border-color);font-weight:500;}
+        .cs-tag-main{background:rgba(117,78,249,0.08);color:var(--main-color);border-color:rgba(117,78,249,0.2);}
+        .cs-hero-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+        .cs-meta-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:3rem;min-width:26rem;box-shadow:0 4px 24px var(--shadow-soft);}
+        .cs-meta-row{display:flex;flex-direction:column;gap:2rem;}
+        .cs-meta-item label{display:block;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:0.4rem;}
+        .cs-meta-item p{font-size:1.45rem;font-weight:600;color:var(--text-color);}
+        .cs-meta-divider{height:1px;background:var(--border-color);}
+        .cs-grade{font-size:2.4rem !important;font-weight:800 !important;color:var(--main-color) !important;}
+        .cs-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg-alt);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
+        .cs-stat{padding:3rem 4rem;border-right:1px solid var(--border-color);text-align:center;}
+        .cs-stat:last-child{border-right:none;}
+        .cs-stat strong{display:block;font-size:3rem;font-weight:800;color:var(--main-color);margin-bottom:0.4rem;}
+        .cs-stat span{font-size:1.3rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+        .assessment-divider{display:flex;align-items:center;gap:2rem;padding:3rem 7%;background:var(--bg-color);border-bottom:1px solid var(--border-color);position:sticky;top:7rem;z-index:10;backdrop-filter:blur(10px);flex-wrap:wrap;}
+        .assessment-pill{display:inline-flex;align-items:center;gap:0.8rem;font-size:1.3rem;font-weight:700;padding:0.7rem 2rem;border-radius:5rem;border:2px solid;transition:all 0.2s;text-decoration:none;}
+        .pill-exp{color:#f59e0b;border-color:#f59e0b;background:rgba(245,158,11,0.06);}
+        .pill-exp:hover{background:rgba(245,158,11,0.12);}
+        .pill-deb{color:var(--main-color);border-color:var(--main-color);background:rgba(117,78,249,0.06);}
+        .pill-deb:hover{background:rgba(117,78,249,0.12);}
+        .assessment-divider p{font-size:1.4rem;color:var(--text-light);}
+        .assessment-band{padding:4rem 7%;border-bottom:1px solid var(--border-color);}
+        .band-exp{background:linear-gradient(135deg,rgba(245,158,11,0.05) 0%,transparent 60%);border-left:4px solid #f59e0b;}
+        .band-deb{background:linear-gradient(135deg,rgba(117,78,249,0.05) 0%,transparent 60%);border-left:4px solid var(--main-color);}
+        .band-inner{display:flex;align-items:center;gap:3rem;flex-wrap:wrap;}
+        .band-badge-exp{font-size:1.2rem;font-weight:800;color:#f59e0b;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);padding:0.6rem 1.6rem;border-radius:5rem;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+        .band-badge-deb{font-size:1.2rem;font-weight:800;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.6rem 1.6rem;border-radius:5rem;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+        .band-title{font-size:2.2rem;font-weight:800;color:var(--text-color);}
+        .band-desc{font-size:1.45rem;color:var(--text-light);max-width:70rem;}
+        .band-weight{font-size:3rem;font-weight:800;color:var(--text-color);margin-left:auto;}
+        .band-weight span{font-size:1.3rem;font-weight:600;color:var(--text-light);display:block;text-align:right;}
+        .cs-section{padding:7rem 7%;border-bottom:1px solid var(--border-color);}
+        .cs-section-alt{background:var(--bg-alt);}
+        .cs-section-top{display:flex;align-items:baseline;gap:2rem;margin-bottom:4rem;}
+        .cs-section-eyebrow{font-size:1.1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;}
+        .cs-section h2{font-size:3rem;font-weight:800;color:var(--text-color);letter-spacing:-0.02em;line-height:1.2;}
+        .cs-section h2 span{color:var(--main-color);}
+        .cs-two-col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+        .cs-body{font-size:1.55rem;color:var(--text-light);line-height:1.8;}
+        .cs-body+.cs-body{margin-top:1.5rem;}
+        .cs-quote{border-left:3px solid var(--main-color);padding:1.8rem 2.2rem;background:rgba(117,78,249,0.04);border-radius:0 1rem 1rem 0;margin:2.5rem 0;}
+        .cs-quote p{font-size:1.6rem;font-style:italic;color:var(--text-color);line-height:1.6;margin-bottom:0.6rem;}
+        .cs-quote cite{font-size:1.25rem;color:var(--main-color);font-style:normal;font-weight:600;}
+        .learnings-list{display:flex;flex-direction:column;gap:1.5rem;}
+        .learning-item{display:flex;gap:2rem;align-items:flex-start;padding:2rem 2.5rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;transition:all 0.3s;}
+        .learning-item:hover{border-color:rgba(117,78,249,0.25);background:rgba(117,78,249,0.02);}
+        .learning-num{font-size:2rem;font-weight:800;color:rgba(117,78,249,0.2);min-width:3rem;line-height:1.2;}
+        .learning-item h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .learning-item p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+        .cs-bottom{display:flex;justify-content:space-between;align-items:center;padding:4rem 7%;background:var(--bg-alt);border-top:1px solid var(--border-color);flex-wrap:wrap;gap:2rem;}
+        .cs-bottom p{font-size:1.6rem;color:var(--text-light);}
+        .cs-bottom-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+
+        /* ===== EXP 1 — DATA VIZ ===== */
+        /* chart showcase — 5 chart type cards */
+        .charts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:2rem;}
+        .charts-row2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+        .chart-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;transition:all 0.3s;}
+        .chart-card:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-3px);box-shadow:0 10px 30px var(--shadow-color);}
+        .chart-vis{height:12rem;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+        /* donut viz */
+        .cv-donut{background:linear-gradient(135deg,#1a0a3d,#4a1942);}
+        .donut-ring{width:8rem;height:8rem;border-radius:50%;background:conic-gradient(#754ef9 0% 35%,#06b6d4 35% 60%,#f59e0b 60% 75%,rgba(255,255,255,0.1) 75% 100%);display:flex;align-items:center;justify-content:center;}
+        .donut-hole{width:4.5rem;height:4.5rem;border-radius:50%;background:#1a0a3d;}
+        /* chord */
+        .cv-chord{background:linear-gradient(135deg,#0f2027,#203a43);}
+        .chord-lines{position:relative;width:9rem;height:9rem;}
+        .chord-arc{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid transparent;}
+        /* bar race */
+        .cv-bar{background:linear-gradient(135deg,#1a0533,#6a11cb);}
+        .bar-race{display:flex;flex-direction:column;gap:0.5rem;width:85%;padding:0 1rem;}
+        .br-row{display:flex;align-items:center;gap:0.8rem;}
+        .br-label{font-size:1rem;color:rgba(255,255,255,0.6);width:2rem;text-align:right;font-weight:700;}
+        .br-bar{height:1.4rem;border-radius:0.3rem;}
+        /* radar */
+        .cv-radar{background:linear-gradient(135deg,#11998e,#1a3a3a);}
+        /* chord 2 */
+        .cv-chord2{background:linear-gradient(135deg,#360033,#0b8793);}
+        .chart-body{padding:2rem 2.2rem;}
+        .chart-type{font-size:1.1rem;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;}
+        .chart-card h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.6rem;}
+        .chart-card p{font-size:1.32rem;color:var(--text-light);line-height:1.6;}
+
+        /* olympic insight strip */
+        .insight-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem;}
+        .insight-box{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;padding:2.2rem;text-align:center;transition:all 0.3s;}
+        .insight-box:hover{border-color:rgba(245,158,11,0.3);}
+        .insight-box strong{display:block;font-size:2.2rem;font-weight:800;color:#f59e0b;margin-bottom:0.4rem;}
+        .insight-box span{font-size:1.25rem;color:var(--text-light);font-weight:600;}
+
+        /* ===== EXP 2 — KFC CHATBOT ===== */
+        .chatbot-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+        /* chat window mockup */
+        .chat-window{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;overflow:hidden;box-shadow:0 8px 32px var(--shadow-color);}
+        .chat-header{background:var(--main-color);padding:1.6rem 2rem;display:flex;align-items:center;gap:1.2rem;}
+        .chat-avatar{width:3.5rem;height:3.5rem;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;}
+        .chat-header-text strong{display:block;font-size:1.4rem;color:#fff;font-weight:700;}
+        .chat-header-text span{font-size:1.1rem;color:rgba(255,255,255,0.7);}
+        .chat-header-dot{width:0.7rem;height:0.7rem;border-radius:50%;background:#4ade80;margin-left:auto;}
+        .chat-messages{padding:1.8rem;display:flex;flex-direction:column;gap:1.2rem;background:var(--bg-alt);}
+        .msg{max-width:80%;padding:1rem 1.4rem;border-radius:1rem;font-size:1.3rem;line-height:1.5;}
+        .msg-bot{background:var(--card-bg);border:1px solid var(--border-color);color:var(--text-color);border-radius:0.4rem 1rem 1rem 1rem;}
+        .msg-user{background:var(--main-color);color:#fff;align-self:flex-end;border-radius:1rem 0.4rem 1rem 1rem;}
+        .chat-input{padding:1.2rem 1.8rem;border-top:1px solid var(--border-color);display:flex;gap:1rem;align-items:center;}
+        .chat-input-bar{flex:1;background:var(--bg-alt);border:1px solid var(--border-color);border-radius:5rem;padding:0.8rem 1.4rem;font-size:1.25rem;color:var(--text-light);}
+        .chat-send{background:var(--main-color);color:#fff;border:none;border-radius:50%;width:3.5rem;height:3.5rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;}
+        .chatbot-info{display:flex;flex-direction:column;gap:2rem;}
+        .intent-list{display:flex;flex-direction:column;gap:1rem;}
+        .intent-row{display:flex;align-items:center;gap:1.2rem;padding:1.2rem 1.6rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:0.8rem;transition:all 0.3s;}
+        .intent-row:hover{border-color:rgba(117,78,249,0.25);}
+        .intent-icon{width:3rem;height:3rem;border-radius:0.6rem;background:rgba(117,78,249,0.08);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--main-color);flex-shrink:0;}
+        .intent-row strong{display:block;font-size:1.35rem;color:var(--text-color);margin-bottom:0.15rem;}
+        .intent-row span{font-size:1.2rem;color:var(--text-light);}
+        .entity-tags{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.5rem;}
+        .entity-tag{font-size:1.1rem;padding:0.25rem 0.9rem;border-radius:5rem;background:rgba(117,78,249,0.06);color:var(--main-color);border:1px solid rgba(117,78,249,0.15);font-weight:600;}
+
+        /* flow steps */
+        .flow-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;}
+        .flow-step{padding:2rem;border-right:1px solid var(--border-color);text-align:center;transition:all 0.3s;position:relative;}
+        .flow-step:last-child{border-right:none;}
+        .flow-step:hover{background:rgba(117,78,249,0.03);}
+        .flow-num{font-size:1rem;font-weight:800;color:var(--main-color);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;}
+        .flow-step h5{font-size:1.35rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .flow-step p{font-size:1.2rem;color:var(--text-light);line-height:1.5;}
+        .flow-arrow{position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-size:1.8rem;color:var(--main-color);z-index:1;display:none;}
+
+        /* ===== THE DEBATE ===== */
+        /* debate motion */
+        .motion-card{background:linear-gradient(135deg,rgba(117,78,249,0.06),rgba(117,78,249,0.02));border:1px solid rgba(117,78,249,0.2);border-radius:1.6rem;padding:4rem;text-align:center;margin-bottom:4rem;}
+        .motion-label{font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--main-color);margin-bottom:1.5rem;}
+        .motion-text{font-size:2.6rem;font-weight:800;color:var(--text-color);line-height:1.3;letter-spacing:-0.02em;max-width:80rem;margin:0 auto 2rem;}
+        .motion-text span{color:var(--main-color);}
+        .motion-meta{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
+        .motion-meta-item{font-size:1.3rem;color:var(--text-light);display:flex;align-items:center;gap:0.6rem;}
+        .motion-meta-item i{color:var(--main-color);}
+
+        /* two-col debate args */
+        .debate-cols{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+        .debate-col{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;}
+        .debate-col-header{padding:1.8rem 2.4rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border-color);}
+        .dch-for{background:rgba(16,185,129,0.06);}
+        .dch-against{background:rgba(239,68,68,0.06);}
+        .dch-badge-for{font-size:1.2rem;font-weight:800;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:0.3rem 1rem;border-radius:5rem;}
+        .dch-badge-against{font-size:1.2rem;font-weight:800;color:#ef4444;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);padding:0.3rem 1rem;border-radius:5rem;}
+        .debate-col-header strong{font-size:1.5rem;color:var(--text-color);}
+        .debate-args{padding:2rem 2.4rem;display:flex;flex-direction:column;gap:1.2rem;}
+        .debate-arg{padding:1.4rem 1.6rem;background:var(--bg-alt);border:1px solid var(--border-color);border-radius:0.8rem;}
+        .debate-arg h5{font-size:1.38rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .debate-arg p{font-size:1.28rem;color:var(--text-light);line-height:1.6;}
+
+        /* case studies row */
+        .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+        .case-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;transition:all 0.3s;}
+        .case-card:hover{border-color:rgba(117,78,249,0.3);transform:translateY(-3px);box-shadow:0 10px 30px var(--shadow-color);}
+        .case-flag{font-size:2.8rem;margin-bottom:1rem;display:block;}
+        .case-card h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:0.7rem;}
+        .case-card p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+        .case-verdict{display:inline-block;font-size:1.1rem;font-weight:700;padding:0.25rem 1rem;border-radius:5rem;margin-top:1rem;}
+        .cv-green{background:rgba(16,185,129,0.08);color:#10b981;border:1px solid rgba(16,185,129,0.2);}
+        .cv-amber{background:rgba(245,158,11,0.08);color:#f59e0b;border:1px solid rgba(245,158,11,0.2);}
+        .cv-blue{background:rgba(59,130,246,0.08);color:#3b82f6;border:1px solid rgba(59,130,246,0.2);}
+
+        @media(max-width:1100px){
+            .cs-hero-inner{grid-template-columns:1fr;}
+            .cs-meta-card{min-width:unset;}
+            .cs-stats{grid-template-columns:repeat(2,1fr);}
+            .cs-two-col,.debate-cols,.chatbot-layout{grid-template-columns:1fr;gap:3rem;}
+            .charts-grid,.charts-row2{grid-template-columns:repeat(2,1fr);}
+            .flow-steps{grid-template-columns:repeat(2,1fr);}
+            .flow-step:nth-child(2){border-right:none;}
+            .insight-strip,.cases-grid{grid-template-columns:repeat(2,1fr);}
+            .band-weight{margin-left:0;}
+        }
+        @media(max-width:650px){
+            .cs-hero{padding:12rem 5% 6rem;}
+            .cs-hero h1{font-size:3.5rem;}
+            .charts-grid,.charts-row2,.cases-grid,.insight-strip{grid-template-columns:1fr;}
+            .flow-steps{grid-template-columns:1fr;}
+            .flow-step{border-right:none;border-bottom:1px solid var(--border-color);}
+            .cs-section{padding:5rem 5%;}
+            .cs-bottom{flex-direction:column;align-items:flex-start;}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Emerging Technologies</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 2 · Module</div>
+                <h1>Emerging <span>Technologies</span></h1>
+                <p class="cs-hero-desc">Two assessments exploring technology at the frontier — an Experiments Collection building an Olympic data visualisation in Flourish and a KFC ordering chatbot in Dialogflow, plus a structured eSports debate analysing both sides of competitive gaming's rise.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">Data Visualisation</span>
+                    <span class="cs-tag cs-tag-main">Flourish Studio</span>
+                    <span class="cs-tag cs-tag-main">Dialogflow</span>
+                    <span class="cs-tag cs-tag-main">Conversational AI</span>
+                    <span class="cs-tag">eSports Debate</span>
+                    <span class="cs-tag">Chatbot Design</span>
+                    <span class="cs-tag">Data Journalism</span>
+                    <span class="cs-tag">NLP</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://public.flourish.studio/story/3066085/" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-line-chart'></i> Live Data Story
+                    </a>
+                    <a href="https://youtu.be/7ikp6rHTQaQ" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-play-circle'></i> Data Viz Walkthrough
+                    </a>
+                    <a href="https://sway.cloud.microsoft/nNe3wxXgzGKG19KF" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-link-external'></i> Sway Portfolio
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Emerging Technologies</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 2 — 2024/25</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Experiments (60%)</label><p>Data Viz · Chatbot</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Debate (40%)</label><p>eSports — For & Against</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Tools</label><p>Flourish · Dialogflow · Canva</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>2</strong><span>Assessments</span></div>
+        <div class="cs-stat"><strong>5</strong><span>Chart Types Built</span></div>
+        <div class="cs-stat"><strong>16+</strong><span>Chatbot Intents</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- JUMP NAV -->
+    <div class="assessment-divider">
+        <p>Jump to:</p>
+        <a href="#experiments" class="assessment-pill pill-exp"><i class='bx bx-flask'></i> Experiments Collection (60%)</a>
+        <a href="#debate" class="assessment-pill pill-deb"><i class='bx bx-conversation'></i> The Debate (40%)</a>
+    </div>
+
+    <!-- ══════════════════════
+         EXPERIMENTS COLLECTION
+    ══════════════════════ -->
+    <div id="experiments" class="assessment-band band-exp">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-exp">Experiments Collection · 60%</div>
+                <div class="band-title" style="margin-top:0.8rem;">Two Emerging Tech Experiments</div>
+                <div class="band-desc" style="margin-top:0.6rem;">Experiment 1 — Olympic data storytelling in Flourish. Experiment 2 — A KFC ordering chatbot with 16+ intents built in Google Dialogflow.</div>
+            </div>
+            <div class="band-weight">60%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- EXP 1: DATA VIZ -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Experiment 1</span>
+            <h2>"The Race Against Time" — <span style="color:#f59e0b;">Olympic Data Story</span></h2>
+        </div>
+
+        <div class="cs-two-col" style="margin-bottom:5rem;">
+            <div>
+                <p class="cs-body">This project explores the evolution of the Olympics from 1900 to 2024 through five interactive visualisations — going beyond medal counts to reveal deeper patterns in gender representation, geopolitical power, and individual athlete dominance.</p>
+                <p class="cs-body">Built using Flourish Studio for its intuitive storytelling features and professional polish, each chart type was carefully selected to fit the specific data story it needed to tell. The dataset spans over 120 years of Olympic history, cleaned and filtered using Excel.</p>
+                <div class="cs-quote">
+                    <p>"Good data visualisation reveals hidden stories — such as athlete medal patterns or geopolitical influence on Olympic performance. Data becomes narrative in the digital age."</p>
+                    <cite>— Critical Reflection, M.Rashid</cite>
+                </div>
+            </div>
+            <div>
+                <div class="insight-strip" style="grid-template-columns:repeat(2,1fr);">
+                    <div class="insight-box"><strong>1900</strong><span>to 2024</span></div>
+                    <div class="insight-box"><strong>5</strong><span>Chart Types</span></div>
+                    <div class="insight-box"><strong>120+</strong><span>Years of Data</span></div>
+                    <div class="insight-box"><strong>Live</strong><span>on Flourish</span></div>
+                </div>
+                <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+                    <a href="https://public.flourish.studio/story/3066085/" target="_blank" class="btn btn-primary" style="font-size:1.3rem;padding:1rem 2.2rem;">
+                        <i class='bx bx-link-external'></i> Open Live Story
+                    </a>
+                    <a href="https://youtu.be/7ikp6rHTQaQ" target="_blank" class="btn btn-secondary" style="font-size:1.3rem;padding:1rem 2.2rem;">
+                        <i class='bx bx-play-circle'></i> Walkthrough
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 CHART TYPES -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-vis cv-donut">
+                    <div class="donut-ring"><div class="donut-hole"></div></div>
+                </div>
+                <div class="chart-body">
+                    <div class="chart-type">Survey Grid Donut</div>
+                    <h4>Gender Representation</h4>
+                    <p>Shows gender equity progress in Olympic sports across decades — mapping the proportion of female vs male athletes per sport over time.</p>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-vis cv-chord" style="background:linear-gradient(135deg,#0f2027,#203a43);">
+                    <div style="position:relative;width:8rem;height:8rem;">
+                        <svg viewBox="0 0 100 100" style="width:100%;height:100%;">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(6,182,212,0.4)" stroke-width="8"/>
+                            <path d="M50,10 Q90,50 50,90" fill="none" stroke="#754ef9" stroke-width="2.5"/>
+                            <path d="M10,50 Q50,10 90,50" fill="none" stroke="#06b6d4" stroke-width="2.5"/>
+                            <path d="M30,20 Q80,80 20,70" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="chart-body">
+                    <div class="chart-type">Chord Diagram</div>
+                    <h4>Sport–Medal Distribution</h4>
+                    <p>Shows how sports contribute to the gold, silver, and bronze medal totals — revealing the disproportionate weight of athletics and swimming.</p>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-vis cv-bar">
+                    <div class="bar-race">
+                        <div class="br-row"><div class="br-label">🇺🇸</div><div class="br-bar" style="width:90%;background:linear-gradient(90deg,#754ef9,#a855f7);"></div></div>
+                        <div class="br-row"><div class="br-label">🇷🇺</div><div class="br-bar" style="width:62%;background:linear-gradient(90deg,#06b6d4,#0891b2);"></div></div>
+                        <div class="br-row"><div class="br-label">🇨🇳</div><div class="br-bar" style="width:50%;background:linear-gradient(90deg,#ef4444,#b91c1c);"></div></div>
+                        <div class="br-row"><div class="br-label">🇬🇧</div><div class="br-bar" style="width:38%;background:linear-gradient(90deg,#f59e0b,#d97706);"></div></div>
+                        <div class="br-row"><div class="br-label">🇩🇪</div><div class="br-bar" style="width:30%;background:linear-gradient(90deg,#10b981,#047857);"></div></div>
+                    </div>
+                </div>
+                <div class="chart-body">
+                    <div class="chart-type">Animated Bar Race</div>
+                    <h4>Country Rankings 1900–2024</h4>
+                    <p>Tracks the Top 5 nations by gold medals over Olympic history — revealing how Cold War geopolitics and China's rise shaped dominance.</p>
+                </div>
+            </div>
+        </div>
+        <div class="charts-row2" style="margin-top:2rem;">
+            <div class="chart-card">
+                <div class="chart-vis cv-radar" style="background:linear-gradient(135deg,#0d2818,#11998e);">
+                    <svg viewBox="0 0 100 100" style="width:9rem;height:9rem;">
+                        <polygon points="50,10 85,35 75,75 25,75 15,35" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <polygon points="50,25 70,40 65,65 35,65 30,40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                        <polygon points="50,15 78,37 70,70 30,70 22,37" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="2"/>
+                        <circle cx="50" cy="15" r="2.5" fill="#f59e0b"/>
+                        <circle cx="78" cy="37" r="2.5" fill="#f59e0b"/>
+                        <circle cx="70" cy="70" r="2.5" fill="#f59e0b"/>
+                        <circle cx="30" cy="70" r="2.5" fill="#f59e0b"/>
+                        <circle cx="22" cy="37" r="2.5" fill="#f59e0b"/>
+                    </svg>
+                </div>
+                <div class="chart-body">
+                    <div class="chart-type">Radar Chart</div>
+                    <h4>Athlete Medal Profiles</h4>
+                    <p>Visualises medal distributions for Phelps, Bolt, and Biles — showing gold-heavy spikes vs balanced spreads. Toggle between individual and grouped views.</p>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-vis cv-chord2">
+                    <div style="position:relative;width:9rem;height:9rem;">
+                        <svg viewBox="0 0 100 100" style="width:100%;height:100%;">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(6,182,212,0.3)" stroke-width="6"/>
+                            <path d="M50,10 C90,10 90,90 50,90" fill="rgba(117,78,249,0.15)" stroke="#754ef9" stroke-width="2"/>
+                            <path d="M10,50 C10,10 90,10 90,50" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" stroke-width="2"/>
+                            <path d="M10,50 C10,90 90,90 90,50" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="chart-body">
+                    <div class="chart-type">Chord Diagram</div>
+                    <h4>Country–Sport Dominance</h4>
+                    <p>Maps relationships between countries and their dominant sports — e.g. USA ↔ Athletics, China ↔ Table Tennis. Custom hover effects added for clarity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXP 2: KFC CHATBOT -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#ef4444;">// Experiment 2</span>
+            <h2>KFC Order Assistant — <span style="color:#ef4444;">Conversational AI</span></h2>
+        </div>
+
+        <!-- CONVERSATION FLOW -->
+        <div class="flow-steps" style="margin-bottom:4rem;">
+            <div class="flow-step">
+                <div class="flow-num">Step 1</div>
+                <h5>🙋 Welcome</h5>
+                <p>Greets the user and sets the fun, friendly tone</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 2</div>
+                <h5>🍔 Meal Selection</h5>
+                <p>Burger type, spice level, size via @entities</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 3</div>
+                <h5>➕ Add-Ons</h5>
+                <p>Fries, drinks, extras selected and confirmed</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 4</div>
+                <h5>📋 Order Summary</h5>
+                <p>Full order reviewed before pickup method</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 5</div>
+                <h5>🎟️ Token</h5>
+                <p>Real pickup token generated for the order</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 6</div>
+                <h5>🎮 Entertainment</h5>
+                <p>Quiz, jokes, fun facts while waiting</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 7</div>
+                <h5>✅ Confirm</h5>
+                <p>Token verification and meal delivery</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">Step 8</div>
+                <h5>👋 Farewell</h5>
+                <p>Warm goodbye and feedback prompt</p>
+            </div>
+        </div>
+
+        <div class="chatbot-layout">
+            <!-- CHAT WINDOW -->
+            <div class="chat-window">
+                <div class="chat-header">
+                    <div class="chat-avatar">🍗</div>
+                    <div class="chat-header-text">
+                        <strong>KFC Order Assistant</strong>
+                        <span>Powered by Google Dialogflow</span>
+                    </div>
+                    <div class="chat-header-dot"></div>
+                </div>
+                <div class="chat-messages">
+                    <div class="msg msg-bot">👋 Hey there! Welcome to KFC! Ready to order something amazing today? 🍗</div>
+                    <div class="msg msg-user">Yes! I want a burger</div>
+                    <div class="msg msg-bot">Great choice! 🍔 Which burger would you like?<br><br>🔥 Zinger · Classic · Tower · Fillet<br>And how spicy? Mild / Hot / Extra Hot</div>
+                    <div class="msg msg-user">Zinger, hot please</div>
+                    <div class="msg msg-bot">One 🔥 Hot Zinger coming up! What size? Regular · Large · Meal Deal?</div>
+                    <div class="msg msg-user">Large meal deal</div>
+                    <div class="msg msg-bot">Perfect! 🎟️ Your token number is <strong>#KFC-4782</strong>. Your order will be ready in 8 mins!<br><br>While you wait — want a quick trivia question? 🎮</div>
+                </div>
+                <div class="chat-input">
+                    <div class="chat-input-bar">Type a message...</div>
+                    <button class="chat-send"><i class='bx bx-send'></i></button>
+                </div>
+            </div>
+
+            <!-- INTENTS + ENTITIES -->
+            <div class="chatbot-info">
+                <div>
+                    <p style="font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:1.4rem;">16+ Structured Intents</p>
+                    <div class="intent-list">
+                        <div class="intent-row"><div class="intent-icon"><i class='bx bx-hand-right'></i></div><div><strong>Welcome</strong><span>Greets user and sets tone</span></div></div>
+                        <div class="intent-row"><div class="intent-icon"><i class='bx bx-food-menu'></i></div><div><strong>OrderBurger</strong><span>Captures type, spice, size</span></div></div>
+                        <div class="intent-row"><div class="intent-icon"><i class='bx bx-plus-circle'></i></div><div><strong>AddOnSelection</strong><span>Extras like fries or drinks</span></div></div>
+                        <div class="intent-row"><div class="intent-icon"><i class='bx bx-barcode'></i></div><div><strong>ProvideToken</strong><span>Simulates pickup token number</span></div></div>
+                        <div class="intent-row"><div class="intent-icon"><i class='bx bx-joystick'></i></div><div><strong>QuizStart · Joke · FunFact</strong><span>Entertainment during wait time</span></div></div>
+                        <div class="intent-row"><div class="intent-icon"><i class='bx bx-check-circle'></i></div><div><strong>ProvideOrderToCustomer</strong><span>Verifies token and delivers meal</span></div></div>
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:1.2rem;">Custom Entities</p>
+                    <div class="entity-tags">
+                        <span class="entity-tag">@BurgerType</span>
+                        <span class="entity-tag">@SpiceLevel</span>
+                        <span class="entity-tag">@MealSize</span>
+                        <span class="entity-tag">@AddOnItem</span>
+                        <span class="entity-tag">@TokenNumber</span>
+                    </div>
+                </div>
+                <a href="https://youtu.be/gy9rnLMcSjs" target="_blank" class="btn btn-primary" style="align-self:flex-start;">
+                    <i class='bx bx-play-circle'></i> Watch Chatbot Demo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════
+         THE DEBATE
+    ══════════════════════ -->
+    <div id="debate" class="assessment-band band-deb">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-deb">The Debate · 40%</div>
+                <div class="band-title" style="margin-top:0.8rem;">eSports — A Structured Academic Debate</div>
+                <div class="band-desc" style="margin-top:0.6rem;">A formal debate analysing whether eSports represents a legitimate and beneficial development in modern entertainment — presenting 5 arguments for, 5 against, and 3 global case studies.</div>
+            </div>
+            <div class="band-weight">40%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- MOTION -->
+    <div class="cs-section">
+        <div class="motion-card">
+            <div class="motion-label">Debate Motion</div>
+            <div class="motion-text">"<span>eSports</span> represents a legitimate and beneficial development in modern entertainment and competitive sports."</div>
+            <div class="motion-meta">
+                <div class="motion-meta-item"><i class='bx bx-calendar'></i> Submitted: 27 March 2025</div>
+                <div class="motion-meta-item"><i class='bx bx-user'></i> Muhammad Abdul Rashid</div>
+                <div class="motion-meta-item"><i class='bx bx-play-circle'></i><a href="https://youtu.be/khXgwIDI7rU" target="_blank" style="color:var(--main-color);font-weight:700;">Watch Debate Recording</a></div>
+            </div>
+        </div>
+
+        <!-- FOR vs AGAINST -->
+        <div class="debate-cols">
+            <div class="debate-col">
+                <div class="debate-col-header dch-for">
+                    <span class="dch-badge-for">✓ For</span>
+                    <strong>5 Arguments in Favour</strong>
+                </div>
+                <div class="debate-args">
+                    <div class="debate-arg">
+                        <h5>💰 Economic Growth</h5>
+                        <p>Global eSports valued at $1.8B in 2023, projected to surpass $3B by 2026 — driven by sponsorships, media rights, and merchandise.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>💼 Career Opportunities</h5>
+                        <p>Thousands of jobs in coaching, event management, broadcasting, and software development. Universities now offer eSports scholarships and degrees.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>🤖 Technological Advancement</h5>
+                        <p>AI analytics, cloud gaming, and blockchain are driving innovation. eSports is a proving ground for emerging technologies at scale.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>🌍 Social Inclusivity</h5>
+                        <p>Unlike physical sports, eSports provides opportunities regardless of physical ability, background, or location — a genuinely inclusive competitive arena.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>🎓 Educational Integration</h5>
+                        <p>Institutions integrating eSports develop transferable skills — strategic thinking, teamwork, problem-solving, and communication under pressure.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="debate-col">
+                <div class="debate-col-header dch-against">
+                    <span class="dch-badge-against">✗ Against</span>
+                    <strong>5 Arguments Against</strong>
+                </div>
+                <div class="debate-args">
+                    <div class="debate-arg">
+                        <h5>🏥 Health Concerns</h5>
+                        <p>Professional gamers train 10–12 hours daily — leading to eye strain, back pain, carpal tunnel syndrome, and documented mental health issues.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>⚖️ Integrity & Regulation</h5>
+                        <p>Unlike FIFA or NBA-governed sports, eSports lacks a universal regulatory body — raising concerns over match-fixing, doping, and inconsistent standards.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>🏈 Impact on Traditional Sports</h5>
+                        <p>Younger audiences shifting to digital gaming — major leagues like NFL and NBA are losing viewership and exploring eSports partnerships defensively.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>😤 Toxicity & Harassment</h5>
+                        <p>Cyberbullying and harassment are prevalent in competitive gaming communities — particularly affecting female players and minority groups at scale.</p>
+                    </div>
+                    <div class="debate-arg">
+                        <h5>🌱 Environmental Impact</h5>
+                        <p>Significant energy consumption from servers, data centres, and high-performance rigs raises serious sustainability and carbon footprint concerns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CASE STUDIES -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Evidence</span>
+            <h2>3 Global <span>Case Studies</span></h2>
+        </div>
+        <div class="cases-grid">
+            <div class="case-card">
+                <span class="case-flag">🇰🇷</span>
+                <h4>South Korea — The Birthplace of eSports</h4>
+                <p>With government support from KeSPA, South Korea built professional leagues, specialised training facilities, and broadcast infrastructure that turned eSports into a legitimate national institution.</p>
+                <div class="case-verdict cv-green">Model of Success</div>
+            </div>
+            <div class="case-card">
+                <span class="case-flag">🇨🇳</span>
+                <h4>China — Regulation vs Growth</h4>
+                <p>The world's largest gaming market imposed strict time limits for minors — three hours per week — to curb addiction, showing how governments must balance economic opportunity against social harm.</p>
+                <div class="case-verdict cv-amber">Regulatory Tension</div>
+            </div>
+            <div class="case-card">
+                <span class="case-flag">🇺🇸</span>
+                <h4>USA — University Scholarships</h4>
+                <p>Over 200 US universities including UC Irvine and Ohio State now offer eSports scholarships and degree programmes — legitimising competitive gaming within academic institutions.</p>
+                <div class="case-verdict cv-blue">Academic Integration</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Data storytelling is a distinct skill from data analysis</h4>
+                    <p>Choosing the right chart type for each story — a radar for an individual athlete, a chord diagram for relationships, a bar race for rankings over time — required design thinking, not just technical skill. The story dictates the format, not the other way around.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Conversational AI design requires user empathy</h4>
+                    <p>The KFC chatbot worked technically — but making it feel human required thinking through what a user might type when confused, bored, or impatient. The entertainment features (quiz, jokes) came from asking "what happens in the gaps?" not just mapping the happy path.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Intent matching errors teach you how NLP really works</h4>
+                    <p>Dialogflow misinterpreting quiz answers and skipping responses forced a deep understanding of training phrases, entity assignment, and context management. Real debugging of NLP systems is the best education in how they work — and fail.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>The strongest debate positions hold both sides</h4>
+                    <p>Researching 5 arguments for and 5 against eSports produced a more nuanced conclusion than taking a side. The most defensible position wasn't "eSports is good" or "bad" — it was "it depends on governance, context, and how you measure success."</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Emerging technologies are defined by their trade-offs</h4>
+                    <p>Every experiment in this module — data visualisation, conversational AI, eSports — had genuine benefits and genuine risks. Emerging technologies aren't inherently good or bad; they're tools, and their impact depends entirely on how they're designed and governed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 2 · Emerging Technologies · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="creative-industry-challenge.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Industry Challenge</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

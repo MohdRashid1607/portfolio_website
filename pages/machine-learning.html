@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* BASE */
+        .cs-hero{padding:14rem 7% 8rem;background:var(--bg-color);position:relative;overflow:hidden;}
+        .cs-hero::before{content:'';position:absolute;top:-20rem;right:-10rem;width:60rem;height:60rem;background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%);pointer-events:none;}
+        .cs-breadcrumb{display:flex;align-items:center;gap:0.8rem;font-size:1.3rem;color:var(--text-light);margin-bottom:3rem;}
+        .cs-breadcrumb a{color:var(--main-color);font-weight:500;}
+        .cs-breadcrumb a:hover{text-decoration:underline;}
+        .cs-breadcrumb i{font-size:1.6rem;}
+        .cs-hero-inner{display:grid;grid-template-columns:1fr auto;gap:6rem;align-items:start;max-width:120rem;}
+        .cs-year-badge{display:inline-block;font-size:1.2rem;font-weight:700;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.4rem 1.4rem;border-radius:5rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.8rem;}
+        .cs-hero h1{font-size:5rem;font-weight:800;color:var(--text-color);line-height:1.1;letter-spacing:-0.03em;margin-bottom:2rem;}
+        .cs-hero h1 span{color:var(--main-color);}
+        .cs-hero-desc{font-size:1.7rem;color:var(--text-light);line-height:1.7;max-width:60rem;margin-bottom:3rem;}
+        .cs-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-bottom:3.5rem;}
+        .cs-tag{font-size:1.25rem;padding:0.5rem 1.4rem;border-radius:5rem;background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border-color);font-weight:500;}
+        .cs-tag-main{background:rgba(117,78,249,0.08);color:var(--main-color);border-color:rgba(117,78,249,0.2);}
+        .cs-tag-y3{background:rgba(16,185,129,0.08);color:#10b981;border-color:rgba(16,185,129,0.2);}
+        .cs-hero-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+        .cs-meta-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:3rem;min-width:26rem;box-shadow:0 4px 24px var(--shadow-soft);}
+        .cs-meta-row{display:flex;flex-direction:column;gap:2rem;}
+        .cs-meta-item label{display:block;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:0.4rem;}
+        .cs-meta-item p{font-size:1.45rem;font-weight:600;color:var(--text-color);}
+        .cs-meta-divider{height:1px;background:var(--border-color);}
+        .cs-grade{font-size:2.4rem !important;font-weight:800 !important;color:var(--main-color) !important;}
+        .cs-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg-alt);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
+        .cs-stat{padding:3rem 4rem;border-right:1px solid var(--border-color);text-align:center;}
+        .cs-stat:last-child{border-right:none;}
+        .cs-stat strong{display:block;font-size:3rem;font-weight:800;color:var(--main-color);margin-bottom:0.4rem;}
+        .cs-stat span{font-size:1.3rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+        .assessment-divider{display:flex;align-items:center;gap:2rem;padding:3rem 7%;background:var(--bg-color);border-bottom:1px solid var(--border-color);position:sticky;top:7rem;z-index:10;backdrop-filter:blur(10px);flex-wrap:wrap;}
+        .assessment-pill{display:inline-flex;align-items:center;gap:0.8rem;font-size:1.3rem;font-weight:700;padding:0.7rem 2rem;border-radius:5rem;border:2px solid;transition:all 0.2s;text-decoration:none;}
+        .pill-a1{color:#06b6d4;border-color:#06b6d4;background:rgba(6,182,212,0.06);}
+        .pill-a1:hover{background:rgba(6,182,212,0.12);}
+        .pill-a2{color:var(--main-color);border-color:var(--main-color);background:rgba(117,78,249,0.06);}
+        .pill-a2:hover{background:rgba(117,78,249,0.12);}
+        .assessment-divider p{font-size:1.4rem;color:var(--text-light);}
+        .assessment-band{padding:4rem 7%;border-bottom:1px solid var(--border-color);}
+        .band-a1{background:linear-gradient(135deg,rgba(6,182,212,0.05) 0%,transparent 60%);border-left:4px solid #06b6d4;}
+        .band-a2{background:linear-gradient(135deg,rgba(117,78,249,0.05) 0%,transparent 60%);border-left:4px solid var(--main-color);}
+        .band-inner{display:flex;align-items:center;gap:3rem;flex-wrap:wrap;}
+        .band-badge-a1{font-size:1.2rem;font-weight:800;color:#06b6d4;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);padding:0.6rem 1.6rem;border-radius:5rem;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+        .band-badge-a2{font-size:1.2rem;font-weight:800;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.6rem 1.6rem;border-radius:5rem;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+        .band-title{font-size:2.2rem;font-weight:800;color:var(--text-color);}
+        .band-desc{font-size:1.45rem;color:var(--text-light);max-width:70rem;}
+        .band-weight{font-size:3rem;font-weight:800;color:var(--text-color);margin-left:auto;}
+        .band-weight span{font-size:1.3rem;font-weight:600;color:var(--text-light);display:block;text-align:right;}
+        .cs-section{padding:7rem 7%;border-bottom:1px solid var(--border-color);}
+        .cs-section-alt{background:var(--bg-alt);}
+        .cs-section-top{display:flex;align-items:baseline;gap:2rem;margin-bottom:4rem;}
+        .cs-section-eyebrow{font-size:1.1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;}
+        .cs-section h2{font-size:3rem;font-weight:800;color:var(--text-color);letter-spacing:-0.02em;line-height:1.2;}
+        .cs-section h2 span{color:var(--main-color);}
+        .cs-two-col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+        .cs-body{font-size:1.55rem;color:var(--text-light);line-height:1.8;}
+        .cs-body+.cs-body{margin-top:1.5rem;}
+        .cs-quote{border-left:3px solid var(--main-color);padding:1.8rem 2.2rem;background:rgba(117,78,249,0.04);border-radius:0 1rem 1rem 0;margin:2.5rem 0;}
+        .cs-quote p{font-size:1.6rem;font-style:italic;color:var(--text-color);line-height:1.6;margin-bottom:0.6rem;}
+        .cs-quote cite{font-size:1.25rem;color:var(--main-color);font-style:normal;font-weight:600;}
+        .learnings-list{display:flex;flex-direction:column;gap:1.5rem;}
+        .learning-item{display:flex;gap:2rem;align-items:flex-start;padding:2rem 2.5rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;transition:all 0.3s;}
+        .learning-item:hover{border-color:rgba(117,78,249,0.25);background:rgba(117,78,249,0.02);}
+        .learning-num{font-size:2rem;font-weight:800;color:rgba(117,78,249,0.2);min-width:3rem;line-height:1.2;}
+        .learning-item h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .learning-item p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+        .cs-bottom{display:flex;justify-content:space-between;align-items:center;padding:4rem 7%;background:var(--bg-alt);border-top:1px solid var(--border-color);flex-wrap:wrap;gap:2rem;}
+        .cs-bottom p{font-size:1.6rem;color:var(--text-light);}
+        .cs-bottom-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+
+        /* ===== EXPERIMENT CARDS ===== */
+        .experiment-cards{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
+        .exp-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;overflow:hidden;transition:all 0.3s;}
+        .exp-card:hover{border-color:rgba(6,182,212,0.35);box-shadow:0 12px 40px var(--shadow-color);transform:translateY(-4px);}
+        .exp-thumb{height:16rem;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+
+        /* Exp1 - insurance viz */
+        .et-medical{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);}
+        .scatter-dots{position:relative;width:18rem;height:12rem;}
+        .scatter-dot{position:absolute;width:0.7rem;height:0.7rem;border-radius:50%;}
+        .regression-line{position:absolute;bottom:10%;left:5%;width:90%;height:2px;background:rgba(245,158,11,0.8);transform:rotate(-8deg);transform-origin:left;}
+
+        /* Exp2 - gaming viz */
+        .et-gaming{background:linear-gradient(135deg,#1a0a3d,#4a1942,#754ef9);}
+        .gaming-bars{display:flex;gap:0.8rem;align-items:flex-end;height:10rem;}
+        .g-bar{width:3.2rem;border-radius:0.4rem 0.4rem 0 0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:0.4rem;}
+        .g-bar span{font-size:0.9rem;font-weight:800;color:#fff;}
+
+        .exp-body{padding:2.5rem;}
+        .exp-num{font-size:1.1rem;font-weight:700;color:#06b6d4;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.6rem;}
+        .exp-card h4{font-size:1.8rem;font-weight:700;color:var(--text-color);margin-bottom:0.8rem;}
+        .exp-card p{font-size:1.38rem;color:var(--text-light);line-height:1.65;margin-bottom:1.6rem;}
+        .exp-models{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.6rem;}
+        .model-tag{font-size:1.1rem;padding:0.3rem 1rem;border-radius:5rem;background:rgba(6,182,212,0.08);color:#06b6d4;border:1px solid rgba(6,182,212,0.2);font-weight:600;}
+        .exp-links{display:flex;gap:1rem;flex-wrap:wrap;}
+        .el-btn{display:inline-flex;align-items:center;gap:0.5rem;font-size:1.2rem;font-weight:700;padding:0.6rem 1.4rem;border-radius:0.6rem;text-decoration:none;transition:all 0.2s;}
+        .el-primary{background:var(--main-color);color:#fff;}
+        .el-primary:hover{background:#5f3dd4;}
+        .el-secondary{background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border-color);}
+        .el-secondary:hover{border-color:var(--main-color);color:var(--main-color);}
+
+        /* workflow steps - horizontal */
+        .workflow-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;}
+        .wf-step{padding:2.5rem 2rem;border-right:1px solid var(--border-color);position:relative;transition:all 0.3s;}
+        .wf-step:last-child{border-right:none;}
+        .wf-step:hover{background:rgba(117,78,249,0.03);}
+        .wf-icon{font-size:2.4rem;margin-bottom:1rem;display:block;}
+        .wf-num{font-size:1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;}
+        .wf-step h5{font-size:1.4rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .wf-step p{font-size:1.25rem;color:var(--text-light);line-height:1.55;}
+
+        /* ===== FRAUD DETECTION SYSTEM ===== */
+        /* gradio mockup */
+        .gradio-mockup{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;overflow:hidden;box-shadow:0 8px 32px var(--shadow-color);margin-bottom:4rem;}
+        .gradio-bar{background:var(--bg-alt);padding:1.2rem 2rem;display:flex;align-items:center;gap:1.2rem;border-bottom:1px solid var(--border-color);}
+        .gr-dot{width:1.2rem;height:1.2rem;border-radius:50%;}
+        .grd-r{background:#ff5f57;} .grd-y{background:#febc2e;} .grd-g{background:#28c840;}
+        .gr-title{font-size:1.3rem;font-weight:700;color:var(--text-color);margin:0 auto;}
+        .gr-badge{font-size:1.1rem;font-weight:700;color:#10b981;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);padding:0.25rem 1rem;border-radius:5rem;}
+        .gradio-body{display:grid;grid-template-columns:1fr 1fr;border-top:0;}
+        .gradio-input{padding:3rem;border-right:1px solid var(--border-color);}
+        .gradio-output{padding:3rem;}
+        .gr-label{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-light);margin-bottom:1.5rem;}
+        .gr-field{margin-bottom:1.2rem;}
+        .gr-field label{display:block;font-size:1.25rem;font-weight:600;color:var(--text-color);margin-bottom:0.5rem;}
+        .gr-field-row{background:var(--bg-alt);border:1px solid var(--border-color);border-radius:0.6rem;padding:0.8rem 1.2rem;font-size:1.25rem;color:var(--text-light);font-family:monospace;}
+        .gr-submit{background:var(--main-color);color:#fff;border:none;border-radius:0.6rem;padding:1rem 2.5rem;font-size:1.3rem;font-weight:700;cursor:pointer;width:100%;margin-top:0.5rem;}
+        .gr-result-card{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:1.2rem;padding:2.5rem;margin-bottom:1.5rem;text-align:center;}
+        .gr-verdict{font-size:2.2rem;font-weight:800;color:#10b981;margin-bottom:0.5rem;}
+        .gr-prob{font-size:1.3rem;color:var(--text-light);}
+        .gr-prob span{font-weight:700;color:var(--text-color);}
+        .gr-metrics-mini{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+        .gr-metric{background:var(--bg-alt);border:1px solid var(--border-color);border-radius:0.8rem;padding:1.2rem;text-align:center;}
+        .gr-metric strong{display:block;font-size:1.8rem;font-weight:800;color:var(--main-color);}
+        .gr-metric span{font-size:1.1rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+
+        /* model comparison table */
+        .model-table{width:100%;border-collapse:collapse;border-radius:1.4rem;overflow:hidden;border:1px solid var(--border-color);}
+        .model-table th{background:var(--bg-alt);padding:1.4rem 2rem;font-size:1.25rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-light);text-align:left;border-bottom:1px solid var(--border-color);}
+        .model-table td{padding:1.6rem 2rem;font-size:1.38rem;color:var(--text-light);border-bottom:1px solid var(--border-color);}
+        .model-table tr:last-child td{border-bottom:none;}
+        .model-table tr:nth-child(even) td{background:rgba(117,78,249,0.01);}
+        .model-table tr:hover td{background:rgba(117,78,249,0.03);}
+        .mt-name{font-weight:700;color:var(--text-color);}
+        .mt-winner{color:var(--main-color) !important;font-weight:700;}
+        .mt-badge{display:inline-block;font-size:1rem;padding:0.2rem 0.8rem;border-radius:5rem;font-weight:700;}
+        .mtb-best{background:rgba(117,78,249,0.08);color:var(--main-color);border:1px solid rgba(117,78,249,0.2);}
+        .mtb-base{background:rgba(148,163,184,0.08);color:#94a3b8;border:1px solid rgba(148,163,184,0.15);}
+
+        /* metrics visual */
+        .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+        .metric-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;text-align:center;transition:all 0.3s;}
+        .metric-card:hover{border-color:rgba(117,78,249,0.3);box-shadow:0 8px 25px var(--shadow-color);}
+        .metric-value{font-size:3.5rem;font-weight:800;color:var(--main-color);line-height:1;margin-bottom:0.6rem;}
+        .metric-label{font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-light);}
+        .metric-desc{font-size:1.25rem;color:var(--text-light);margin-top:0.8rem;line-height:1.5;}
+
+        @media(max-width:1100px){
+            .cs-hero-inner{grid-template-columns:1fr;}
+            .cs-meta-card{min-width:unset;}
+            .cs-stats{grid-template-columns:repeat(2,1fr);}
+            .cs-two-col,.experiment-cards{grid-template-columns:1fr;gap:3rem;}
+            .gradio-body{grid-template-columns:1fr;}
+            .gradio-input{border-right:none;border-bottom:1px solid var(--border-color);}
+            .workflow-steps{grid-template-columns:repeat(3,1fr);}
+            .wf-step:nth-child(3){border-right:none;}
+            .metrics-grid{grid-template-columns:repeat(2,1fr);}
+            .band-weight{margin-left:0;}
+        }
+        @media(max-width:650px){
+            .cs-hero{padding:12rem 5% 6rem;}
+            .cs-hero h1{font-size:3.5rem;}
+            .cs-section{padding:5rem 5%;}
+            .workflow-steps{grid-template-columns:1fr;}
+            .wf-step{border-right:none;border-bottom:1px solid var(--border-color);}
+            .wf-step:last-child{border-bottom:none;}
+            .metrics-grid{grid-template-columns:1fr 1fr;}
+            .cs-bottom{flex-direction:column;align-items:flex-start;}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Machine Learning</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 3 · Module</div>
+                <h1>Machine <span>Learning</span></h1>
+                <p class="cs-hero-desc">Two assessments going deep into ML — A1: two Kaggle experiments exploring regression and multi-class classification. A2: a production-grade credit card fraud detection system achieving 97% accuracy, deployed live with a Gradio interface.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-y3">✓ Year 3</span>
+                    <span class="cs-tag cs-tag-main">Python</span>
+                    <span class="cs-tag cs-tag-main">scikit-learn</span>
+                    <span class="cs-tag cs-tag-main">Gradio</span>
+                    <span class="cs-tag cs-tag-main">Logistic Regression</span>
+                    <span class="cs-tag">Random Forest</span>
+                    <span class="cs-tag">LightGBM</span>
+                    <span class="cs-tag">Fraud Detection</span>
+                    <span class="cs-tag">Kaggle</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://youtu.be/6uIQKqvevh4" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-play-circle'></i> A2 Demo Video
+                    </a>
+                    <a href="https://github.com/DC-BSU-RAK/assessment-2-machine-learning-model-60-MohdRashid1607.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub
+                    </a>
+                    <a href="https://www.kaggle.com/code/m7hammad/exercise-1-medical-insurance-cost-prediction" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-data'></i> Kaggle
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Machine Learning</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 3 — 2025/26</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>A1 (40%)</label><p>Experiment Portfolio — Kaggle</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>A2 (60%)</label><p>Fraud Detection + Gradio App</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Best Result</label><p>97% Accuracy — Fraud Model</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>4</strong><span>ML Models Built</span></div>
+        <div class="cs-stat"><strong>97%</strong><span>Fraud Model Accuracy</span></div>
+        <div class="cs-stat"><strong>40k+</strong><span>Gaming Dataset Records</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- JUMP NAV -->
+    <div class="assessment-divider">
+        <p>Jump to:</p>
+        <a href="#a1" class="assessment-pill pill-a1"><i class='bx bx-flask'></i> A1 — Experiment Portfolio (40%)</a>
+        <a href="#a2" class="assessment-pill pill-a2"><i class='bx bx-shield-quarter'></i> A2 — Model Development (60%)</a>
+    </div>
+
+    <!-- ══════════════
+         A1: EXPERIMENTS
+    ══════════════ -->
+    <div id="a1" class="assessment-band band-a1">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-a1">Assessment 1 · 40%</div>
+                <div class="band-title" style="margin-top:0.8rem;">Experiment Portfolio — Kaggle Notebooks</div>
+                <div class="band-desc" style="margin-top:0.6rem;">Two machine learning experiments on Kaggle — a regression task predicting medical insurance costs, and a multi-class classification predicting online gaming engagement levels.</div>
+            </div>
+            <div class="band-weight">40%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#06b6d4;">// Two Experiments</span>
+            <h2>Kaggle <span style="color:#06b6d4;">Notebooks</span></h2>
+        </div>
+        <div class="experiment-cards">
+            <!-- Experiment 1 -->
+            <div class="exp-card">
+                <div class="exp-thumb et-medical">
+                    <!-- scatter plot vis -->
+                    <div class="scatter-dots">
+                        <div class="scatter-dot" style="left:8%;top:70%;background:#754ef9;opacity:0.8;"></div>
+                        <div class="scatter-dot" style="left:20%;top:55%;background:#754ef9;opacity:0.8;"></div>
+                        <div class="scatter-dot" style="left:15%;top:80%;background:#ef4444;opacity:0.9;width:1rem;height:1rem;"></div>
+                        <div class="scatter-dot" style="left:30%;top:45%;background:#754ef9;opacity:0.7;"></div>
+                        <div class="scatter-dot" style="left:40%;top:60%;background:#06b6d4;opacity:0.8;"></div>
+                        <div class="scatter-dot" style="left:35%;top:20%;background:#ef4444;opacity:0.9;width:1rem;height:1rem;"></div>
+                        <div class="scatter-dot" style="left:50%;top:50%;background:#754ef9;opacity:0.8;"></div>
+                        <div class="scatter-dot" style="left:60%;top:35%;background:#06b6d4;opacity:0.7;"></div>
+                        <div class="scatter-dot" style="left:55%;top:15%;background:#ef4444;opacity:0.9;width:1rem;height:1rem;"></div>
+                        <div class="scatter-dot" style="left:70%;top:25%;background:#754ef9;opacity:0.8;"></div>
+                        <div class="scatter-dot" style="left:75%;top:10%;background:#ef4444;opacity:0.9;width:1.1rem;height:1.1rem;"></div>
+                        <div class="scatter-dot" style="left:80%;top:40%;background:#06b6d4;opacity:0.7;"></div>
+                        <div class="scatter-dot" style="left:90%;top:30%;background:#754ef9;opacity:0.8;"></div>
+                        <div class="regression-line"></div>
+                        <div style="position:absolute;bottom:1rem;right:1rem;font-size:1rem;color:rgba(255,255,255,0.4);">Predicted vs Actual</div>
+                        <div style="position:absolute;top:1rem;left:1rem;display:flex;gap:0.8rem;">
+                            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;color:rgba(255,255,255,0.5);"><div style="width:0.8rem;height:0.8rem;border-radius:50%;background:#ef4444;"></div>Smoker</div>
+                            <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;color:rgba(255,255,255,0.5);"><div style="width:0.8rem;height:0.8rem;border-radius:50%;background:#754ef9;"></div>Non-Smoker</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="exp-body">
+                    <div class="exp-num">Exercise 01 · Regression</div>
+                    <h4>Medical Insurance Cost Prediction</h4>
+                    <p>Predicted insurance charges from demographic and lifestyle features — uncovering that BMI and smoking status have disproportionately strong influence. Linear Regression set a baseline; Random Forest handled non-linear interactions far better.</p>
+                    <div class="exp-models">
+                        <span class="model-tag">Linear Regression</span>
+                        <span class="model-tag">Random Forest</span>
+                        <span class="model-tag">Hyperparameter Tuning</span>
+                    </div>
+                    <div class="exp-links">
+                        <a href="https://www.kaggle.com/code/m7hammad/exercise-1-medical-insurance-cost-prediction" target="_blank" class="el-btn el-primary"><i class='bx bx-data'></i> Kaggle Notebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment 2 -->
+            <div class="exp-card">
+                <div class="exp-thumb et-gaming">
+                    <div class="gaming-bars">
+                        <div class="g-bar" style="height:50%;background:rgba(117,78,249,0.7);"><span>Low</span></div>
+                        <div class="g-bar" style="height:72%;background:rgba(6,182,212,0.8);"><span>Med</span></div>
+                        <div class="g-bar" style="height:90%;background:rgba(16,185,129,0.85);"><span>High</span></div>
+                    </div>
+                    <div style="position:absolute;top:1.5rem;left:1.8rem;font-size:1rem;color:rgba(255,255,255,0.4);">Engagement Levels · 40k records</div>
+                    <div style="position:absolute;bottom:1.5rem;right:1.8rem;">
+                        <div style="display:flex;gap:0.6rem;">
+                            <div style="background:rgba(117,78,249,0.3);border:1px solid rgba(117,78,249,0.5);border-radius:0.4rem;padding:0.3rem 0.7rem;font-size:0.95rem;color:rgba(255,255,255,0.7);">RF ✓ Best</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="exp-body">
+                    <div class="exp-num">Exercise 02 · Classification</div>
+                    <h4>High-Engagement Player Prediction</h4>
+                    <p>Predicted online gaming engagement (Low / Medium / High) from 40,000+ records. Tested four classifiers — Random Forest won with the highest accuracy and best balanced performance across all three engagement classes.</p>
+                    <div class="exp-models">
+                        <span class="model-tag">Logistic Regression</span>
+                        <span class="model-tag">Decision Tree</span>
+                        <span class="model-tag">Random Forest</span>
+                        <span class="model-tag">LightGBM</span>
+                    </div>
+                    <div class="exp-links">
+                        <a href="https://www.kaggle.com/code/m7hammad/exercise-2-online-gaming-behavior-classification" target="_blank" class="el-btn el-primary"><i class='bx bx-data'></i> Kaggle Notebook</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-quote" style="margin-top:4rem;">
+            <p>"Working through this regression task felt less like following a recipe and more like slowly untangling a knot. Every step revealed some limitation, some assumption I had made too quickly, or some pattern in the data that I had underestimated."</p>
+            <cite>— Critical Reflection, Exercise 1, M.Rashid</cite>
+        </div>
+    </div>
+
+    <!-- ══════════════
+         A2: FRAUD DETECTION
+    ══════════════ -->
+    <div id="a2" class="assessment-band band-a2">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-a2">Assessment 2 · 60%</div>
+                <div class="band-title" style="margin-top:0.8rem;">Credit Card Fraud Detection — Model + Gradio App</div>
+                <div class="band-desc" style="margin-top:0.6rem;">A production-grade binary classification system trained on real European credit card transaction data — 97% accuracy, deployed as an interactive Gradio application with real-time predictions.</div>
+            </div>
+            <div class="band-weight">60%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- OVERVIEW + GRADIO MOCKUP -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// The System</span>
+            <h2>Fraud Detection <span>App</span></h2>
+        </div>
+
+        <!-- Gradio mockup -->
+        <div class="gradio-mockup">
+            <div class="gradio-bar">
+                <div class="gr-dot grd-r"></div>
+                <div class="gr-dot grd-y"></div>
+                <div class="gr-dot grd-g"></div>
+                <div class="gr-title">💳 Credit Card Fraud Detector — Gradio Interface</div>
+                <div class="gr-badge">✓ 97% Accuracy</div>
+            </div>
+            <div class="gradio-body">
+                <div class="gradio-input">
+                    <div class="gr-label">Transaction Details</div>
+                    <div class="gr-field">
+                        <label>Transaction Amount ($)</label>
+                        <div class="gr-field-row">142.50</div>
+                    </div>
+                    <div class="gr-field">
+                        <label>Transaction Time (seconds)</label>
+                        <div class="gr-field-row">86400</div>
+                    </div>
+                    <div class="gr-field">
+                        <label>Anonymized Feature V1</label>
+                        <div class="gr-field-row">-1.3598...</div>
+                    </div>
+                    <div class="gr-field">
+                        <label>Anonymized Feature V2</label>
+                        <div class="gr-field-row">-0.0727...</div>
+                    </div>
+                    <button class="gr-submit">🔍 Detect Fraud</button>
+                </div>
+                <div class="gradio-output">
+                    <div class="gr-label">Prediction Result</div>
+                    <div class="gr-result-card">
+                        <div class="gr-verdict">✅ Legitimate Transaction</div>
+                        <div class="gr-prob">Fraud Probability: <span>2.3%</span> · Confidence: <span>97.7%</span></div>
+                    </div>
+                    <div class="gr-metrics-mini">
+                        <div class="gr-metric"><strong>97%</strong><span>Accuracy</span></div>
+                        <div class="gr-metric"><strong>0.97</strong><span>ROC-AUC</span></div>
+                        <div class="gr-metric"><strong>High</strong><span>Precision</span></div>
+                        <div class="gr-metric"><strong>Low</strong><span>False Alerts</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Credit card fraud detection is one of the most challenging real-world ML problems — not because of model complexity, but because of extreme class imbalance. Fraudulent transactions are rare, so a model that simply predicts "legitimate" for everything would achieve very high accuracy while being completely useless.</p>
+                <p class="cs-body">The dataset — real European credit card transactions from Kaggle — reflects this: the vast majority are legitimate, with fraud cases representing a tiny fraction. This required using precision, recall, F1-score, and ROC-AUC as primary metrics rather than raw accuracy.</p>
+            </div>
+            <div>
+                <p class="cs-body">Logistic Regression was selected as the primary algorithm for its efficiency, interpretability, and excellent performance on binary classification tasks. It provides probabilistic outputs — meaning the system doesn't just say "fraud" or "not fraud", it gives a confidence score, which is far more useful for risk assessment.</p>
+                <p class="cs-body">The Gradio deployment transforms the model from a notebook into a usable application — users input transaction details and receive an instant prediction with fraud probability. This makes the system educational and demonstrates real-world deployment thinking.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ML WORKFLOW -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Process</span>
+            <h2>ML <span>Workflow</span></h2>
+        </div>
+        <div class="workflow-steps">
+            <div class="wf-step">
+                <span class="wf-icon">📦</span>
+                <div class="wf-num">Step 1</div>
+                <h5>Data Loading</h5>
+                <p>Real European CC transaction dataset from Kaggle — numerical features, anonymised with PCA</p>
+            </div>
+            <div class="wf-step">
+                <span class="wf-icon">🔧</span>
+                <div class="wf-num">Step 2</div>
+                <h5>Preprocessing</h5>
+                <p>StandardScaler applied to normalize feature values — train/test split with imbalance handling</p>
+            </div>
+            <div class="wf-step">
+                <span class="wf-icon">🧠</span>
+                <div class="wf-num">Step 3</div>
+                <h5>Model Training</h5>
+                <p>Logistic Regression with increased max iterations — learning decision boundaries for fraud vs legitimate</p>
+            </div>
+            <div class="wf-step">
+                <span class="wf-icon">📊</span>
+                <div class="wf-num">Step 4</div>
+                <h5>Evaluation</h5>
+                <p>Confusion matrix · ROC curve · Precision–Recall · F1-score — metrics chosen for imbalanced data</p>
+            </div>
+            <div class="wf-step">
+                <span class="wf-icon">🚀</span>
+                <div class="wf-num">Step 5</div>
+                <h5>Deployment</h5>
+                <p>Gradio interface — real-time predictions with probability scores, accessible to non-technical users</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERFORMANCE METRICS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Results</span>
+            <h2>Model <span>Performance</span></h2>
+        </div>
+        <div class="metrics-grid" style="margin-bottom:5rem;">
+            <div class="metric-card">
+                <div class="metric-value">97%</div>
+                <div class="metric-label">Overall Accuracy</div>
+                <div class="metric-desc">Strong classification performance on unseen test data — but not the primary metric for this task</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">0.97</div>
+                <div class="metric-label">ROC-AUC Score</div>
+                <div class="metric-desc">Effective at separating fraud from legitimate transactions across different classification thresholds</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">High</div>
+                <div class="metric-label">Fraud Recall</div>
+                <div class="metric-desc">Good detection of actual fraud cases — critical metric since missing fraud has high real-world cost</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">Low</div>
+                <div class="metric-label">False Positives</div>
+                <div class="metric-desc">Kept false alerts low — avoiding unnecessary inconvenience for legitimate cardholders</div>
+            </div>
+        </div>
+
+        <!-- Visualisations built -->
+        <div class="cs-section-top" style="margin-top:0;">
+            <span class="cs-section-eyebrow">// Visualisations Built</span>
+            <h2>4 Analytical <span>Charts</span></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;">
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(117,78,249,0.3)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size:3rem;margin-bottom:1rem;">🟦</div>
+                <h4 style="font-size:1.5rem;font-weight:700;color:var(--text-color);margin-bottom:0.5rem;">Confusion Matrix</h4>
+                <p style="font-size:1.3rem;color:var(--text-light);line-height:1.6;">TP/TN/FP/FN breakdown — visualising true vs predicted fraud classifications</p>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(117,78,249,0.3)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size:3rem;margin-bottom:1rem;">📊</div>
+                <h4 style="font-size:1.5rem;font-weight:700;color:var(--text-color);margin-bottom:0.5rem;">Class Distribution</h4>
+                <p style="font-size:1.3rem;color:var(--text-light);line-height:1.6;">Shows the extreme imbalance — fraud cases vs legitimate transactions in the dataset</p>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(117,78,249,0.3)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size:3rem;margin-bottom:1rem;">📈</div>
+                <h4 style="font-size:1.5rem;font-weight:700;color:var(--text-color);margin-bottom:0.5rem;">ROC Curve</h4>
+                <p style="font-size:1.3rem;color:var(--text-light);line-height:1.6;">True positive vs false positive rate at different thresholds — AUC = 0.97</p>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;text-align:center;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(117,78,249,0.3)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                <div style="font-size:3rem;margin-bottom:1rem;">📉</div>
+                <h4 style="font-size:1.5rem;font-weight:700;color:var(--text-color);margin-bottom:0.5rem;">Precision–Recall Curve</h4>
+                <p style="font-size:1.3rem;color:var(--text-light);line-height:1.6;">Balance between detecting fraud and avoiding incorrect fraud predictions at each threshold</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>ML is iterative — every result reveals what you don't yet understand</h4>
+                    <p>Each model trained in the experiments opened a new question. Linear Regression exposing non-linearity. Random Forest outperforming without tuning. Hyperparameter changes shifting behaviour significantly. The learning isn't in the final model — it's in the progression.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Accuracy is a misleading metric for imbalanced data</h4>
+                    <p>A fraud detection model that predicts "legitimate" for everything would achieve 99%+ accuracy while being completely useless. Precision, recall, F1-score, and ROC-AUC are the real measures of performance when classes are imbalanced — and this was the most important conceptual shift in A2.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Feature importance reveals what the model actually learned</h4>
+                    <p>In the gaming classification task, gameplay metrics (PlayTimeHours, AvgSessionDuration) were far more predictive than demographic features. Feature importance analysis turned the model from a black box into an explainable system — and that explanation was itself valuable insight.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Deployment is what separates a notebook from a product</h4>
+                    <p>Building the Gradio interface for the fraud detection model transformed it from a Jupyter notebook into something a non-technical person could use. Deployment forces you to think about the user, not just the model — and that thinking makes the model better.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Preprocessing often matters more than model choice</h4>
+                    <p>In both assessments, the most impactful decisions were in data preparation — encoding strategy, scaling method, stratified splitting, handling class imbalance. A well-preprocessed dataset with a simple model consistently outperformed a complex model on poorly prepared data.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 3 · Machine Learning · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

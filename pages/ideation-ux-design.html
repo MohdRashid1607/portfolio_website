@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideation & UX Design — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        .cs-hero { padding: 14rem 7% 8rem; background: var(--bg-color); position: relative; overflow: hidden; }
+        .cs-hero::before { content:''; position:absolute; top:-20rem; right:-10rem; width:60rem; height:60rem; background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%); pointer-events:none; }
+        .cs-breadcrumb { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); margin-bottom:3rem; }
+        .cs-breadcrumb a { color:var(--main-color); font-weight:500; }
+        .cs-breadcrumb a:hover { text-decoration:underline; }
+        .cs-breadcrumb i { font-size:1.6rem; }
+        .cs-hero-inner { display:grid; grid-template-columns:1fr auto; gap:6rem; align-items:start; max-width:120rem; }
+        .cs-year-badge { display:inline-block; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.4rem; border-radius:5rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.8rem; }
+        .cs-hero h1 { font-size:5rem; font-weight:800; color:var(--text-color); line-height:1.1; letter-spacing:-0.03em; margin-bottom:2rem; }
+        .cs-hero h1 span { color:var(--main-color); }
+        .cs-hero-desc { font-size:1.7rem; color:var(--text-light); line-height:1.7; max-width:60rem; margin-bottom:3rem; }
+        .cs-tags { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:3.5rem; }
+        .cs-tag { font-size:1.25rem; padding:0.5rem 1.4rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:500; }
+        .cs-tag-main { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); }
+        .cs-hero-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .cs-meta-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; min-width:26rem; box-shadow:0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display:flex; flex-direction:column; gap:2rem; }
+        .cs-meta-item label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.4rem; }
+        .cs-meta-item p { font-size:1.45rem; font-weight:600; color:var(--text-color); }
+        .cs-meta-divider { height:1px; background:var(--border-color); }
+        .cs-grade { font-size:2.4rem !important; font-weight:800 !important; color:var(--main-color) !important; }
+
+        .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--bg-alt); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); }
+        .cs-stat { padding:3rem 4rem; border-right:1px solid var(--border-color); text-align:center; }
+        .cs-stat:last-child { border-right:none; }
+        .cs-stat strong { display:block; font-size:3rem; font-weight:800; color:var(--main-color); margin-bottom:0.4rem; }
+        .cs-stat span { font-size:1.3rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+
+        /* jump nav */
+        .assessment-divider { display:flex; align-items:center; gap:2rem; padding:3rem 7%; background:var(--bg-color); border-bottom:1px solid var(--border-color); position:sticky; top:7rem; z-index:10; backdrop-filter:blur(10px); flex-wrap:wrap; }
+        .assessment-pill { display:inline-flex; align-items:center; gap:0.8rem; font-size:1.3rem; font-weight:700; padding:0.7rem 2rem; border-radius:5rem; border:2px solid; cursor:pointer; transition:all 0.2s; text-decoration:none; }
+        .pill-a1 { color:#06b6d4; border-color:#06b6d4; background:rgba(6,182,212,0.06); }
+        .pill-a1:hover { background:rgba(6,182,212,0.12); }
+        .pill-sa2 { color:var(--main-color); border-color:var(--main-color); background:rgba(117,78,249,0.06); }
+        .pill-sa2:hover { background:rgba(117,78,249,0.12); }
+        .assessment-divider p { font-size:1.4rem; color:var(--text-light); }
+
+        /* assessment band */
+        .assessment-band { padding:4rem 7%; border-bottom:1px solid var(--border-color); }
+        .assessment-band-a1 { background:linear-gradient(135deg,rgba(6,182,212,0.05) 0%,transparent 60%); border-left:4px solid #06b6d4; }
+        .assessment-band-sa2 { background:linear-gradient(135deg,rgba(117,78,249,0.05) 0%,transparent 60%); border-left:4px solid var(--main-color); }
+        .band-inner { display:flex; align-items:center; gap:3rem; flex-wrap:wrap; }
+        .band-badge-a1 { font-size:1.2rem; font-weight:800; color:#06b6d4; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.25); padding:0.6rem 1.6rem; border-radius:5rem; text-transform:uppercase; letter-spacing:0.08em; white-space:nowrap; }
+        .band-badge-sa2 { font-size:1.2rem; font-weight:800; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.6rem 1.6rem; border-radius:5rem; text-transform:uppercase; letter-spacing:0.08em; white-space:nowrap; }
+        .band-title { font-size:2.2rem; font-weight:800; color:var(--text-color); }
+        .band-desc { font-size:1.45rem; color:var(--text-light); max-width:70rem; }
+        .band-weight { font-size:3rem; font-weight:800; color:var(--text-color); margin-left:auto; }
+        .band-weight span { font-size:1.3rem; font-weight:600; color:var(--text-light); display:block; text-align:right; }
+
+        /* sections */
+        .cs-section { padding:7rem 7%; border-bottom:1px solid var(--border-color); }
+        .cs-section-alt { background:var(--bg-alt); }
+        .cs-section-top { display:flex; align-items:baseline; gap:2rem; margin-bottom:4rem; }
+        .cs-section-eyebrow { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.12em; white-space:nowrap; }
+        .cs-section h2 { font-size:3rem; font-weight:800; color:var(--text-color); letter-spacing:-0.02em; line-height:1.2; }
+        .cs-section h2 span { color:var(--main-color); }
+        .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+        .cs-body { font-size:1.55rem; color:var(--text-light); line-height:1.8; }
+        .cs-body + .cs-body { margin-top:1.5rem; }
+        .cs-quote { border-left:3px solid var(--main-color); padding:1.8rem 2.2rem; background:rgba(117,78,249,0.04); border-radius:0 1rem 1rem 0; margin:2.5rem 0; }
+        .cs-quote p { font-size:1.6rem; font-style:italic; color:var(--text-color); line-height:1.6; margin-bottom:0.6rem; }
+        .cs-quote cite { font-size:1.25rem; color:var(--main-color); font-style:normal; font-weight:600; }
+
+        /* idea sessions */
+        .sessions-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+        .session-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; overflow:hidden; transition:all 0.3s; }
+        .session-card:hover { border-color:rgba(6,182,212,0.3); transform:translateY(-4px); box-shadow:0 12px 35px var(--shadow-color); }
+        .session-thumb { height:12rem; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+        .session-thumb i { font-size:4.5rem; color:rgba(255,255,255,0.3); position:relative; z-index:1; }
+        .session-num { position:absolute; top:1.4rem; left:1.6rem; font-size:1.1rem; font-weight:800; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:0.1em; z-index:2; }
+        .st-1 { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); }
+        .st-2 { background:linear-gradient(135deg,#1a0a3d,#06b6d4); }
+        .st-3 { background:linear-gradient(135deg,#1d1d1d,#4f4f4f); }
+        .st-final { background:linear-gradient(135deg,#1a0533,#6a11cb,#f59e0b); }
+        .session-body { padding:2rem 2.2rem; }
+        .session-body h4 { font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:0.6rem; }
+        .session-body p { font-size:1.35rem; color:var(--text-light); line-height:1.6; margin-bottom:1.2rem; }
+        .session-tag { display:inline-block; font-size:1.1rem; padding:0.25rem 1rem; border-radius:5rem; background:rgba(6,182,212,0.08); color:#06b6d4; border:1px solid rgba(6,182,212,0.2); font-weight:600; margin-bottom:0.8rem; }
+        .session-tag-final { background:rgba(245,158,11,0.08); color:#f59e0b; border-color:rgba(245,158,11,0.2); }
+
+        /* commentary */
+        .commentary-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+        .commentary-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .commentary-card:hover { border-color:rgba(6,182,212,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .commentary-q { font-size:1.3rem; font-weight:700; color:#06b6d4; margin-bottom:1rem; font-style:italic; line-height:1.5; }
+        .commentary-card p { font-size:1.38rem; color:var(--text-light); line-height:1.7; }
+
+        /* fitness app section */
+        .app-hero-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; margin-bottom:4rem; }
+        .app-hero-visual { background:linear-gradient(135deg,#1a0a3d,#754ef9,#06b6d4); display:flex; align-items:center; justify-content:center; min-height:28rem; position:relative; overflow:hidden; padding:3rem; }
+        .app-hero-visual::before { content:''; position:absolute; width:20rem; height:20rem; border-radius:50%; background:rgba(255,255,255,0.04); top:-5rem; right:-5rem; }
+        .phone-mockup { width:12rem; background:#0d0d1a; border-radius:2.4rem; border:2.5px solid rgba(255,255,255,0.15); overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.5); position:relative; z-index:1; }
+        .phone-screen { padding:1.5rem 1.2rem; }
+        .phone-status { display:flex; justify-content:space-between; font-size:1rem; color:rgba(255,255,255,0.4); margin-bottom:1.2rem; font-family:monospace; }
+        .phone-header { font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:0.4rem; }
+        .phone-sub { font-size:1rem; color:rgba(255,255,255,0.5); margin-bottom:1.4rem; }
+        .phone-stat-row { display:flex; gap:0.8rem; margin-bottom:1rem; }
+        .phone-stat-box { flex:1; background:rgba(117,78,249,0.25); border-radius:0.8rem; padding:0.8rem; text-align:center; }
+        .phone-stat-box strong { display:block; font-size:1.4rem; font-weight:800; color:#fff; }
+        .phone-stat-box span { font-size:0.9rem; color:rgba(255,255,255,0.5); }
+        .phone-bar { height:0.6rem; background:rgba(255,255,255,0.08); border-radius:5rem; margin-bottom:0.6rem; overflow:hidden; }
+        .phone-bar-fill { height:100%; background:linear-gradient(90deg,#754ef9,#06b6d4); border-radius:5rem; }
+        .phone-bar-label { font-size:0.9rem; color:rgba(255,255,255,0.4); display:flex; justify-content:space-between; margin-bottom:1rem; }
+        .app-hero-info { padding:3.5rem; }
+        .app-hero-info h3 { font-size:2.8rem; font-weight:800; color:var(--text-color); margin-bottom:1rem; letter-spacing:-0.02em; }
+        .app-hero-info h3 span { color:var(--main-color); }
+        .app-hero-info p { font-size:1.5rem; color:var(--text-light); line-height:1.75; margin-bottom:2rem; }
+        .app-feature-list { display:flex; flex-direction:column; gap:1rem; }
+        .app-feature { display:flex; gap:1.2rem; align-items:flex-start; }
+        .app-feature i { font-size:1.8rem; color:var(--main-color); margin-top:0.1rem; flex-shrink:0; }
+        .app-feature p { font-size:1.38rem; color:var(--text-light); line-height:1.55; margin:0; }
+
+        /* competitors */
+        .comp-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+        .comp-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .comp-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .comp-name { font-size:1.8rem; font-weight:800; color:var(--text-color); margin-bottom:0.4rem; }
+        .comp-row { margin-top:1.2rem; }
+        .comp-row label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--text-light); margin-bottom:0.4rem; }
+        .comp-row p { font-size:1.35rem; color:var(--text-light); line-height:1.6; }
+
+        /* user group */
+        .user-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .user-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .user-card:hover { border-color:rgba(117,78,249,0.3); transform:translateY(-4px); box-shadow:0 12px 35px var(--shadow-color); }
+        .user-icon { width:4.5rem; height:4.5rem; background:rgba(117,78,249,0.08); border-radius:1rem; display:flex; align-items:center; justify-content:center; font-size:2.2rem; color:var(--main-color); margin-bottom:1.5rem; }
+        .user-card h4 { font-size:1.6rem; font-weight:700; color:var(--text-color); margin-bottom:0.7rem; }
+        .user-card p { font-size:1.35rem; color:var(--text-light); line-height:1.6; }
+
+        /* feedback */
+        .feedback-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .feedback-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .feedback-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .feedback-tag-pos { display:inline-block; font-size:1.1rem; padding:0.25rem 1rem; border-radius:5rem; background:rgba(16,185,129,0.08); color:#10b981; border:1px solid rgba(16,185,129,0.2); font-weight:600; margin-bottom:1rem; }
+        .feedback-tag-sug { display:inline-block; font-size:1.1rem; padding:0.25rem 1rem; border-radius:5rem; background:rgba(245,158,11,0.08); color:#f59e0b; border:1px solid rgba(245,158,11,0.2); font-weight:600; margin-bottom:1rem; }
+        .feedback-card h4 { font-size:1.5rem; font-weight:700; color:var(--text-color); margin-bottom:0.6rem; }
+        .feedback-card p { font-size:1.35rem; color:var(--text-light); line-height:1.6; }
+
+        /* learnings */
+        .learnings-list { display:flex; flex-direction:column; gap:1.5rem; }
+        .learning-item { display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .learning-item:hover { border-color:rgba(117,78,249,0.25); background:rgba(117,78,249,0.02); }
+        .learning-num { font-size:2rem; font-weight:800; color:rgba(117,78,249,0.2); min-width:3rem; line-height:1.2; }
+        .learning-item h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .learning-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        .cs-bottom { display:flex; justify-content:space-between; align-items:center; padding:4rem 7%; background:var(--bg-alt); border-top:1px solid var(--border-color); flex-wrap:wrap; gap:2rem; }
+        .cs-bottom p { font-size:1.6rem; color:var(--text-light); }
+        .cs-bottom-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+        @media (max-width:1100px) {
+            .cs-hero-inner { grid-template-columns:1fr; }
+            .cs-meta-card { min-width:unset; }
+            .cs-stats { grid-template-columns:repeat(2,1fr); }
+            .cs-two-col { grid-template-columns:1fr; gap:3rem; }
+            .sessions-grid,.commentary-grid,.comp-grid,.feedback-grid { grid-template-columns:1fr; }
+            .user-grid { grid-template-columns:repeat(2,1fr); }
+            .app-hero-card { grid-template-columns:1fr; }
+            .band-weight { margin-left:0; }
+        }
+        @media (max-width:650px) {
+            .cs-hero { padding:12rem 5% 6rem; }
+            .cs-hero h1 { font-size:3.5rem; }
+            .user-grid { grid-template-columns:1fr; }
+            .cs-section { padding:5rem 5%; }
+            .cs-bottom { flex-direction:column; align-items:flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Ideation & UX Design</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 1 · Module</div>
+                <h1>Ideation & <span>UX Design</span></h1>
+                <p class="cs-hero-desc">From live ideation challenges — designing fresher orientations, university homepages, and a chandelier made from paper cups — to a full UX portfolio for FITNESS, a real app concept with user research, market analysis, hi-fi prototyping, and user testing.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">UX Design</span>
+                    <span class="cs-tag cs-tag-main">Figma</span>
+                    <span class="cs-tag cs-tag-main">Ideation</span>
+                    <span class="cs-tag cs-tag-main">Prototyping</span>
+                    <span class="cs-tag">User Research</span>
+                    <span class="cs-tag">Market Analysis</span>
+                    <span class="cs-tag">User Testing</span>
+                    <span class="cs-tag">Design Thinking</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://sway.cloud.microsoft/KaVzAA9SsF8rXrEO?ref=Link" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-link-external'></i> View Sway Portfolio
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1d3JMDLR_uQtO3cx-k8UMkspxA8pwJxkw?usp=sharing" target="_blank" class="btn btn-secondary">
+                        Google Drive <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Ideation & UX Design</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 1 — 2022/23</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Assessments</label><p>A1 (20%) + SA2 (80%)</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Tools</label><p>Figma · Sway · Google Forms</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>App Concept</label><p>FITNESS — Gym & Workout App</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>2</strong><span>Assessments</span></div>
+        <div class="cs-stat"><strong>4</strong><span>Idea Sessions</span></div>
+        <div class="cs-stat"><strong>2</strong><span>Competitors Analysed</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- JUMP NAV -->
+    <div class="assessment-divider">
+        <p>Jump to:</p>
+        <a href="#a1" class="assessment-pill pill-a1"><i class='bx bx-bulb'></i> A1 — Live Challenge Portfolio (20%)</a>
+        <a href="#sa2" class="assessment-pill pill-sa2"><i class='bx bx-mobile-alt'></i> SA2 — UX Portfolio (80%)</a>
+    </div>
+
+    <!-- ══════════════════════════════
+         A1 — LIVE CHALLENGE PORTFOLIO
+    ══════════════════════════════ -->
+    <div id="a1" class="assessment-band assessment-band-a1">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-a1">Assessment 1 · 20%</div>
+                <div class="band-title" style="margin-top:0.8rem;">Live Challenge Portfolio — Ideation in Action</div>
+                <div class="band-desc" style="margin-top:0.6rem;">Three in-class ideation sessions and a final group challenge — designing real solutions under real constraints, with reflection at every stage.</div>
+            </div>
+            <div class="band-weight">20%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- IDEA SESSIONS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#06b6d4;">// Sessions</span>
+            <h2>Ideation <span style="color:#06b6d4;">in Action</span></h2>
+        </div>
+        <div class="sessions-grid">
+            <div class="session-card">
+                <div class="session-thumb st-1">
+                    <span class="session-num">Session 01</span>
+                    <i class='bx bx-party'></i>
+                </div>
+                <div class="session-body">
+                    <div class="session-tag">Freshers' Week</div>
+                    <h4>Inclusive First Day Orientation</h4>
+                    <p>Designed a friendly and encouraging first-day orientation experience for new students. Organised 30-minute icebreaker sessions and brainstorming activities to foster connection and ensure every participant — regardless of background — felt supported and included from day one.</p>
+                </div>
+            </div>
+
+            <div class="session-card">
+                <div class="session-thumb st-2">
+                    <span class="session-num">Session 02</span>
+                    <i class='bx bx-globe'></i>
+                </div>
+                <div class="session-body">
+                    <div class="session-tag">Web Design</div>
+                    <h4>BathSpa.ae Homepage Redesign</h4>
+                    <p>Collaborated as a team to ideate a redesign of the bathspa.ae homepage — starting with brainstorming user preferences and requirements, progressing to wireframes, and producing a final design that showcased Bath Spa's offering with user-friendly navigation.</p>
+                </div>
+            </div>
+
+            <div class="session-card">
+                <div class="session-thumb st-3">
+                    <span class="session-num">Session 03</span>
+                    <i class='bx bx-trophy'></i>
+                </div>
+                <div class="session-body">
+                    <div class="session-tag">Physical Prototyping</div>
+                    <h4>Graduate Trophy</h4>
+                    <p>Built a physical graduate trophy prototype using only cardboard, hot glue guns, scissors, and gold spray paint — a hands-on exercise in teamwork, creative constraints, and translating a concept into a tangible object under time pressure.</p>
+                </div>
+            </div>
+
+            <div class="session-card">
+                <div class="session-thumb st-final">
+                    <span class="session-num">Final Challenge</span>
+                    <i class='bx bx-bulb'></i>
+                </div>
+                <div class="session-body">
+                    <div class="session-tag session-tag-final">★ Final Challenge</div>
+                    <h4>FairyCup Chandelier</h4>
+                    <p>The capstone challenge: design and build a full chandelier using thermocol, paper cups, cardboard, white thread, and LED lights. My role was precision-cutting the cardboard and thermocol pieces. The final piece — assembled through meticulous planning and clear team communication — came alive with glowing LEDs threaded through the structure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMENTARY -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#06b6d4;">// Reflections</span>
+            <h2>Critical <span style="color:#06b6d4;">Commentaries</span></h2>
+        </div>
+        <div class="commentary-grid">
+            <div class="commentary-card">
+                <div class="commentary-q">"What role does a good idea play in a successful digital artefact?"</div>
+                <p>A strong idea is the foundation of any successful digital product. It defines the user's experience, functionality, and overall impact. Without a compelling core concept, even technically flawless execution fails to engage the people it's built for.</p>
+            </div>
+            <div class="commentary-card">
+                <div class="commentary-q">"Why does knowledge of ideation techniques matter?"</div>
+                <p>Established ideation techniques — like brainstorming, mind mapping, and SCAMPER — offer structured approaches to creative problem-solving. They make the generation of original ideas repeatable and teachable, rather than a matter of luck or inspiration.</p>
+            </div>
+            <div class="commentary-card">
+                <div class="commentary-q">"What do you understand by 'the process is more important than the product'?"</div>
+                <p>This principle emphasises that the skills, habits, and thinking developed during creation matter more than the finished output. Each iteration teaches more than the final result. The process builds the person; the product is merely its evidence.</p>
+            </div>
+            <div class="commentary-card">
+                <div class="commentary-q">"What does 'generating ideas as a professional habit' mean?"</div>
+                <p>Professional idea generation is a mindset of constant curiosity and creative flexibility — always looking for innovative solutions rather than defaulting to the familiar. It means cultivating openness to unexpected directions and making ideation a daily discipline, not an event.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         SA2 — UX PORTFOLIO (80%)
+    ══════════════════════════════ -->
+    <div id="sa2" class="assessment-band assessment-band-sa2">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-sa2">Assessment 2 · 80%</div>
+                <div class="band-title" style="margin-top:0.8rem;">UX Portfolio — FITNESS App</div>
+                <div class="band-desc" style="margin-top:0.6rem;">A full UX design process from user research and market analysis to hi-fi Figma prototyping and real user testing — for FITNESS, a gym and workout tracking app concept.</div>
+            </div>
+            <div class="band-weight">80%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- APP CONCEPT -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// App Concept</span>
+            <h2>Meet <span>FITNESS</span></h2>
+        </div>
+        <div class="app-hero-card">
+            <div class="app-hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-status"><span>9:41</span><span>●●●</span></div>
+                        <div class="phone-header">FITNESS</div>
+                        <div class="phone-sub">Welcome back, Rashid 👋</div>
+                        <div class="phone-stat-row">
+                            <div class="phone-stat-box"><strong>12</strong><span>Workouts</span></div>
+                            <div class="phone-stat-box"><strong>4.2k</strong><span>Calories</span></div>
+                        </div>
+                        <div style="font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:0.4rem;">Weekly Goal</div>
+                        <div class="phone-bar"><div class="phone-bar-fill" style="width:72%"></div></div>
+                        <div class="phone-bar-label"><span>Progress</span><span>72%</span></div>
+                        <div style="background:rgba(117,78,249,0.3);border-radius:0.8rem;padding:0.8rem;text-align:center;font-size:1rem;color:#fff;font-weight:700;">🏋️ Start Workout</div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-hero-info">
+                <h3>FITNESS — <span>Your Gym Companion</span></h3>
+                <p>FITNESS is an all-in-one gym and workout app designed for fitness enthusiasts aged 18–40. It solves three core problems: finding the right workout routine, managing gym memberships, and tracking real progress over time.</p>
+                <div class="app-feature-list">
+                    <div class="app-feature">
+                        <i class='bx bx-dumbbell'></i>
+                        <p><strong style="color:var(--text-color)">Custom Workout Routines</strong> — tailored to the user's fitness goals and experience level</p>
+                    </div>
+                    <div class="app-feature">
+                        <i class='bx bx-id-card'></i>
+                        <p><strong style="color:var(--text-color)">Gym Membership Management</strong> — apply and manage memberships directly in-app</p>
+                    </div>
+                    <div class="app-feature">
+                        <i class='bx bx-line-chart'></i>
+                        <p><strong style="color:var(--text-color)">Progress Tracking</strong> — real-time analytics and goal setting with visual displays</p>
+                    </div>
+                    <div class="app-feature">
+                        <i class='bx bx-book-reader'></i>
+                        <p><strong style="color:var(--text-color)">Expert Fitness Tips</strong> — professional guidance accessible at every stage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER GROUP -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// User Research</span>
+            <h2>Understanding the <span>User</span></h2>
+        </div>
+        <div class="user-grid">
+            <div class="user-card">
+                <div class="user-icon"><i class='bx bx-user-circle'></i></div>
+                <h4>Who They Are</h4>
+                <p>Fitness enthusiasts — both beginners and experienced individuals — who want structure and guidance in their fitness routine, aged 18–40.</p>
+            </div>
+            <div class="user-card">
+                <div class="user-icon"><i class='bx bx-map-pin'></i></div>
+                <h4>Where They Face the Problem</h4>
+                <p>At home, the gym, office, school, and university — wherever managing workouts, memberships, and nutrition becomes overwhelming without the right tools.</p>
+            </div>
+            <div class="user-card">
+                <div class="user-icon"><i class='bx bx-time-five'></i></div>
+                <h4>How Often</h4>
+                <p>Daily or weekly — fitness challenges are recurring, not one-off. The app needs to be a consistent companion rather than a periodic reference.</p>
+            </div>
+            <div class="user-card">
+                <div class="user-icon"><i class='bx bx-target-lock'></i></div>
+                <h4>The Core Problem</h4>
+                <p>Managing workouts, gym memberships, and nutrition simultaneously is fragmented across multiple apps and platforms — users want one solution.</p>
+            </div>
+            <div class="user-card">
+                <div class="user-icon"><i class='bx bx-heart'></i></div>
+                <h4>Why It Matters</h4>
+                <p>Physical health and fitness directly impact wellbeing. Friction in accessing fitness tools creates genuine barriers — this app removes those barriers.</p>
+            </div>
+            <div class="user-card">
+                <div class="user-icon"><i class='bx bx-analyse'></i></div>
+                <h4>Research Method</h4>
+                <p>Audience research conducted via Google Forms — collecting real feedback from the target group about their pain points and preferences before any design began.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARKET RESEARCH -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Market Analysis</span>
+            <h2>Competitor <span>Research</span></h2>
+        </div>
+        <div class="comp-grid">
+            <div class="comp-card">
+                <div class="comp-name">MyFitnessPal</div>
+                <div class="comp-row">
+                    <label>UI</label>
+                    <p>Straightforward and easy to navigate. Quick access to key functions like calorie tracking and exercise recording via a clean dashboard.</p>
+                </div>
+                <div class="comp-row">
+                    <label>Strengths</label>
+                    <p>Large food database, device/app integration, detailed meal logging, and comprehensive progress monitoring.</p>
+                </div>
+                <div class="comp-row">
+                    <label>Weaknesses</label>
+                    <p>Users report occasional accuracy issues in the food database and cluttered experience from some premium-locked features.</p>
+                </div>
+            </div>
+            <div class="comp-card">
+                <div class="comp-name">Nike Training Club</div>
+                <div class="comp-row">
+                    <label>UI</label>
+                    <p>Eye-catching, contemporary layout — simple navigation and clean visual hierarchy that feels premium and polished.</p>
+                </div>
+                <div class="comp-row">
+                    <label>Strengths</label>
+                    <p>High-quality workouts from certified trainers, ranging from beginner to intermediate — personalised suggestions and progress tracking.</p>
+                </div>
+                <div class="comp-row">
+                    <label>Weaknesses</label>
+                    <p>Some users report technical issues and app crashes — reliability concerns that FITNESS aims to avoid from the start.</p>
+                </div>
+            </div>
+        </div>
+        <div class="cs-quote" style="margin-top:3rem;">
+            <p>FITNESS differentiates itself by combining workout routines, gym membership management, and progress tracking in a single seamless experience — addressing the fragmentation that both competitors leave unsolved.</p>
+            <cite>— SA2 Market Research, M.Rashid</cite>
+        </div>
+    </div>
+
+    <!-- USER TESTING -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// User Testing</span>
+            <h2>Real <span>Feedback</span></h2>
+        </div>
+        <div class="feedback-grid">
+            <div class="feedback-card">
+                <div class="feedback-tag-pos">✓ Positive</div>
+                <h4>Overall Experience</h4>
+                <p>Users found FITNESS easy to use and intuitive. Navigation through features was smooth and the design felt user-friendly from the first interaction.</p>
+            </div>
+            <div class="feedback-card">
+                <div class="feedback-tag-pos">✓ Positive</div>
+                <h4>Workout Routines</h4>
+                <p>Exercise regimens were praised for accommodating varying fitness levels, with clear directions and good variety — users appreciated the thoroughness of each routine.</p>
+            </div>
+            <div class="feedback-card">
+                <div class="feedback-tag-pos">✓ Positive</div>
+                <h4>Progress Tracking</h4>
+                <p>The visual progress displays were well-liked — users found the tracking tool made it easy and motivating to monitor their fitness improvements over time.</p>
+            </div>
+            <div class="feedback-card">
+                <div class="feedback-tag-sug">→ Suggestion</div>
+                <h4>Onboarding Tutorial</h4>
+                <p>New users suggested adding a guided tutorial to help them discover all features quickly — particularly useful for less tech-savvy fitness users.</p>
+            </div>
+            <div class="feedback-card">
+                <div class="feedback-tag-sug">→ Suggestion</div>
+                <h4>Membership Data</h4>
+                <p>One user noted some gym information was out of date — feedback led to the idea of a user-submitted update system to keep gym data accurate in real time.</p>
+            </div>
+            <div class="feedback-card">
+                <div class="feedback-tag-sug">→ Bug Found</div>
+                <h4>Nutrition Section Crash</h4>
+                <p>One tester experienced crashes accessing the nutrition guide — a key technical issue flagged for resolution before any real-world launch of the app.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>The process builds the designer, not the product</h4>
+                    <p>The FairyCup Chandelier and the FITNESS prototype taught the same lesson from opposite ends — the creative decisions, constraints, and iterations in between matter far more than the finished artefact.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>User research before design, always</h4>
+                    <p>Starting with Google Forms feedback before opening Figma changed the quality of every decision that followed. The user's problem — not the designer's assumption — should drive every feature.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Market saturation demands a sharp differentiator</h4>
+                    <p>The fitness app space is crowded. Analysing MyFitnessPal and Nike Training Club showed that FITNESS's real opportunity was solving the fragmentation problem — one app, three core needs.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>User testing reveals what the designer can't see</h4>
+                    <p>The nutrition section crash was invisible to me during design. Real testing with real users found it instantly. No prototype is finished until it's been tested by someone who didn't build it.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Ideation is a professional skill, not a personality trait</h4>
+                    <p>Across all four live challenge sessions, structured ideation techniques produced better outputs than free-form brainstorming alone. Creativity is a practice — and a learnable one at that.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 1 · Ideation & UX Design · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/projects.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="/pages/creative-coding.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Creative Coding</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

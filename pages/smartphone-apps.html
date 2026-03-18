@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphone App Design — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* BASE */
+        .cs-hero{padding:14rem 7% 8rem;background:var(--bg-color);position:relative;overflow:hidden;}
+        .cs-hero::before{content:'';position:absolute;top:-20rem;right:-10rem;width:60rem;height:60rem;background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%);pointer-events:none;}
+        .cs-breadcrumb{display:flex;align-items:center;gap:0.8rem;font-size:1.3rem;color:var(--text-light);margin-bottom:3rem;}
+        .cs-breadcrumb a{color:var(--main-color);font-weight:500;}
+        .cs-breadcrumb a:hover{text-decoration:underline;}
+        .cs-breadcrumb i{font-size:1.6rem;}
+        .cs-hero-inner{display:grid;grid-template-columns:1fr auto;gap:6rem;align-items:start;max-width:120rem;}
+        .cs-year-badge{display:inline-block;font-size:1.2rem;font-weight:700;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.4rem 1.4rem;border-radius:5rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.8rem;}
+        .cs-hero h1{font-size:5rem;font-weight:800;color:var(--text-color);line-height:1.1;letter-spacing:-0.03em;margin-bottom:2rem;}
+        .cs-hero h1 span{color:var(--main-color);}
+        .cs-hero-desc{font-size:1.7rem;color:var(--text-light);line-height:1.7;max-width:60rem;margin-bottom:3rem;}
+        .cs-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-bottom:3.5rem;}
+        .cs-tag{font-size:1.25rem;padding:0.5rem 1.4rem;border-radius:5rem;background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border-color);font-weight:500;}
+        .cs-tag-main{background:rgba(117,78,249,0.08);color:var(--main-color);border-color:rgba(117,78,249,0.2);}
+        .cs-hero-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+        .cs-meta-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:3rem;min-width:26rem;box-shadow:0 4px 24px var(--shadow-soft);}
+        .cs-meta-row{display:flex;flex-direction:column;gap:2rem;}
+        .cs-meta-item label{display:block;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:0.4rem;}
+        .cs-meta-item p{font-size:1.45rem;font-weight:600;color:var(--text-color);}
+        .cs-meta-divider{height:1px;background:var(--border-color);}
+        .cs-grade{font-size:2.4rem !important;font-weight:800 !important;color:var(--main-color) !important;}
+        .cs-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg-alt);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
+        .cs-stat{padding:3rem 4rem;border-right:1px solid var(--border-color);text-align:center;}
+        .cs-stat:last-child{border-right:none;}
+        .cs-stat strong{display:block;font-size:3rem;font-weight:800;color:var(--main-color);margin-bottom:0.4rem;}
+        .cs-stat span{font-size:1.3rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+
+        /* JUMP NAV */
+        .assessment-divider{display:flex;align-items:center;gap:2rem;padding:3rem 7%;background:var(--bg-color);border-bottom:1px solid var(--border-color);position:sticky;top:7rem;z-index:10;backdrop-filter:blur(10px);flex-wrap:wrap;}
+        .assessment-pill{display:inline-flex;align-items:center;gap:0.8rem;font-size:1.3rem;font-weight:700;padding:0.7rem 2rem;border-radius:5rem;border:2px solid;transition:all 0.2s;text-decoration:none;}
+        .pill-color{color:#f59e0b;border-color:#f59e0b;background:rgba(245,158,11,0.06);}
+        .pill-color:hover{background:rgba(245,158,11,0.12);}
+        .pill-fit{color:#10b981;border-color:#10b981;background:rgba(16,185,129,0.06);}
+        .pill-fit:hover{background:rgba(16,185,129,0.12);}
+        .assessment-divider p{font-size:1.4rem;color:var(--text-light);}
+
+        /* APP BANDS */
+        .app-band{padding:4rem 7%;border-bottom:1px solid var(--border-color);}
+        .band-color{background:linear-gradient(135deg,rgba(245,158,11,0.05) 0%,transparent 60%);border-left:4px solid #f59e0b;}
+        .band-fit{background:linear-gradient(135deg,rgba(16,185,129,0.05) 0%,transparent 60%);border-left:4px solid #10b981;}
+        .band-inner{display:flex;align-items:center;gap:3rem;flex-wrap:wrap;}
+        .band-badge-color{font-size:1.2rem;font-weight:800;color:#f59e0b;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);padding:0.6rem 1.6rem;border-radius:5rem;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+        .band-badge-fit{font-size:1.2rem;font-weight:800;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);padding:0.6rem 1.6rem;border-radius:5rem;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+        .band-title{font-size:2.2rem;font-weight:800;color:var(--text-color);}
+        .band-desc{font-size:1.45rem;color:var(--text-light);max-width:70rem;}
+        .band-tech{font-size:1.3rem;font-weight:700;color:var(--text-light);margin-left:auto;white-space:nowrap;}
+
+        /* SECTIONS */
+        .cs-section{padding:7rem 7%;border-bottom:1px solid var(--border-color);}
+        .cs-section-alt{background:var(--bg-alt);}
+        .cs-section-top{display:flex;align-items:baseline;gap:2rem;margin-bottom:4rem;}
+        .cs-section-eyebrow{font-size:1.1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;}
+        .cs-section h2{font-size:3rem;font-weight:800;color:var(--text-color);letter-spacing:-0.02em;line-height:1.2;}
+        .cs-section h2 span{color:var(--main-color);}
+        .cs-body{font-size:1.55rem;color:var(--text-light);line-height:1.8;}
+        .cs-body+.cs-body{margin-top:1.5rem;}
+        .cs-quote{border-left:3px solid var(--main-color);padding:1.8rem 2.2rem;background:rgba(117,78,249,0.04);border-radius:0 1rem 1rem 0;margin:2.5rem 0;}
+        .cs-quote p{font-size:1.6rem;font-style:italic;color:var(--text-color);line-height:1.6;margin-bottom:0.6rem;}
+        .cs-quote cite{font-size:1.25rem;color:var(--main-color);font-style:normal;font-weight:600;}
+
+        /* ===== PHONE MOCKUP ===== */
+        .phone-showcase{display:flex;gap:3rem;justify-content:center;margin-bottom:5rem;flex-wrap:wrap;}
+        .phone-frame{background:#1a1a2e;border-radius:3.5rem;border:3px solid rgba(255,255,255,0.12);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.05);width:19rem;flex-shrink:0;}
+        .phone-notch{background:#0d0d1a;height:2.8rem;display:flex;align-items:center;justify-content:center;position:relative;}
+        .phone-notch::after{content:'';width:8rem;height:1.2rem;background:#1a1a2e;border-radius:0 0 1rem 1rem;position:absolute;top:0;left:50%;transform:translateX(-50%);}
+        .phone-screen{padding:0;}
+        /* ColorMix screen */
+        .cm-screen{background:#fff;padding:2rem 1.8rem;min-height:38rem;display:flex;flex-direction:column;gap:1.5rem;}
+        .cm-title{font-size:1.5rem;font-weight:800;color:#1e293b;text-align:center;}
+        .cm-subtitle{font-size:1rem;color:#94a3b8;text-align:center;margin-top:-1rem;}
+        .cm-color-row{display:flex;gap:1rem;justify-content:center;}
+        .cm-color-btn{width:5rem;height:5rem;border-radius:1.2rem;border:2.5px solid rgba(0,0,0,0.08);cursor:pointer;transition:transform 0.2s;box-shadow:0 3px 10px rgba(0,0,0,0.15);}
+        .cm-color-btn.selected{border-color:#1e293b;transform:scale(1.1);}
+        .cm-plus{display:flex;align-items:center;justify-content:center;font-size:2rem;color:#94a3b8;font-weight:300;}
+        .cm-result-label{font-size:1rem;font-weight:600;color:#64748b;text-align:center;}
+        .cm-result-box{height:6rem;border-radius:1.5rem;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.3);}
+        .cm-name-row{display:flex;justify-content:center;}
+        .cm-color-name{font-size:1.1rem;font-weight:700;color:#1e293b;background:#f1f5f9;padding:0.4rem 1.4rem;border-radius:5rem;}
+        .cm-reset-btn{background:#1e293b;color:#fff;border:none;border-radius:0.8rem;padding:0.9rem;font-size:1.1rem;font-weight:700;text-align:center;}
+        /* FitTrack screen */
+        .ft-screen{background:#f8fafc;min-height:38rem;}
+        .ft-header{background:var(--main-color);padding:2rem 1.8rem 1.6rem;color:#fff;}
+        .ft-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;}
+        .ft-greeting{font-size:1.1rem;color:rgba(255,255,255,0.75);}
+        .ft-name{font-size:1.6rem;font-weight:800;color:#fff;}
+        .ft-streak{font-size:1.1rem;background:rgba(255,255,255,0.2);padding:0.3rem 0.9rem;border-radius:5rem;}
+        .ft-stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem;margin-top:1.2rem;}
+        .ft-stat-box{background:rgba(255,255,255,0.15);border-radius:0.8rem;padding:0.8rem;text-align:center;}
+        .ft-stat-box strong{display:block;font-size:1.5rem;font-weight:800;color:#fff;}
+        .ft-stat-box span{font-size:0.85rem;color:rgba(255,255,255,0.7);}
+        .ft-body{padding:1.6rem 1.6rem;}
+        .ft-section-title{font-size:1.1rem;font-weight:700;color:#334155;margin-bottom:1rem;}
+        .ft-workout-card{background:#fff;border-radius:1rem;padding:1.2rem;display:flex;align-items:center;gap:1rem;margin-bottom:0.8rem;border:1px solid #e2e8f0;}
+        .ft-workout-icon{width:3.5rem;height:3.5rem;border-radius:0.8rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+        .fw-purple{background:rgba(117,78,249,0.1);}
+        .fw-green{background:rgba(16,185,129,0.1);}
+        .fw-amber{background:rgba(245,158,11,0.1);}
+        .ft-workout-info strong{display:block;font-size:1.2rem;font-weight:700;color:#1e293b;}
+        .ft-workout-info span{font-size:1rem;color:#94a3b8;}
+        .ft-workout-done{margin-left:auto;width:2rem;height:2rem;border-radius:50%;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#10b981;}
+        .ft-nav{display:flex;justify-content:space-around;padding:1rem 0;background:#fff;border-top:1px solid #e2e8f0;}
+        .ft-nav-item{display:flex;flex-direction:column;align-items:center;gap:0.3rem;font-size:0.85rem;color:#94a3b8;}
+        .ft-nav-item.active{color:var(--main-color);}
+        .ft-nav-item i{font-size:1.6rem;}
+
+        /* APP INFO GRID (alongside phone) */
+        .app-showcase{display:grid;grid-template-columns:auto 1fr;gap:5rem;align-items:start;}
+        .app-info{display:flex;flex-direction:column;gap:3rem;}
+        .app-info-block h3{font-size:2.2rem;font-weight:800;color:var(--text-color);margin-bottom:1rem;letter-spacing:-0.02em;}
+        .app-info-block h3 span{color:var(--main-color);}
+        .app-info-block p{font-size:1.48rem;color:var(--text-light);line-height:1.75;}
+
+        /* TECH DECISIONS — numbered horizontal */
+        .decisions-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+        .decision-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;transition:all 0.3s;position:relative;overflow:hidden;}
+        .decision-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+        .dc-color::before{background:linear-gradient(90deg,#f59e0b,#fb923c);}
+        .dc-fit::before{background:linear-gradient(90deg,#10b981,#06b6d4);}
+        .decision-card:hover{border-color:rgba(117,78,249,0.3);transform:translateY(-3px);box-shadow:0 10px 30px var(--shadow-color);}
+        .decision-num{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--main-color);margin-bottom:0.8rem;}
+        .decision-card h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:0.8rem;}
+        .decision-card p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+
+        /* EVALUATION — strengths vs improvements */
+        .eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+        .eval-col{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;}
+        .eval-header{padding:1.8rem 2.4rem;border-bottom:1px solid var(--border-color);}
+        .eh-strong{background:rgba(16,185,129,0.04);}
+        .eh-improve{background:rgba(245,158,11,0.04);}
+        .eval-header h4{font-size:1.5rem;font-weight:700;color:var(--text-color);display:flex;align-items:center;gap:0.8rem;}
+        .eval-body{padding:2rem 2.4rem;display:flex;flex-direction:column;gap:1rem;}
+        .eval-item{display:flex;gap:1.2rem;align-items:flex-start;font-size:1.38rem;color:var(--text-light);line-height:1.65;}
+        .eval-item i{font-size:1.6rem;flex-shrink:0;margin-top:0.2rem;}
+        .ei-green i{color:#10b981;}
+        .ei-amber i{color:#f59e0b;}
+
+        /* TECH STACK strip */
+        .tech-strip{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:2rem;}
+        .tech-pill{display:inline-flex;align-items:center;gap:0.6rem;font-size:1.3rem;font-weight:700;padding:0.7rem 1.6rem;border-radius:0.8rem;border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);transition:all 0.2s;}
+        .tech-pill:hover{border-color:rgba(117,78,249,0.3);color:var(--main-color);}
+        .tech-pill i{font-size:1.6rem;color:var(--main-color);}
+
+        /* LEARNINGS */
+        .learnings-list{display:flex;flex-direction:column;gap:1.5rem;}
+        .learning-item{display:flex;gap:2rem;align-items:flex-start;padding:2rem 2.5rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;transition:all 0.3s;}
+        .learning-item:hover{border-color:rgba(117,78,249,0.25);background:rgba(117,78,249,0.02);}
+        .learning-num{font-size:2rem;font-weight:800;color:rgba(117,78,249,0.2);min-width:3rem;line-height:1.2;}
+        .learning-item h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .learning-item p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+
+        .cs-bottom{display:flex;justify-content:space-between;align-items:center;padding:4rem 7%;background:var(--bg-alt);border-top:1px solid var(--border-color);flex-wrap:wrap;gap:2rem;}
+        .cs-bottom p{font-size:1.6rem;color:var(--text-light);}
+        .cs-bottom-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+
+        @media(max-width:1100px){
+            .cs-hero-inner{grid-template-columns:1fr;}
+            .cs-meta-card{min-width:unset;}
+            .cs-stats{grid-template-columns:repeat(2,1fr);}
+            .app-showcase{grid-template-columns:1fr;gap:3rem;}
+            .phone-frame{width:100%;max-width:30rem;}
+            .decisions-row{grid-template-columns:1fr;}
+            .eval-grid{grid-template-columns:1fr;}
+            .band-tech{margin-left:0;}
+        }
+        @media(max-width:650px){
+            .cs-hero{padding:12rem 5% 6rem;}
+            .cs-hero h1{font-size:3.5rem;}
+            .cs-section{padding:5rem 5%;}
+            .cs-bottom{flex-direction:column;align-items:flex-start;}
+            .phone-showcase{justify-content:flex-start;}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Smartphone App Design</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 2 · Module</div>
+                <h1>Smartphone <span>App Design</span></h1>
+                <p class="cs-hero-desc">Two Android apps built from scratch with Jetpack Compose — App 1: ColorMix, a real-time RGB colour blending playground for visual learners. App 2: FitTrack, an offline-first fitness tracker with Room Database and state hoisting.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">Android</span>
+                    <span class="cs-tag cs-tag-main">Jetpack Compose</span>
+                    <span class="cs-tag cs-tag-main">Kotlin</span>
+                    <span class="cs-tag cs-tag-main">Room Database</span>
+                    <span class="cs-tag">RGB Blending</span>
+                    <span class="cs-tag">Fitness Tracking</span>
+                    <span class="cs-tag">Offline-First</span>
+                    <span class="cs-tag">State Hoisting</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://youtu.be/7hscRf6FVes" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-play-circle'></i> ColorMix Demo
+                    </a>
+                    <a href="https://youtu.be/duGCFhiRTwQ" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-play-circle'></i> FitTrack Demo
+                    </a>
+                    <a href="https://github.com/DC-BSU-RAK/nan-calculator-MohdRashid1607.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Smartphone App Design</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 2 — 2024/25</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>App 1</label><p>ColorMix — Colour Playground</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>App 2</label><p>FitTrack — Fitness Tracker</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Platform</label><p>Android · Jetpack Compose</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>2</strong><span>Android Apps</span></div>
+        <div class="cs-stat"><strong>Compose</strong><span>UI Framework</span></div>
+        <div class="cs-stat"><strong>Room DB</strong><span>Local Storage</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- JUMP NAV -->
+    <div class="assessment-divider">
+        <p>Jump to:</p>
+        <a href="#colormix" class="assessment-pill pill-color">🎨 App 1 — ColorMix</a>
+        <a href="#fittrack" class="assessment-pill pill-fit">💪 App 2 — FitTrack</a>
+    </div>
+
+    <!-- ══════════════
+         APP 1: COLORMIX
+    ══════════════ -->
+    <div id="colormix" class="app-band band-color">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-color">App 1 · ColorMix</div>
+                <div class="band-title" style="margin-top:0.8rem;">A Digital Colour Playground</div>
+                <div class="band-desc" style="margin-top:0.6rem;">Real-time RGB colour blending for children, designers, and curious minds — tap two primary colours and see the result instantly.</div>
+            </div>
+            <div class="band-tech">Jetpack Compose · Kotlin · Android</div>
+        </div>
+    </div>
+
+    <!-- ColorMix overview + phone -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Overview</span>
+            <h2>ColorMix — <span style="color:#f59e0b;">See Colour Happen</span></h2>
+        </div>
+        <div class="app-showcase">
+            <!-- Phone mockup -->
+            <div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="cm-screen">
+                            <div class="cm-title">🎨 ColorMix</div>
+                            <div class="cm-subtitle">Tap to mix primary colours</div>
+                            <div class="cm-color-row">
+                                <div class="cm-color-btn selected" style="background:#ef4444;" title="Red"></div>
+                                <div class="cm-plus">+</div>
+                                <div class="cm-color-btn selected" style="background:#3b82f6;" title="Blue"></div>
+                            </div>
+                            <div style="display:flex;align-items:center;flex-direction:column;gap:0.8rem;">
+                                <div class="cm-result-label">Mixed Result</div>
+                                <div class="cm-result-box" style="background:#7c3aed;width:100%;">Red + Blue</div>
+                                <div class="cm-name-row">
+                                    <div class="cm-color-name">🟣 Purple</div>
+                                </div>
+                            </div>
+                            <div class="cm-color-row" style="flex-wrap:wrap;gap:0.8rem;">
+                                <div class="cm-color-btn" style="background:#ef4444;width:3.8rem;height:3.8rem;"></div>
+                                <div class="cm-color-btn" style="background:#3b82f6;width:3.8rem;height:3.8rem;"></div>
+                                <div class="cm-color-btn" style="background:#eab308;width:3.8rem;height:3.8rem;"></div>
+                                <div class="cm-color-btn" style="background:#22c55e;width:3.8rem;height:3.8rem;"></div>
+                            </div>
+                            <div class="cm-reset-btn">🔄 Reset Mix</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Info -->
+            <div class="app-info">
+                <div class="app-info-block">
+                    <h3>Concept & <span>Goal</span></h3>
+                    <p>ColorMix started with a simple question: how many people see colours every day but don't understand how they mix? The app turns that curiosity into an interactive experience — tap two primary colours and see the result instantly, without reading a word of theory.</p>
+                    <p style="margin-top:1.5rem;font-size:1.55rem;color:var(--text-light);line-height:1.8;">Designed for school students, hobbyists, and visual learners of all ages — lightweight, fast, and accessible. The cleaner the interface, the better the experience, especially for learning through interaction.</p>
+                </div>
+                <div class="app-info-block">
+                    <h3>Design <span>Approach</span></h3>
+                    <p>Three main sections on screen at all times: colour selection buttons, a mix display area, and a reset option. Bright high-contrast colours, lots of white space, large tap-friendly buttons. The app looks playful but stays professional — every element placed so the user can explore without needing instructions.</p>
+                </div>
+                <div style="display:flex;gap:1.2rem;flex-wrap:wrap;">
+                    <a href="https://youtu.be/7hscRf6FVes" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-play-circle'></i> Watch Demo
+                    </a>
+                    <a href="https://github.com/DC-BSU-RAK/nan-calculator-MohdRashid1607.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ColorMix Technical Decisions -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Technical</span>
+            <h2>Key <span style="color:#f59e0b;">Decisions</span></h2>
+        </div>
+        <div class="decisions-row">
+            <div class="decision-card dc-color">
+                <div class="decision-num">Decision 01</div>
+                <h4>RGB Averaging Blending Logic</h4>
+                <p>Primary colours are converted to RGB values and averaged to generate the mixed result. Not as scientifically accurate as pigment-based mixing, but works perfectly for screen-based visual feedback — and instant enough to feel responsive.</p>
+            </div>
+            <div class="decision-card dc-color">
+                <div class="decision-num">Decision 02</div>
+                <h4>Single-Page Jetpack Compose Layout</h4>
+                <p>Built as a single-page reactive UI — allowing for quicker load times and better state management. Compose's declarative approach meant fewer bugs when updating colour state in real time, with minimal boilerplate.</p>
+            </div>
+            <div class="decision-card dc-color">
+                <div class="decision-num">Decision 03</div>
+                <h4>Tap-to-Mix — No Sliders</h4>
+                <p>Deliberately avoided sliders or complex input tools. A tap interaction is more intuitive, less overwhelming, and faster — matching the educational goal of showing results immediately without friction. Subtle animations keep it responsive without overloading performance.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ColorMix Evaluation -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Evaluation</span>
+            <h2>Strengths & <span style="color:#f59e0b;">Improvements</span></h2>
+        </div>
+        <div class="eval-grid">
+            <div class="eval-col">
+                <div class="eval-header eh-strong">
+                    <h4><span style="color:#10b981;font-size:1.8rem;">✓</span> Strengths</h4>
+                </div>
+                <div class="eval-body">
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Instantly understandable — users know what to do without any instructions</span></div>
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Clean, modern UI with immediate, accurate colour feedback</span></div>
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Responsive design that works across different Android screen sizes</span></div>
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Lightweight and fast — no unnecessary features slowing it down</span></div>
+                </div>
+            </div>
+            <div class="eval-col">
+                <div class="eval-header eh-improve">
+                    <h4><span style="color:#f59e0b;font-size:1.8rem;">→</span> Improvements</h4>
+                </div>
+                <div class="eval-body">
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>RGB blending doesn't match real-world pigment mixing — HSL or CMYK models would be more accurate</span></div>
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>Add drag-and-drop colour mixing and a colour history for more engagement</span></div>
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>No audio feedback or accessibility settings — limits usability for differently-abled users</span></div>
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>Brief tooltips or onboarding tutorial would help first-time users discover all features</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════
+         APP 2: FITTRACK
+    ══════════════ -->
+    <div id="fittrack" class="app-band band-fit">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-fit">App 2 · FitTrack</div>
+                <div class="band-title" style="margin-top:0.8rem;">Your Offline-First Fitness Companion</div>
+                <div class="band-desc" style="margin-top:0.6rem;">Log workouts, track progress, and build consistent fitness habits — all stored locally with Room Database, no internet required.</div>
+            </div>
+            <div class="band-tech">Jetpack Compose · Room DB · State Hoisting</div>
+        </div>
+    </div>
+
+    <!-- FitTrack overview + phone -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#10b981;">// Overview</span>
+            <h2>FitTrack — <span style="color:#10b981;">Move. Log. Improve.</span></h2>
+        </div>
+        <div class="app-showcase">
+            <!-- Phone mockup -->
+            <div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="ft-screen">
+                            <div class="ft-header">
+                                <div class="ft-header-row">
+                                    <div>
+                                        <div class="ft-greeting">Good morning,</div>
+                                        <div class="ft-name">Rashid 👋</div>
+                                    </div>
+                                    <div class="ft-streak">🔥 7 days</div>
+                                </div>
+                                <div class="ft-stats-row">
+                                    <div class="ft-stat-box"><strong>4</strong><span>Workouts</span></div>
+                                    <div class="ft-stat-box"><strong>8,240</strong><span>Steps</span></div>
+                                    <div class="ft-stat-box"><strong>320</strong><span>Calories</span></div>
+                                </div>
+                            </div>
+                            <div class="ft-body">
+                                <div class="ft-section-title">Today's Plan</div>
+                                <div class="ft-workout-card">
+                                    <div class="ft-workout-icon fw-purple">🏋️</div>
+                                    <div class="ft-workout-info"><strong>Upper Body</strong><span>30 min · 8 exercises</span></div>
+                                    <div class="ft-workout-done"><i class='bx bx-check'></i></div>
+                                </div>
+                                <div class="ft-workout-card">
+                                    <div class="ft-workout-icon fw-green">🏃</div>
+                                    <div class="ft-workout-info"><strong>Cardio Run</strong><span>20 min · 3km</span></div>
+                                    <div class="ft-workout-done" style="background:rgba(148,163,184,0.1);color:#94a3b8;"><i class='bx bx-time'></i></div>
+                                </div>
+                                <div class="ft-workout-card">
+                                    <div class="ft-workout-icon fw-amber">🧘</div>
+                                    <div class="ft-workout-info"><strong>Stretching</strong><span>15 min · Cool down</span></div>
+                                    <div class="ft-workout-done" style="background:rgba(148,163,184,0.1);color:#94a3b8;"><i class='bx bx-time'></i></div>
+                                </div>
+                            </div>
+                            <div class="ft-nav">
+                                <div class="ft-nav-item active"><i class='bx bx-home'></i><span>Home</span></div>
+                                <div class="ft-nav-item"><i class='bx bx-plus-circle'></i><span>Log</span></div>
+                                <div class="ft-nav-item"><i class='bx bx-bar-chart'></i><span>Progress</span></div>
+                                <div class="ft-nav-item"><i class='bx bx-user'></i><span>Profile</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Info -->
+            <div class="app-info">
+                <div class="app-info-block">
+                    <h3>Concept & <span>Goal</span></h3>
+                    <p>FitTrack is a virtual accountability partner — not a complex planner, but a lightweight, clean tool that makes it easy to log workouts and build the habit of tracking progress. Whether you're a beginner or an experienced gym-goer, the goal is to make fitness feel less overwhelming.</p>
+                    <p style="margin-top:1.5rem;font-size:1.55rem;color:var(--text-light);line-height:1.8;">Three screens: a home screen showing daily activity, a log screen for adding new workouts, and a history screen for reviewing past performance. Every interaction is purposeful — nothing extra.</p>
+                </div>
+                <div>
+                    <p style="font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:1.4rem;">Tech Stack</p>
+                    <div class="tech-strip">
+                        <div class="tech-pill"><i class='bx bxl-android'></i> Android</div>
+                        <div class="tech-pill"><i class='bx bx-code-alt'></i> Jetpack Compose</div>
+                        <div class="tech-pill"><i class='bx bx-data'></i> Room Database</div>
+                        <div class="tech-pill"><i class='bx bx-transfer'></i> State Hoisting</div>
+                        <div class="tech-pill"><i class='bx bx-cloud-off'></i> Offline-First</div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:1.2rem;flex-wrap:wrap;">
+                    <a href="https://youtu.be/duGCFhiRTwQ" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-play-circle'></i> Watch Demo
+                    </a>
+                    <a href="https://github.com/DC-BSU-RAK/nan-calculator-MohdRashid1607.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FitTrack Technical Decisions -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#10b981;">// Technical</span>
+            <h2>Key <span style="color:#10b981;">Decisions</span></h2>
+        </div>
+        <div class="decisions-row">
+            <div class="decision-card dc-fit">
+                <div class="decision-num">Decision 01</div>
+                <h4>Offline-First with Room Database</h4>
+                <p>Many users won't always have internet access — so local storage was the priority from day one. Room Database integrates cleanly with Compose and ensures workout data is always available, regardless of network status. No login, no cloud dependency.</p>
+            </div>
+            <div class="decision-card dc-fit">
+                <div class="decision-num">Decision 02</div>
+                <h4>State Hoisting for UI Consistency</h4>
+                <p>Updating workout logs and switching between screens can cause UI inconsistencies if state isn't managed carefully. State hoisting techniques were used throughout to manage UI consistency and avoid unnecessary recompositions — keeping the app responsive and predictable.</p>
+            </div>
+            <div class="decision-card dc-fit">
+                <div class="decision-num">Decision 03</div>
+                <h4>Scalable Architecture — No Login Yet</h4>
+                <p>Deliberately avoided a login system or cloud syncing at this stage, keeping the focus on usability. However, the app's architecture is built to scale — Firebase integration, reminders, and calorie tracking can all be added without rebuilding from scratch.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FitTrack Evaluation -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#10b981;">// Evaluation</span>
+            <h2>Strengths & <span style="color:#10b981;">Improvements</span></h2>
+        </div>
+        <div class="eval-grid">
+            <div class="eval-col">
+                <div class="eval-header eh-strong">
+                    <h4><span style="color:#10b981;font-size:1.8rem;">✓</span> Strengths</h4>
+                </div>
+                <div class="eval-body">
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Simple, fast, clearly organised UI — users can track progress without getting confused</span></div>
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Offline functionality — fitness data saved and accessible without internet access</span></div>
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Well-structured codebase using Compose + Room — clean and genuinely scalable</span></div>
+                    <div class="eval-item ei-green"><i class='bx bx-check-circle'></i><span>Thumb-friendly layout with bottom nav and icon-led design reducing text clutter</span></div>
+                </div>
+            </div>
+            <div class="eval-col">
+                <div class="eval-header eh-improve">
+                    <h4><span style="color:#f59e0b;font-size:1.8rem;">→</span> Improvements</h4>
+                </div>
+                <div class="eval-body">
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>No data visualisation — progress graphs or charts would make tracking far more engaging</span></div>
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>No personalisation — theme selection, user goals, and custom workout types would increase retention</span></div>
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>Future: add reminder notifications, calorie tracking, and Firebase cloud sync</span></div>
+                    <div class="eval-item ei-amber"><i class='bx bx-right-arrow-circle'></i><span>Wearable device integration (e.g. Wear OS) could turn it into a full-featured companion</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="cs-quote" style="margin-top:3rem;">
+            <p>"FitTrack fulfills its goal of being a simple fitness tracker effectively. With more time and development, it can be enhanced into a full-featured fitness companion that supports long-term habit building and user motivation."</p>
+            <cite>— Critical Evaluation, M.Rashid</cite>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Jetpack Compose changes how you think about UI</h4>
+                    <p>Declarative UI removes the mental overhead of manually syncing view state. Once the pattern clicks — describe what the UI should look like given a state, not how to update it — building reactive interfaces becomes dramatically faster and less error-prone.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Simplicity is a design decision, not a limitation</h4>
+                    <p>Both apps deliberately left features out. ColorMix skipped sliders; FitTrack skipped login. These weren't gaps — they were choices that kept the user experience clean and the codebase focused. Knowing what to remove is as important as knowing what to build.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Offline-first is the right default for mobile</h4>
+                    <p>Designing around Room Database from the start — instead of retrofitting local storage later — made FitTrack inherently more reliable. Building mobile apps that assume connectivity is a mistake; building for offline-first produces apps people actually trust.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>State management is the hardest part of any app</h4>
+                    <p>State hoisting in FitTrack — and real-time state updates in ColorMix — were the most technically demanding aspects. Getting state management right is what separates a working prototype from a production-quality app.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Build for scale from day one</h4>
+                    <p>FitTrack's architecture was designed so that Firebase, reminders, and calorie tracking could be added without rebuilding. Writing scalable code when you're building something small isn't overengineering — it's the difference between a project and a product.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 2 · Smartphone App Design · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="emerging-technologies.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Emerging Tech</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

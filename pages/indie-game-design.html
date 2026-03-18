@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indie Game Design — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* ===== HERO ===== */
+        .cs-hero { padding:14rem 7% 8rem; background:var(--bg-color); position:relative; overflow:hidden; }
+        .cs-hero::before { content:''; position:absolute; top:-20rem; right:-10rem; width:60rem; height:60rem; background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%); pointer-events:none; }
+        .cs-breadcrumb { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); margin-bottom:3rem; }
+        .cs-breadcrumb a { color:var(--main-color); font-weight:500; }
+        .cs-breadcrumb a:hover { text-decoration:underline; }
+        .cs-breadcrumb i { font-size:1.6rem; }
+        .cs-hero-inner { display:grid; grid-template-columns:1fr auto; gap:6rem; align-items:start; max-width:120rem; }
+        .cs-year-badge { display:inline-block; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.4rem; border-radius:5rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.8rem; }
+        .cs-hero h1 { font-size:5rem; font-weight:800; color:var(--text-color); line-height:1.1; letter-spacing:-0.03em; margin-bottom:2rem; }
+        .cs-hero h1 span { color:var(--main-color); }
+        .cs-hero-desc { font-size:1.7rem; color:var(--text-light); line-height:1.7; max-width:60rem; margin-bottom:3rem; }
+        .cs-tags { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:3.5rem; }
+        .cs-tag { font-size:1.25rem; padding:0.5rem 1.4rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:500; }
+        .cs-tag-main { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); }
+        .cs-hero-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .cs-meta-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; min-width:26rem; box-shadow:0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display:flex; flex-direction:column; gap:2rem; }
+        .cs-meta-item label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.4rem; }
+        .cs-meta-item p { font-size:1.45rem; font-weight:600; color:var(--text-color); }
+        .cs-meta-divider { height:1px; background:var(--border-color); }
+        .cs-grade { font-size:2.4rem !important; font-weight:800 !important; color:var(--main-color) !important; }
+
+        /* STATS */
+        .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--bg-alt); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); }
+        .cs-stat { padding:3rem 4rem; border-right:1px solid var(--border-color); text-align:center; }
+        .cs-stat:last-child { border-right:none; }
+        .cs-stat strong { display:block; font-size:3rem; font-weight:800; color:var(--main-color); margin-bottom:0.4rem; }
+        .cs-stat span { font-size:1.3rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+
+        /* SECTIONS */
+        .cs-section { padding:7rem 7%; border-bottom:1px solid var(--border-color); }
+        .cs-section-alt { background:var(--bg-alt); }
+        .cs-section-top { display:flex; align-items:baseline; gap:2rem; margin-bottom:4rem; }
+        .cs-section-eyebrow { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.12em; white-space:nowrap; }
+        .cs-section h2 { font-size:3rem; font-weight:800; color:var(--text-color); letter-spacing:-0.02em; line-height:1.2; }
+        .cs-section h2 span { color:var(--main-color); }
+        .cs-body { font-size:1.55rem; color:var(--text-light); line-height:1.8; }
+        .cs-body + .cs-body { margin-top:1.5rem; }
+        .cs-quote { border-left:3px solid var(--main-color); padding:1.8rem 2.2rem; background:rgba(117,78,249,0.04); border-radius:0 1rem 1rem 0; margin:2.5rem 0; }
+        .cs-quote p { font-size:1.6rem; font-style:italic; color:var(--text-color); line-height:1.6; margin-bottom:0.6rem; }
+        .cs-quote cite { font-size:1.25rem; color:var(--main-color); font-style:normal; font-weight:600; }
+
+        /* ===== OVERVIEW — horizontal 3-col ===== */
+        .overview-3col { display:grid; grid-template-columns:2fr 1fr; gap:5rem; align-items:start; }
+        
+        .overview-right { display:flex; flex-direction:column; gap:1.5rem; }
+        .ov-stat-box { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; padding:2.2rem 2.5rem; }
+        .ov-stat-box strong { display:block; font-size:2.8rem; font-weight:800; color:var(--main-color); line-height:1; }
+        .ov-stat-box span { font-size:1.3rem; color:var(--text-light); font-weight:600; text-transform:uppercase; letter-spacing:0.07em; }
+
+        /* ===== GAME SCENE — pure CSS ===== */
+        .game-scene-wrap { border-radius:1.4rem; overflow:hidden; border:1px solid var(--border-color); box-shadow:0 8px 32px var(--shadow-color); margin-bottom:4rem; }
+        .game-scene { height:26rem; background:linear-gradient(180deg,#87CEEB 0%,#b8dff0 55%,#8BC34A 55%,#6aa825 75%,#5D8A2A 100%); position:relative; overflow:hidden; }
+        .gs-cloud { position:absolute; background:rgba(255,255,255,0.75); border-radius:5rem; }
+        .gs-pipe-group { position:absolute; top:0; bottom:0; display:flex; flex-direction:column; justify-content:space-between; }
+        .gs-pipe-top { background:linear-gradient(90deg,#558b2f,#7cb342,#558b2f); width:5rem; border-radius:0 0 0.4rem 0.4rem; position:relative; }
+        .gs-pipe-top::after { content:''; position:absolute; bottom:-0.6rem; left:-0.5rem; right:-0.5rem; height:1.2rem; background:linear-gradient(90deg,#33691e,#558b2f,#33691e); border-radius:0.3rem; }
+        .gs-pipe-bot { background:linear-gradient(90deg,#558b2f,#7cb342,#558b2f); width:5rem; border-radius:0.4rem 0.4rem 0 0; position:relative; }
+        .gs-pipe-bot::before { content:''; position:absolute; top:-0.6rem; left:-0.5rem; right:-0.5rem; height:1.2rem; background:linear-gradient(90deg,#33691e,#558b2f,#33691e); border-radius:0.3rem; }
+        .gs-bird { position:absolute; width:4.2rem; height:3.2rem; background:radial-gradient(ellipse at 40% 40%,#fbbf24,#f59e0b); border-radius:50% 60% 55% 45%; box-shadow:0 3px 12px rgba(245,158,11,0.4); }
+        .gs-bird::before { content:''; position:absolute; width:1.1rem; height:1rem; background:#fff; border-radius:50%; top:0.5rem; right:0.6rem; }
+        .gs-bird::after { content:''; position:absolute; width:0.55rem; height:0.55rem; background:#1e293b; border-radius:50%; top:0.65rem; right:0.7rem; }
+        .gs-score-label { position:absolute; top:2rem; left:50%; transform:translateX(-50%); font-size:3.5rem; font-weight:900; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.25); }
+        .gs-ground { position:absolute; bottom:0; left:0; right:0; height:2rem; background:#5D8A2A; }
+        .gs-ui-bar { background:var(--card-bg); border-top:1px solid var(--border-color); padding:1.4rem 2.4rem; display:flex; align-items:center; justify-content:space-between; }
+        .gs-ui-bar span { font-size:1.3rem; color:var(--text-light); font-weight:600; display:flex; align-items:center; gap:0.6rem; }
+        .gs-live-dot { width:0.7rem; height:0.7rem; border-radius:50%; background:#10b981; display:inline-block; }
+
+        /* ===== RULES — 3-col numbered ===== */
+        .rules-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+        .rule-item { display:flex; gap:1.5rem; align-items:flex-start; padding:2rem 2.2rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .rule-item:hover { border-color:rgba(117,78,249,0.3); transform:translateY(-2px); box-shadow:0 8px 25px var(--shadow-color); }
+        .rule-n { font-size:1.8rem; font-weight:800; color:rgba(117,78,249,0.18); min-width:2.8rem; line-height:1.1; }
+        .rule-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        /* ===== SCRIPTS — 2+3 asymmetric ===== */
+        .scripts-featured { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:2rem; }
+        .scripts-row3 { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .script-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; }
+        .script-card:hover { border-color:rgba(117,78,249,0.3); transform:translateY(-3px); box-shadow:0 10px 30px var(--shadow-color); }
+        .script-tag { display:inline-block; font-size:1.1rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.25rem 1rem; border-radius:5rem; margin-bottom:1.2rem; text-transform:uppercase; letter-spacing:0.08em; }
+        .script-card h4 { font-size:1.65rem; font-weight:700; color:var(--text-color); margin-bottom:0.8rem; font-family:monospace; }
+        .script-card p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        /* ===== TEST PLAN — alternating rows ===== */
+        .test-list { display:flex; flex-direction:column; gap:0; border:1px solid var(--border-color); border-radius:1.4rem; overflow:hidden; }
+        .test-row { display:grid; grid-template-columns:auto 1fr 1fr; gap:0; border-bottom:1px solid var(--border-color); }
+        .test-row:last-child { border-bottom:none; }
+        .test-row:nth-child(even) { background:var(--bg-alt); }
+        .test-status-cell { padding:2rem 2.4rem; display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border-color); min-width:6rem; }
+        .ts-badge { width:3rem; height:3rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; flex-shrink:0; }
+        .ts-pass { background:rgba(16,185,129,0.1); color:#10b981; }
+        .ts-fix { background:rgba(245,158,11,0.1); color:#f59e0b; }
+        .test-name-cell { padding:2rem 2.4rem; border-right:1px solid var(--border-color); }
+        .test-name-cell strong { display:block; font-size:1.45rem; font-weight:700; color:var(--text-color); margin-bottom:0.3rem; }
+        .test-name-cell span { font-size:1.2rem; color:var(--text-light); }
+        .test-result-cell { padding:2rem 2.4rem; font-size:1.35rem; color:var(--text-light); line-height:1.6; display:flex; align-items:center; }
+
+        /* ===== FEEDBACK — full-width quote cards ===== */
+        .fb-list { display:flex; flex-direction:column; gap:2rem; }
+        .fb-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:3rem; display:grid; grid-template-columns:auto 1fr; gap:3rem; align-items:start; transition:all 0.3s; }
+        .fb-card:hover { border-color:rgba(117,78,249,0.25); box-shadow:0 8px 25px var(--shadow-color); }
+        .fb-avatar { width:5rem; height:5rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800; color:#fff; flex-shrink:0; }
+        .fa-1 { background:linear-gradient(135deg,#754ef9,#a855f7); }
+        .fa-2 { background:linear-gradient(135deg,#06b6d4,#0e7490); }
+        .fa-3 { background:linear-gradient(135deg,#f59e0b,#d97706); }
+        .fb-content p { font-size:1.5rem; color:var(--text-light); line-height:1.75; font-style:italic; margin-bottom:1rem; }
+        .fb-meta { display:flex; gap:1rem; flex-wrap:wrap; }
+        .fb-tag { font-size:1.15rem; padding:0.3rem 1rem; border-radius:5rem; background:var(--bg-alt); border:1px solid var(--border-color); color:var(--text-light); font-weight:600; }
+        .fb-tag-purple { background:rgba(117,78,249,0.06); border-color:rgba(117,78,249,0.18); color:var(--main-color); }
+
+        /* ===== STANLEY PARABLE ===== */
+        .stanley-banner { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
+        .stanley-left { padding:4rem; border-right:1px solid var(--border-color); }
+        .stanley-badge { display:inline-block; font-size:1.1rem; font-weight:700; background:rgba(245,158,11,0.08); color:#f59e0b; border:1px solid rgba(245,158,11,0.2); padding:0.4rem 1.2rem; border-radius:5rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.8rem; }
+        .stanley-left h3 { font-size:2.8rem; font-weight:800; color:var(--text-color); line-height:1.15; letter-spacing:-0.02em; margin-bottom:1.5rem; }
+        .stanley-left h3 span { color:var(--main-color); }
+        .stanley-left p { font-size:1.45rem; color:var(--text-light); line-height:1.75; margin-bottom:2rem; }
+        .stanley-coming { display:inline-flex; align-items:center; gap:0.8rem; font-size:1.3rem; font-weight:700; color:var(--text-light); background:var(--bg-alt); border:1px solid var(--border-color); padding:0.9rem 1.8rem; border-radius:0.8rem; }
+        .stanley-right { padding:4rem; }
+        .stanley-right h4 { font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:2rem; }
+        .stanley-topics { display:flex; flex-direction:column; gap:1.2rem; }
+        .st-topic { display:flex; gap:1.5rem; align-items:center; padding:1.4rem 1.8rem; background:var(--bg-alt); border:1px solid var(--border-color); border-radius:1rem; transition:all 0.3s; }
+        .st-topic:hover { border-color:rgba(117,78,249,0.25); }
+        .st-icon { width:3.6rem; height:3.6rem; background:rgba(117,78,249,0.08); border-radius:0.8rem; display:flex; align-items:center; justify-content:center; font-size:1.7rem; color:var(--main-color); flex-shrink:0; }
+        .st-topic strong { display:block; font-size:1.4rem; color:var(--text-color); margin-bottom:0.2rem; }
+        .st-topic span { font-size:1.25rem; color:var(--text-light); }
+
+        /* LEARNINGS */
+        .learnings-list { display:flex; flex-direction:column; gap:1.5rem; }
+        .learning-item { display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .learning-item:hover { border-color:rgba(117,78,249,0.25); background:rgba(117,78,249,0.02); }
+        .learning-num { font-size:2rem; font-weight:800; color:rgba(117,78,249,0.2); min-width:3rem; line-height:1.2; }
+        .learning-item h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .learning-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        .cs-bottom { display:flex; justify-content:space-between; align-items:center; padding:4rem 7%; background:var(--bg-alt); border-top:1px solid var(--border-color); flex-wrap:wrap; gap:2rem; }
+        .cs-bottom p { font-size:1.6rem; color:var(--text-light); }
+        .cs-bottom-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+        @media (max-width:1100px) {
+            .cs-hero-inner { grid-template-columns:1fr; }
+            .cs-meta-card { min-width:unset; }
+            .cs-stats { grid-template-columns:repeat(2,1fr); }
+            .overview-3col { grid-template-columns:1fr; }
+            .overview-right { flex-direction:row; flex-wrap:wrap; }
+            .scripts-featured { grid-template-columns:1fr; }
+            .scripts-row3 { grid-template-columns:repeat(2,1fr); }
+            .rules-grid { grid-template-columns:repeat(2,1fr); }
+            .stanley-banner { grid-template-columns:1fr; }
+            .stanley-left { border-right:none; border-bottom:1px solid var(--border-color); }
+            .test-row { grid-template-columns:auto 1fr; }
+            .test-result-cell { display:none; }
+        }
+        @media (max-width:650px) {
+            .cs-hero { padding:12rem 5% 6rem; }
+            .cs-hero h1 { font-size:3.5rem; }
+            .rules-grid, .scripts-row3 { grid-template-columns:1fr; }
+            .scripts-featured { grid-template-columns:1fr; }
+            .cs-section { padding:5rem 5%; }
+            .cs-bottom { flex-direction:column; align-items:flex-start; }
+            .fb-card { grid-template-columns:1fr; gap:1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Indie Game Design</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 2 · Module</div>
+                <h1>Indie Game <span>Design</span></h1>
+                <p class="cs-hero-desc">A Flappy Bird clone built entirely from scratch in Unity — custom physics, collision detection, pipe spawning, parallax scrolling, sprite animation, and sound. Published live on itch.io with real player testing and feedback.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">Unity</span>
+                    <span class="cs-tag cs-tag-main">C#</span>
+                    <span class="cs-tag cs-tag-main">2D Game Dev</span>
+                    <span class="cs-tag cs-tag-main">itch.io</span>
+                    <span class="cs-tag">Rigidbody2D</span>
+                    <span class="cs-tag">Box Collider 2D</span>
+                    <span class="cs-tag">Game Design</span>
+                    <span class="cs-tag">User Testing</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://m7hammad.itch.io/flappy-bird" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-joystick'></i> Play on itch.io
+                    </a>
+                    <a href="https://youtu.be/G2e28D4ORKI" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-play-circle'></i> Walkthrough Video
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1BX4iF__RavU7JVqNIUVNeRRg2YPjLaxK" target="_blank" class="btn btn-secondary">
+                        <i class='bx bx-folder-open'></i> Drive
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Indie Game Design</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 2 — 2023/24</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Engine</label><p>Unity · C#</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Published</label><p>itch.io — Live</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Testers</label><p>4 Players</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>Unity</strong><span>Game Engine</span></div>
+        <div class="cs-stat"><strong>5</strong><span>C# Scripts</span></div>
+        <div class="cs-stat"><strong>4</strong><span>Playtesters</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Overview</span>
+            <h2>Flappy Bird — <span>Built from Scratch</span></h2>
+        </div>
+
+        <!-- CSS game scene -->
+        <div class="game-scene-wrap">
+            <div class="game-scene">
+                <!-- clouds -->
+                <div class="gs-cloud" style="width:9rem;height:3rem;top:3rem;left:10%;"></div>
+                <div class="gs-cloud" style="width:6rem;height:2rem;top:6rem;left:30%;opacity:0.6;"></div>
+                <div class="gs-cloud" style="width:7rem;height:2.5rem;top:4rem;left:70%;"></div>
+                <!-- pipe set 1 -->
+                <div style="position:absolute;left:42%;top:0;bottom:2rem;display:flex;flex-direction:column;justify-content:space-between;">
+                    <div class="gs-pipe-top" style="height:9rem;"></div>
+                    <div class="gs-pipe-bot" style="height:11rem;"></div>
+                </div>
+                <!-- pipe set 2 (ahead) -->
+                <div style="position:absolute;left:72%;top:0;bottom:2rem;display:flex;flex-direction:column;justify-content:space-between;opacity:0.55;">
+                    <div class="gs-pipe-top" style="height:13rem;"></div>
+                    <div class="gs-pipe-bot" style="height:7rem;"></div>
+                </div>
+                <!-- bird -->
+                <div class="gs-bird" style="left:23%;top:41%;"></div>
+                <!-- score -->
+                <div class="gs-score-label">4</div>
+                <div class="gs-ground"></div>
+            </div>
+            <div class="gs-ui-bar">
+                <span><span class="gs-live-dot"></span> Live on itch.io — playable in browser</span>
+                <span>Unity · C# · Rigidbody2D</span>
+                <span>Spacebar to fly</span>
+            </div>
+        </div>
+
+        <div class="overview-3col">
+            <div>
+                <p class="cs-body">Flappy Bird is a deceptively simple game — the entire mechanic is one button. But building it from the ground up in Unity requires every system to be engineered precisely: physics, collision, pipe spawning, scoring, and restart logic all need to work together without breaking.</p>
+                <p class="cs-body">The player controls a bird navigating through the gaps between pairs of pipes by pressing the spacebar. Each successful pass scores one point. Touch a pipe, hit the ground, or stop pressing — and the bird falls and dies. The game resets from zero with no time limit and no upper bound on score.</p>
+                <div class="cs-quote">
+                    <p>"Adjusting the game's difficulty was one of the main challenges. At first the pipe spacing was irregular — through iteration and testing, I found the balance that makes it feel both fair and challenging."</p>
+                    <cite>— Critical Reflection, M.Rashid</cite>
+                </div>
+            </div>
+            <div class="overview-right">
+                <div class="ov-stat-box"><strong>5</strong><span>C# Scripts</span></div>
+                <div class="ov-stat-box"><strong>2D</strong><span>Physics Engine</span></div>
+                <div class="ov-stat-box"><strong>Live</strong><span>on itch.io</span></div>
+                <div class="ov-stat-box"><strong>4+</strong><span>Feedback Rounds</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME RULES -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Gameplay</span>
+            <h2>The <span>Rules</span></h2>
+        </div>
+        <div class="rules-grid">
+            <div class="rule-item"><div class="rule-n">01</div><p>The bird must pass through the gaps between pipes to score.</p></div>
+            <div class="rule-item"><div class="rule-n">02</div><p>Touching the ground instantly kills the bird.</p></div>
+            <div class="rule-item"><div class="rule-n">03</div><p>Touching any pipe instantly kills the bird.</p></div>
+            <div class="rule-item"><div class="rule-n">04</div><p>One point is earned for each pipe gap passed through.</p></div>
+            <div class="rule-item"><div class="rule-n">05</div><p>Press spacebar to fly upward — holding it is not allowed.</p></div>
+            <div class="rule-item"><div class="rule-n">06</div><p>Without input, gravity pulls the bird downward naturally.</p></div>
+            <div class="rule-item"><div class="rule-n">07</div><p>Death resets the game — score and all elements return to zero.</p></div>
+            <div class="rule-item"><div class="rule-n">08</div><p>No time limit — survive as long as possible.</p></div>
+            <div class="rule-item"><div class="rule-n">09</div><p>Objective: score as high as possible. Pure survival.</p></div>
+        </div>
+    </div>
+
+    <!-- C# SCRIPTS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Technical</span>
+            <h2>5 C# <span>Scripts</span></h2>
+        </div>
+        <div class="scripts-featured">
+            <div class="script-card">
+                <div class="script-tag">Core</div>
+                <h4>GameManager.cs</h4>
+                <p>The main control mechanism for the entire game. Uses the Singleton pattern to ensure one instance only. Manages all key game states — start, pause, end — and handles score display, the game-over panel, and restart logic by resetting the time scale and repositioning all elements on death.</p>
+            </div>
+            <div class="script-card">
+                <div class="script-tag">Player</div>
+                <h4>Player.cs</h4>
+                <p>Handles the bird's movement, sprite animation, and collision interactions. Cycles through an array of sprites at set intervals to simulate flapping motion. Applies upward force via Rigidbody2D on spacebar press — with gravity pulling the bird down continuously when no input is given.</p>
+            </div>
+        </div>
+        <div class="scripts-row3">
+            <div class="script-card">
+                <div class="script-tag">Obstacles</div>
+                <h4>Pipes.cs</h4>
+                <p>Controls the movement and lifecycle of pipe obstacles. Pipes scroll left at constant speed and are destroyed on exit — preserving performance by preventing object buildup in the scene.</p>
+            </div>
+            <div class="script-card">
+                <div class="script-tag">Spawning</div>
+                <h4>Spawner.cs</h4>
+                <p>Dynamically instantiates pipe prefabs at regular intervals with randomised heights — ensuring consistent challenge. Spawn rate is adjustable for difficulty tuning without touching core logic.</p>
+            </div>
+            <div class="script-card">
+                <div class="script-tag">Visual</div>
+                <h4>Parallax.cs</h4>
+                <p>Creates the scrolling background effect — different layers scroll at different speeds, simulating depth and reinforcing the illusion of flying through a real environment.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEST PLAN -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// QA</span>
+            <h2>Test Plan & <span>Results</span></h2>
+        </div>
+        <div class="test-list">
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-pass"><i class='bx bx-check'></i></div></div>
+                <div class="test-name-cell"><strong>Flight Mechanics</strong><span>Spacebar input</span></div>
+                <div class="test-result-cell">Bird flies upward on spacebar press. Upward force adjusted for smooth, responsive feel.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-pass"><i class='bx bx-check'></i></div></div>
+                <div class="test-name-cell"><strong>Collision Detection</strong><span>Box Collider 2D</span></div>
+                <div class="test-result-cell">Bird dies on contact with ground or pipes. Box Collider 2D added and verified on all elements.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-pass"><i class='bx bx-check'></i></div></div>
+                <div class="test-name-cell"><strong>Pipe Spawning</strong><span>Random heights</span></div>
+                <div class="test-result-cell">Pipes spawn at random heights with consistent spacing. Speed balanced for fair difficulty.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-pass"><i class='bx bx-check'></i></div></div>
+                <div class="test-name-cell"><strong>Scoring System</strong><span>+1 per pipe</span></div>
+                <div class="test-result-cell">Score increments correctly by 1 per gap passed and displays accurately on screen.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-pass"><i class='bx bx-check'></i></div></div>
+                <div class="test-name-cell"><strong>Restart Functionality</strong><span>Full reset</span></div>
+                <div class="test-result-cell">All elements reset cleanly on death — positions, score, and state return to initial values.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-pass"><i class='bx bx-check'></i></div></div>
+                <div class="test-name-cell"><strong>Sound Effects</strong><span>Flap · pass · die</span></div>
+                <div class="test-result-cell">All three sounds synchronised with actions — no overlapping or desync issues found.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-fix"><i class='bx bx-wrench'></i></div></div>
+                <div class="test-name-cell"><strong>Pipe Clipping Bug</strong><span>Fixed</span></div>
+                <div class="test-result-cell">Bird occasionally clipped through pipes. Fixed by refining Box Collider 2D boundaries on bird and pipes.</div>
+            </div>
+            <div class="test-row">
+                <div class="test-status-cell"><div class="ts-badge ts-fix"><i class='bx bx-wrench'></i></div></div>
+                <div class="test-name-cell"><strong>Idle Hover Bug</strong><span>Fixed</span></div>
+                <div class="test-result-cell">Bird hovered slightly when idle. Fixed by adjusting Rigidbody2D gravity scale settings.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER FEEDBACK -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Playtesting</span>
+            <h2>Player <span>Feedback</span></h2>
+        </div>
+        <div class="fb-list">
+            <div class="fb-card">
+                <div class="fb-avatar fa-1">S1</div>
+                <div class="fb-content">
+                    <p>"The game was fun but I found it challenging to maintain the bird's flight — the difficulty ramps up quickly which actually kept me coming back for more."</p>
+                    <div class="fb-meta">
+                        <span class="fb-tag">Student Tester 01</span>
+                        <span class="fb-tag">Google Forms</span>
+                        <span class="fb-tag-purple fb-tag">Difficulty Feedback</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fb-card">
+                <div class="fb-avatar fa-2">S2</div>
+                <div class="fb-content">
+                    <p>"I really enjoyed the simplicity of the controls. One suggestion — adding a scoring leaderboard would make the competition element much more engaging."</p>
+                    <div class="fb-meta">
+                        <span class="fb-tag">Student Tester 02</span>
+                        <span class="fb-tag">Live Session</span>
+                        <span class="fb-tag-purple fb-tag">Feature Suggestion</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fb-card">
+                <div class="fb-avatar fa-3">S3</div>
+                <div class="fb-content">
+                    <p>"The graphics felt blurry at first — after the resolution update it looks much cleaner. The parallax background gives it a really polished feel for a student project."</p>
+                    <div class="fb-meta">
+                        <span class="fb-tag">Student Tester 03</span>
+                        <span class="fb-tag">Iteration 2</span>
+                        <span class="fb-tag-purple fb-tag">Visual Quality</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STANLEY PARABLE -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// A1 Assessment</span>
+            <h2>The Stanley <span>Parable</span></h2>
+        </div>
+        <div class="stanley-banner">
+            <div class="stanley-left">
+                <div class="stanley-badge">Presentation · Coming Soon</div>
+                <h3>A1 — Indie Game <span>Case Study</span></h3>
+                <p>The first assessment for this module was a deep-dive presentation analysing The Stanley Parable — a landmark indie game that interrogates player agency, narrative linearity, and the nature of choice. The presentation file will be added here once uploaded.</p>
+                <div class="stanley-coming">
+                    <i class='bx bx-time-five' style="font-size:1.8rem;"></i>
+                    Upload pending — will update this page
+                </div>
+            </div>
+            <div class="stanley-right">
+                <h4>Analysis Topics</h4>
+                <div class="stanley-topics">
+                    <div class="st-topic">
+                        <div class="st-icon"><i class='bx bx-git-branch'></i></div>
+                        <div><strong>Non-Linear Narrative</strong><span>How the game subverts player expectations about choice</span></div>
+                    </div>
+                    <div class="st-topic">
+                        <div class="st-icon"><i class='bx bx-joystick'></i></div>
+                        <div><strong>Player Agency</strong><span>What it means to "play" when all roads lead the same way</span></div>
+                    </div>
+                    <div class="st-topic">
+                        <div class="st-icon"><i class='bx bx-brain'></i></div>
+                        <div><strong>Meta-Commentary</strong><span>The game as a critique of game design conventions</span></div>
+                    </div>
+                    <div class="st-topic">
+                        <div class="st-icon"><i class='bx bx-paint'></i></div>
+                        <div><strong>Indie Philosophy</strong><span>How small teams create culturally significant work</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Simple mechanics hide complex systems</h4>
+                    <p>Flappy Bird looks like a one-button game. Building it required 5 interconnected scripts, physics tuning, collision layers, and spawn logic. Real simplicity on screen requires serious engineering underneath.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Player feedback is the best debugging tool</h4>
+                    <p>The pipe clipping bug and the difficulty imbalance both came from playtester observation — not code review. Watching 4 real players revealed things no test plan alone would have caught.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Rigidbody2D physics demands careful tuning</h4>
+                    <p>Getting the bird's gravity, upward force, and idle falling to feel right took more iteration than any other system. Physics-based feel is subjective — and that subjectivity is what makes it hard to code correctly.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Game feel is a design discipline, not polish</h4>
+                    <p>The parallax background, sprite animation, and sound effects weren't cosmetic — they were what turned a functional prototype into an enjoyable game. Responsiveness and feel matter as much as the core mechanics.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Publishing makes the project real</h4>
+                    <p>Getting the game live on itch.io wasn't just a submission step — it was the point. Shipping to a real platform, writing a game page, and collecting live feedback was the final stage that completed the project.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 2 · Indie Game Design · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="code-lab-2.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Code Lab 2</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

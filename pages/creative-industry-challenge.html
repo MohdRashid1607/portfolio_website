@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Industry Challenge — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* ===== BASE ===== */
+        .cs-hero { padding:14rem 7% 8rem; background:var(--bg-color); position:relative; overflow:hidden; }
+        .cs-hero::before { content:''; position:absolute; top:-20rem; right:-10rem; width:60rem; height:60rem; background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%); pointer-events:none; }
+        .cs-breadcrumb { display:flex; align-items:center; gap:0.8rem; font-size:1.3rem; color:var(--text-light); margin-bottom:3rem; }
+        .cs-breadcrumb a { color:var(--main-color); font-weight:500; }
+        .cs-breadcrumb a:hover { text-decoration:underline; }
+        .cs-breadcrumb i { font-size:1.6rem; }
+        .cs-hero-inner { display:grid; grid-template-columns:1fr auto; gap:6rem; align-items:start; max-width:120rem; }
+        .cs-year-badge { display:inline-block; font-size:1.2rem; font-weight:700; color:var(--main-color); background:rgba(117,78,249,0.08); border:1px solid rgba(117,78,249,0.2); padding:0.4rem 1.4rem; border-radius:5rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.8rem; }
+        .cs-hero h1 { font-size:5rem; font-weight:800; color:var(--text-color); line-height:1.1; letter-spacing:-0.03em; margin-bottom:2rem; }
+        .cs-hero h1 span { color:var(--main-color); }
+        .cs-hero-desc { font-size:1.7rem; color:var(--text-light); line-height:1.7; max-width:60rem; margin-bottom:3rem; }
+        .cs-tags { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:3.5rem; }
+        .cs-tag { font-size:1.25rem; padding:0.5rem 1.4rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:500; }
+        .cs-tag-main { background:rgba(117,78,249,0.08); color:var(--main-color); border-color:rgba(117,78,249,0.2); }
+        .cs-tag-real { background:rgba(16,185,129,0.08); color:#10b981; border-color:rgba(16,185,129,0.2); }
+        .cs-hero-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .cs-meta-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.6rem; padding:3rem; min-width:26rem; box-shadow:0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display:flex; flex-direction:column; gap:2rem; }
+        .cs-meta-item label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.4rem; }
+        .cs-meta-item p { font-size:1.45rem; font-weight:600; color:var(--text-color); }
+        .cs-meta-divider { height:1px; background:var(--border-color); }
+        .cs-grade { font-size:2.4rem !important; font-weight:800 !important; color:var(--main-color) !important; }
+        .cs-real { color:#10b981 !important; }
+
+        /* STATS */
+        .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--bg-alt); border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); }
+        .cs-stat { padding:3rem 4rem; border-right:1px solid var(--border-color); text-align:center; }
+        .cs-stat:last-child { border-right:none; }
+        .cs-stat strong { display:block; font-size:3rem; font-weight:800; color:var(--main-color); margin-bottom:0.4rem; }
+        .cs-stat span { font-size:1.3rem; color:var(--text-light); text-transform:uppercase; letter-spacing:0.07em; font-weight:600; }
+
+        /* SECTIONS */
+        .cs-section { padding:7rem 7%; border-bottom:1px solid var(--border-color); }
+        .cs-section-alt { background:var(--bg-alt); }
+        .cs-section-top { display:flex; align-items:baseline; gap:2rem; margin-bottom:4rem; }
+        .cs-section-eyebrow { font-size:1.1rem; font-weight:700; color:var(--main-color); text-transform:uppercase; letter-spacing:0.12em; white-space:nowrap; }
+        .cs-section h2 { font-size:3rem; font-weight:800; color:var(--text-color); letter-spacing:-0.02em; line-height:1.2; }
+        .cs-section h2 span { color:var(--main-color); }
+        .cs-two-col { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+        .cs-body { font-size:1.55rem; color:var(--text-light); line-height:1.8; }
+        .cs-body + .cs-body { margin-top:1.5rem; }
+        .cs-quote { border-left:3px solid var(--main-color); padding:1.8rem 2.2rem; background:rgba(117,78,249,0.04); border-radius:0 1rem 1rem 0; margin:2.5rem 0; }
+        .cs-quote p { font-size:1.6rem; font-style:italic; color:var(--text-color); line-height:1.6; margin-bottom:0.6rem; }
+        .cs-quote cite { font-size:1.25rem; color:var(--main-color); font-style:normal; font-weight:600; }
+
+        /* ===== CLIENT BRIEF CARD ===== */
+        .client-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.6rem;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+        .client-card-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .client-info { padding: 3.5rem; border-right: 1px solid var(--border-color); }
+        .client-label { font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-light); margin-bottom:0.5rem; }
+        .client-name { font-size:2.8rem; font-weight:800; color:var(--text-color); line-height:1.2; margin-bottom:0.6rem; letter-spacing:-0.02em; }
+        .client-name span { color:var(--main-color); }
+        .client-subtitle { font-size:1.5rem; color:var(--text-light); margin-bottom:1.8rem; }
+        .client-tags { display:flex; flex-wrap:wrap; gap:0.7rem; }
+        .c-tag { font-size:1.15rem; padding:0.3rem 1.1rem; border-radius:5rem; font-weight:600; }
+        .c-tag-green { background:rgba(16,185,129,0.08); color:#10b981; border:1px solid rgba(16,185,129,0.2); }
+        .c-tag-purple { background:rgba(117,78,249,0.08); color:var(--main-color); border:1px solid rgba(117,78,249,0.2); }
+        .c-tag-amber { background:rgba(245,158,11,0.08); color:#f59e0b; border:1px solid rgba(245,158,11,0.2); }
+        .client-goal { padding: 3.5rem; }
+        .client-goal h4 { font-size:1.8rem; font-weight:700; color:var(--text-color); margin-bottom:1.2rem; }
+        .client-goal p { font-size:1.45rem; color:var(--text-light); line-height:1.75; }
+        .client-card-bottom { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--border-color); }
+        .client-kpi { padding:2.5rem; border-right:1px solid var(--border-color); }
+        .client-kpi:last-child { border-right:none; }
+        .client-kpi label { display:block; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:var(--text-light); margin-bottom:0.4rem; }
+        .client-kpi p { font-size:1.4rem; font-weight:600; color:var(--text-color); line-height:1.55; }
+
+        /* ===== ROLE CARD ===== */
+        .role-highlight {
+            background: linear-gradient(135deg, rgba(117,78,249,0.04), rgba(117,78,249,0.08));
+            border: 1px solid rgba(117,78,249,0.2);
+            border-radius: 1.4rem;
+            padding: 3.5rem;
+            margin-bottom: 4rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .role-badge-col { display:flex; flex-direction:column; gap:1rem; min-width:16rem; }
+        .role-badge { background:var(--main-color); color:#fff; font-size:1.2rem; font-weight:800; padding:0.7rem 1.6rem; border-radius:5rem; text-align:center; text-transform:uppercase; letter-spacing:0.07em; }
+        .role-team { font-size:1.2rem; font-weight:700; color:var(--text-light); text-align:center; text-transform:uppercase; letter-spacing:0.07em; }
+        .role-body h4 { font-size:1.9rem; font-weight:700; color:var(--text-color); margin-bottom:1rem; }
+        .role-body p { font-size:1.5rem; color:var(--text-light); line-height:1.75; }
+
+        /* ===== CONTRIBUTIONS ===== */
+        /* horizontal timeline-style steps */
+        .contrib-timeline { display:flex; flex-direction:column; gap:0; }
+        .contrib-step { display:grid; grid-template-columns:6rem 1fr; gap:3rem; position:relative; }
+        .contrib-step:not(:last-child)::before { content:''; position:absolute; left:2.9rem; top:6.5rem; bottom:0; width:2px; background:var(--border-color); }
+        .contrib-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:0.5rem; }
+        .contrib-dot { width:5rem; height:5rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; flex-shrink:0; border:3px solid var(--bg-color); }
+        .cd-purple { background:rgba(117,78,249,0.12); color:var(--main-color); border-color:rgba(117,78,249,0.3); }
+        .cd-green { background:rgba(16,185,129,0.12); color:#10b981; border-color:rgba(16,185,129,0.3); }
+        .cd-amber { background:rgba(245,158,11,0.12); color:#f59e0b; border-color:rgba(245,158,11,0.3); }
+        .cd-cyan { background:rgba(6,182,212,0.12); color:#06b6d4; border-color:rgba(6,182,212,0.3); }
+        .contrib-content { padding:2.5rem 0 3.5rem; }
+        .contrib-content h4 { font-size:1.7rem; font-weight:700; color:var(--text-color); margin-bottom:0.7rem; }
+        .contrib-content p { font-size:1.42rem; color:var(--text-light); line-height:1.72; }
+        .contrib-tools { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1.2rem; }
+        .contrib-tool { font-size:1.15rem; padding:0.3rem 1rem; border-radius:5rem; background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); font-weight:600; }
+
+        /* ===== DELIVERABLES ===== */
+        .deliverables-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .del-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; overflow:hidden; transition:all 0.3s; }
+        .del-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px var(--shadow-color); border-color:rgba(117,78,249,0.3); }
+        .del-thumb { height:12rem; display:flex; align-items:center; justify-content:center; }
+        .del-thumb i { font-size:4.5rem; color:rgba(255,255,255,0.3); }
+        .dt-1 { background:linear-gradient(135deg,#1a0a3d,#754ef9); }
+        .dt-2 { background:linear-gradient(135deg,#0f2027,#2c5364); }
+        .dt-3 { background:linear-gradient(135deg,#f24e1e,#a259ff); }
+        .dt-4 { background:linear-gradient(135deg,#11998e,#38ef7d); }
+        .dt-5 { background:linear-gradient(135deg,#360033,#0b8793); }
+        .dt-6 { background:linear-gradient(135deg,#f953c6,#b91d73); }
+        .del-body { padding:2rem 2.2rem; }
+        .del-tag { display:inline-block; font-size:1.1rem; padding:0.2rem 1rem; border-radius:5rem; background:rgba(117,78,249,0.08); color:var(--main-color); border:1px solid rgba(117,78,249,0.15); font-weight:600; margin-bottom:0.8rem; }
+        .del-card h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.6rem; }
+        .del-card p { font-size:1.3rem; color:var(--text-light); line-height:1.55; }
+
+        /* ===== TEAM STRUCTURE ===== */
+        .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+        .team-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.4rem; padding:2.5rem; transition:all 0.3s; text-align:center; }
+        .team-card:hover { border-color:rgba(117,78,249,0.3); box-shadow:0 8px 25px var(--shadow-color); }
+        .team-avatar { width:5.5rem; height:5.5rem; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 1.4rem; }
+        .ta-me { background:linear-gradient(135deg,#754ef9,#a855f7); color:#fff; border:2px solid rgba(117,78,249,0.3); }
+        .ta-team { background:var(--bg-alt); color:var(--text-light); border:1px solid var(--border-color); }
+        .team-card h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .team-card p { font-size:1.3rem; color:var(--text-light); line-height:1.6; }
+        .team-me-badge { display:inline-block; font-size:1.1rem; font-weight:700; background:rgba(117,78,249,0.08); color:var(--main-color); border:1px solid rgba(117,78,249,0.2); padding:0.2rem 1rem; border-radius:5rem; margin-top:0.8rem; }
+
+        /* LEARNINGS */
+        .learnings-list { display:flex; flex-direction:column; gap:1.5rem; }
+        .learning-item { display:flex; gap:2rem; align-items:flex-start; padding:2rem 2.5rem; background:var(--card-bg); border:1px solid var(--border-color); border-radius:1.2rem; transition:all 0.3s; }
+        .learning-item:hover { border-color:rgba(117,78,249,0.25); background:rgba(117,78,249,0.02); }
+        .learning-num { font-size:2rem; font-weight:800; color:rgba(117,78,249,0.2); min-width:3rem; line-height:1.2; }
+        .learning-item h4 { font-size:1.55rem; font-weight:700; color:var(--text-color); margin-bottom:0.4rem; }
+        .learning-item p { font-size:1.35rem; color:var(--text-light); line-height:1.65; }
+
+        .cs-bottom { display:flex; justify-content:space-between; align-items:center; padding:4rem 7%; background:var(--bg-alt); border-top:1px solid var(--border-color); flex-wrap:wrap; gap:2rem; }
+        .cs-bottom p { font-size:1.6rem; color:var(--text-light); }
+        .cs-bottom-links { display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+        @media (max-width:1100px) {
+            .cs-hero-inner { grid-template-columns:1fr; }
+            .cs-meta-card { min-width:unset; }
+            .cs-stats { grid-template-columns:repeat(2,1fr); }
+            .cs-two-col { grid-template-columns:1fr; gap:3rem; }
+            .client-card-top { grid-template-columns:1fr; }
+            .client-info { border-right:none; border-bottom:1px solid var(--border-color); }
+            .client-card-bottom { grid-template-columns:1fr; }
+            .client-kpi { border-right:none; border-bottom:1px solid var(--border-color); }
+            .client-kpi:last-child { border-bottom:none; }
+            .role-highlight { grid-template-columns:1fr; gap:2rem; }
+            .role-badge-col { flex-direction:row; align-items:center; min-width:unset; }
+            .deliverables-grid, .team-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        @media (max-width:650px) {
+            .cs-hero { padding:12rem 5% 6rem; }
+            .cs-hero h1 { font-size:3.5rem; }
+            .deliverables-grid, .team-grid { grid-template-columns:1fr; }
+            .cs-section { padding:5rem 5%; }
+            .cs-bottom { flex-direction:column; align-items:flex-start; }
+            .contrib-step { grid-template-columns:1fr; }
+            .contrib-dot-col { display:none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Creative Industry Challenge</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 2 · Real Client</div>
+                <h1>Creative Industry <span>Challenge</span></h1>
+                <p class="cs-hero-desc">A real client project with a real brief — as part of Team 11, I led the advertising, poster design, and social media strategy for Prime Marketing & Construction, helping them launch Prime Arcade with a complete digital identity.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-real">✓ Real Client</span>
+                    <span class="cs-tag cs-tag-main">Digital Marketing</span>
+                    <span class="cs-tag cs-tag-main">Brand Design</span>
+                    <span class="cs-tag cs-tag-main">Canva</span>
+                    <span class="cs-tag">Social Media</span>
+                    <span class="cs-tag">Poster Design</span>
+                    <span class="cs-tag">Content Strategy</span>
+                    <span class="cs-tag">Team Project</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="../index.html#contact" class="btn btn-primary">
+                        <i class='bx bx-briefcase'></i> View Portfolio
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Creative Industry Challenge</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 2 — 2024/25</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Client</label><p>Prime Marketing & Construction</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Project</label><p>Prime Arcade Launch</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>My Role</label><p>Advertising & Brand Design</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Type</label><p class="cs-real">✓ Real Client Work</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>Real</strong><span>Industry Client</span></div>
+        <div class="cs-stat"><strong>Team 11</strong><span>Group Project</span></div>
+        <div class="cs-stat"><strong>Canva</strong><span>Primary Tool</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- CLIENT BRIEF -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// The Client</span>
+            <h2>Prime Marketing <span>& Construction</span></h2>
+        </div>
+        <div class="client-card">
+            <div class="client-card-top">
+                <div class="client-info">
+                    <div class="client-label">Client</div>
+                    <div class="client-name">Prime <span>Arcade</span></div>
+                    <div class="client-subtitle">By Prime Marketing & Construction</div>
+                    <div class="client-tags">
+                        <span class="c-tag c-tag-green">Real Client</span>
+                        <span class="c-tag c-tag-purple">Digital Identity</span>
+                        <span class="c-tag c-tag-amber">Property Launch</span>
+                    </div>
+                </div>
+                <div class="client-goal">
+                    <h4>The Brief</h4>
+                    <p>Prime Marketing & Construction needed a complete digital identity to promote their new development, Prime Arcade — attracting potential buyers and investors through a cohesive brand presence across social media, promotional materials, and digital advertising. The challenge: build something that looks professional, trustworthy, and compelling from zero.</p>
+                </div>
+            </div>
+            <div class="client-card-bottom">
+                <div class="client-kpi">
+                    <label>Goal</label>
+                    <p>Build a complete digital brand identity for the Prime Arcade launch</p>
+                </div>
+                <div class="client-kpi">
+                    <label>Audience</label>
+                    <p>Potential buyers, investors, and the wider community interested in the development</p>
+                </div>
+                <div class="client-kpi">
+                    <label>Outcome</label>
+                    <p>Positive client feedback validating the campaign's professional execution and brand impact</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">The Creative Industry Challenge is the module where university work meets real professional life. Instead of a hypothetical brief, Team 11 worked with an actual client — Prime Marketing & Construction — to deliver real-world outputs that were actually used to promote their project.</p>
+                <p class="cs-body">The stakes were higher than any coursework assignment. The client's brand, reputation, and commercial goals were on the line. Every design decision had to balance creative quality against client expectations, project requirements, and team coordination.</p>
+            </div>
+            <div>
+                <p class="cs-body">Prime Arcade is a real development project — our goal was to make it look like it had a seasoned marketing team behind it. The campaign had to communicate three things clearly: location, facilities, and investment potential.</p>
+                <div class="cs-quote">
+                    <p>"This project taught me how to balance creativity with client expectations, and how to manage responsibilities in a real-world, team-driven setting. The client's positive feedback validated our work."</p>
+                    <cite>— Collaboration Statement, M.Rashid</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MY ROLE -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// My Role</span>
+            <h2>What I <span>Led</span></h2>
+        </div>
+        <div class="role-highlight">
+            <div class="role-badge-col">
+                <div class="role-badge">My Role</div>
+                <div class="role-team">Team 11</div>
+            </div>
+            <div class="role-body">
+                <h4>Advertising · Poster Design · Social Media Strategy</h4>
+                <p>Within Team 11, I was responsible for the advertising, poster design, and social media presence of the entire campaign. This wasn't a supporting role — it was ownership of the client's visual identity and their public-facing brand. Every poster, every social post, every template was designed and delivered by me.</p>
+            </div>
+        </div>
+
+        <!-- Contribution timeline -->
+        <div class="contrib-timeline">
+            <div class="contrib-step">
+                <div class="contrib-dot-col">
+                    <div class="contrib-dot cd-purple"><i class='bx bx-palette'></i></div>
+                </div>
+                <div class="contrib-content">
+                    <h4>Branding & Visual Identity</h4>
+                    <p>Led the development of the campaign's visual style during the planning and branding phase. Established a consistent colour palette, typography system, and messaging tone that made Prime Arcade appear professional and trustworthy across all touchpoints.</p>
+                    <div class="contrib-tools">
+                        <span class="contrib-tool">Canva</span>
+                        <span class="contrib-tool">Colour Theory</span>
+                        <span class="contrib-tool">Brand Guidelines</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contrib-step">
+                <div class="contrib-dot-col">
+                    <div class="contrib-dot cd-amber"><i class='bx bx-image-alt'></i></div>
+                </div>
+                <div class="contrib-content">
+                    <h4>Promotional Poster Design</h4>
+                    <p>Designed multiple promotional posters and posts that were shared through the client's social media accounts. Each design visually highlighted Prime Arcade's key selling points — its location, facilities, and investment potential — in a way that would resonate with both buyers and investors.</p>
+                    <div class="contrib-tools">
+                        <span class="contrib-tool">Canva</span>
+                        <span class="contrib-tool">Poster Design</span>
+                        <span class="contrib-tool">Print-Ready Assets</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contrib-step">
+                <div class="contrib-dot-col">
+                    <div class="contrib-dot cd-green"><i class='bx bx-broadcast'></i></div>
+                </div>
+                <div class="contrib-content">
+                    <h4>Social Media Setup & Strategy</h4>
+                    <p>Set up and optimised the company's social media profiles, suggested content strategies for better audience engagement, and created reusable post templates that maintained visual consistency across all platforms. Ensured the brand voice was consistent whether posting about the project features, investment opportunities, or community engagement.</p>
+                    <div class="contrib-tools">
+                        <span class="contrib-tool">Social Media Strategy</span>
+                        <span class="contrib-tool">Content Templates</span>
+                        <span class="contrib-tool">Profile Optimisation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contrib-step">
+                <div class="contrib-dot-col">
+                    <div class="contrib-dot cd-cyan"><i class='bx bx-git-merge'></i></div>
+                </div>
+                <div class="contrib-content">
+                    <h4>Cross-Team Brand Alignment</h4>
+                    <p>Worked closely with the UI/UX and video production teams within Team 11 to ensure that the promotional videos and website matched our advertising and branding tone. This alignment was key to unifying the client's digital presence — so that posters, social media, and the website all felt like one campaign, not three separate outputs.</p>
+                    <div class="contrib-tools">
+                        <span class="contrib-tool">Brand Alignment</span>
+                        <span class="contrib-tool">Cross-Team Collaboration</span>
+                        <span class="contrib-tool">Creative Direction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELIVERABLES -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Outputs</span>
+            <h2>What Was <span>Delivered</span></h2>
+        </div>
+        <div class="deliverables-grid">
+            <div class="del-card">
+                <div class="del-thumb dt-1"><i class='bx bx-palette'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Branding</div>
+                    <h4>Visual Identity System</h4>
+                    <p>A complete brand identity — colour palette, typography, logo usage guidelines, and visual style — applied consistently across all campaign materials.</p>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-2"><i class='bx bx-image-alt'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Design</div>
+                    <h4>Promotional Posters</h4>
+                    <p>Multiple poster designs highlighting Prime Arcade's location, facilities, and investment potential — shared through the client's social media and digital channels.</p>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-3"><i class='bx bx-grid-alt'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Social Media</div>
+                    <h4>Post Templates</h4>
+                    <p>Reusable post templates for all social media platforms — designed for visual consistency so the client could continue publishing after the project ended.</p>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-4"><i class='bx bx-trending-up'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Strategy</div>
+                    <h4>Content Strategy</h4>
+                    <p>Suggested content strategies for better audience engagement — including posting schedules, content pillars, and audience targeting recommendations.</p>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-5"><i class='bx bx-user-check'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Profiles</div>
+                    <h4>Optimised Social Profiles</h4>
+                    <p>Set up and optimised the client's social media profiles — bios, profile images, cover photos, and contact information aligned to the campaign identity.</p>
+                </div>
+            </div>
+            <div class="del-card">
+                <div class="del-thumb dt-6"><i class='bx bx-video'></i></div>
+                <div class="del-body">
+                    <div class="del-tag">Collaboration</div>
+                    <h4>Promotional Video Support</h4>
+                    <p>Collaborated with the video production team to ensure the promotional video matched the advertising tone and brand identity I had established for the campaign.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEAM STRUCTURE -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Collaboration</span>
+            <h2>Team 11 <span>Structure</span></h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar ta-me"><i class='bx bx-palette'></i></div>
+                <h4>Muhammad Rashid</h4>
+                <p>Advertising, poster design, social media strategy, and brand identity — the visual face of the entire campaign.</p>
+                <div class="team-me-badge">← My Role</div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar ta-team"><i class='bx bx-layout'></i></div>
+                <h4>UI/UX Team</h4>
+                <p>Designed and developed the client's website — working with my brand guidelines to ensure the site matched the advertising tone.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar ta-team"><i class='bx bx-video'></i></div>
+                <h4>Video Production Team</h4>
+                <p>Produced the promotional video for Prime Arcade — aligned to the visual identity and campaign direction established during branding.</p>
+            </div>
+        </div>
+        <div class="cs-quote" style="margin-top:3rem;">
+            <p>"I actively participated in all group meetings, shared ideas during decision-making, and ensured timely delivery of my assigned tasks. I supported my teammates by giving feedback and making revisions when needed."</p>
+            <cite>— Collaboration Statement, M.Rashid</cite>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Real clients change everything</h4>
+                    <p>Working with Prime Marketing & Construction wasn't like a coursework brief. The client had real stakes, real preferences, and real expectations. Every design had to work for them — not just look good in a portfolio. That constraint produced better work.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Visual consistency is the foundation of brand trust</h4>
+                    <p>Making every poster, post, and template feel like they came from the same brand required discipline — not just creativity. Consistent colour, typography, and messaging tone is what makes a company look professional rather than cobbled together.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Design must serve the brief, not the designer</h4>
+                    <p>Highlighting Prime Arcade's location, facilities, and investment potential wasn't always the most visually exciting direction — but it was the right one for the client's goals. Good design serves the audience, not the ego of the person making it.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Cross-team alignment is a creative skill</h4>
+                    <p>Making sure the website, posters, and video all felt like one campaign required active communication — not just doing my part and moving on. Brand alignment across teams is as much a design skill as anything done in Canva.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Client validation is the ultimate grade</h4>
+                    <p>The client's positive feedback mattered more than any mark. It confirmed that the work was genuinely useful, professional, and effective — not just academically correct. That distinction is what makes industry experience different from coursework.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 2 · Creative Industry Challenge · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="web-dev-2.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Web Dev 2</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Coding — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* ===== BASE ===== */
+        .cs-hero { padding: 14rem 7% 8rem; background: var(--bg-color); position: relative; overflow: hidden; }
+        .cs-hero::before { content: ''; position: absolute; top: -20rem; right: -10rem; width: 60rem; height: 60rem; background: radial-gradient(circle, rgba(117,78,249,0.07) 0%, transparent 70%); pointer-events: none; }
+        .cs-breadcrumb { display: flex; align-items: center; gap: 0.8rem; font-size: 1.3rem; color: var(--text-light); margin-bottom: 3rem; }
+        .cs-breadcrumb a { color: var(--main-color); font-weight: 500; }
+        .cs-breadcrumb a:hover { text-decoration: underline; }
+        .cs-breadcrumb i { font-size: 1.6rem; }
+        .cs-hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 6rem; align-items: start; max-width: 120rem; }
+        .cs-year-badge { display: inline-block; font-size: 1.2rem; font-weight: 700; color: var(--main-color); background: rgba(117,78,249,0.08); border: 1px solid rgba(117,78,249,0.2); padding: 0.4rem 1.4rem; border-radius: 5rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.8rem; }
+        .cs-hero h1 { font-size: 5rem; font-weight: 800; color: var(--text-color); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 2rem; }
+        .cs-hero h1 span { color: var(--main-color); }
+        .cs-hero-desc { font-size: 1.7rem; color: var(--text-light); line-height: 1.7; max-width: 60rem; margin-bottom: 3rem; }
+        .cs-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 3.5rem; }
+        .cs-tag { font-size: 1.25rem; padding: 0.5rem 1.4rem; border-radius: 5rem; background: var(--bg-alt); color: var(--text-light); border: 1px solid var(--border-color); font-weight: 500; }
+        .cs-tag-main { background: rgba(117,78,249,0.08); color: var(--main-color); border-color: rgba(117,78,249,0.2); }
+        .cs-hero-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        .cs-meta-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.6rem; padding: 3rem; min-width: 26rem; box-shadow: 0 4px 24px var(--shadow-soft); }
+        .cs-meta-row { display: flex; flex-direction: column; gap: 2rem; }
+        .cs-meta-item label { display: block; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.4rem; }
+        .cs-meta-item p { font-size: 1.45rem; font-weight: 600; color: var(--text-color); }
+        .cs-meta-divider { height: 1px; background: var(--border-color); }
+        .cs-grade { font-size: 2.4rem !important; font-weight: 800 !important; color: var(--main-color) !important; }
+
+        /* ===== STATS ===== */
+        .cs-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--bg-alt); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .cs-stat { padding: 3rem 4rem; border-right: 1px solid var(--border-color); text-align: center; }
+        .cs-stat:last-child { border-right: none; }
+        .cs-stat strong { display: block; font-size: 3rem; font-weight: 800; color: var(--main-color); margin-bottom: 0.4rem; }
+        .cs-stat span { font-size: 1.3rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+
+        /* ===== ASSESSMENT DIVIDER ===== */
+        .assessment-divider {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 3rem 7%;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 7rem;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+        .assessment-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 0.7rem 2rem;
+            border-radius: 5rem;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .pill-a1 { color: #f59e0b; border-color: #f59e0b; background: rgba(245,158,11,0.06); }
+        .pill-a1:hover { background: rgba(245,158,11,0.12); }
+        .pill-sa2 { color: var(--main-color); border-color: var(--main-color); background: rgba(117,78,249,0.06); }
+        .pill-sa2:hover { background: rgba(117,78,249,0.12); }
+        .assessment-divider p { font-size: 1.4rem; color: var(--text-light); }
+
+        /* ===== SECTIONS ===== */
+        .cs-section { padding: 7rem 7%; border-bottom: 1px solid var(--border-color); }
+        .cs-section-alt { background: var(--bg-alt); }
+        .cs-section-top { display: flex; align-items: baseline; gap: 2rem; margin-bottom: 4rem; }
+        .cs-section-eyebrow { font-size: 1.1rem; font-weight: 700; color: var(--main-color); text-transform: uppercase; letter-spacing: 0.12em; white-space: nowrap; }
+        .cs-section h2 { font-size: 3rem; font-weight: 800; color: var(--text-color); letter-spacing: -0.02em; line-height: 1.2; }
+        .cs-section h2 span { color: var(--main-color); }
+        .cs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+        .cs-body { font-size: 1.55rem; color: var(--text-light); line-height: 1.8; }
+        .cs-body + .cs-body { margin-top: 1.5rem; }
+        .cs-quote { border-left: 3px solid var(--main-color); padding: 1.8rem 2.2rem; background: rgba(117,78,249,0.04); border-radius: 0 1rem 1rem 0; margin: 2.5rem 0; }
+        .cs-quote p { font-size: 1.6rem; font-style: italic; color: var(--text-color); line-height: 1.6; margin-bottom: 0.6rem; }
+        .cs-quote cite { font-size: 1.25rem; color: var(--main-color); font-style: normal; font-weight: 600; }
+
+        /* ===== ASSESSMENT HEADER BAND ===== */
+        .assessment-band {
+            padding: 4rem 7%;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .assessment-band-a1 { background: linear-gradient(135deg, rgba(245,158,11,0.05) 0%, transparent 60%); border-left: 4px solid #f59e0b; }
+        .assessment-band-sa2 { background: linear-gradient(135deg, rgba(117,78,249,0.05) 0%, transparent 60%); border-left: 4px solid var(--main-color); }
+        .band-inner { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+        .band-badge-a1 { font-size: 1.2rem; font-weight: 800; color: #f59e0b; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); padding: 0.6rem 1.6rem; border-radius: 5rem; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+        .band-badge-sa2 { font-size: 1.2rem; font-weight: 800; color: var(--main-color); background: rgba(117,78,249,0.08); border: 1px solid rgba(117,78,249,0.2); padding: 0.6rem 1.6rem; border-radius: 5rem; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+        .band-title { font-size: 2.2rem; font-weight: 800; color: var(--text-color); }
+        .band-desc { font-size: 1.45rem; color: var(--text-light); max-width: 70rem; }
+        .band-weight { font-size: 3rem; font-weight: 800; color: var(--text-color); margin-left: auto; }
+        .band-weight span { font-size: 1.3rem; font-weight: 600; color: var(--text-light); display: block; text-align: right; }
+
+        /* ===== BEN FRY PROFILE ===== */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.6rem;
+            padding: 3rem;
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
+        .profile-avatar {
+            width: 7rem;
+            height: 7rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+        .profile-info h4 { font-size: 2rem; font-weight: 800; color: var(--text-color); margin-bottom: 0.4rem; }
+        .profile-info p { font-size: 1.4rem; color: var(--text-light); line-height: 1.6; }
+        .profile-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+        .profile-tag { font-size: 1.15rem; padding: 0.3rem 1.1rem; border-radius: 5rem; background: rgba(245,158,11,0.08); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); font-weight: 600; }
+
+        .contributions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .contrib-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.4rem; padding: 2.5rem; transition: all 0.3s; }
+        .contrib-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-4px); box-shadow: 0 12px 35px var(--shadow-color); }
+        .contrib-icon { width: 4.5rem; height: 4.5rem; background: rgba(245,158,11,0.08); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: #f59e0b; margin-bottom: 1.5rem; }
+        .contrib-card h4 { font-size: 1.6rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.7rem; }
+        .contrib-card p { font-size: 1.35rem; color: var(--text-light); line-height: 1.6; }
+
+        /* ===== WHAT IS CREATIVE CODING ===== */
+        .cc-pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .cc-pillar { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.4rem; padding: 2.5rem; transition: all 0.3s; }
+        .cc-pillar:hover { border-color: rgba(117,78,249,0.3); box-shadow: 0 8px 25px var(--shadow-color); }
+        .cc-pillar h4 { font-size: 1.6rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 1rem; }
+        .cc-pillar h4 i { font-size: 2rem; color: var(--main-color); }
+        .cc-pillar p { font-size: 1.4rem; color: var(--text-light); line-height: 1.65; }
+
+        /* ===== P5.JS PROJECTS ===== */
+        .projects-showcase { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .p5-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.4rem; overflow: hidden; transition: all 0.3s; }
+        .p5-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px var(--shadow-color); border-color: rgba(117,78,249,0.3); }
+        .p5-thumb { height: 16rem; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .p5-thumb-icon { font-size: 5rem; color: rgba(255,255,255,0.3); position: relative; z-index: 1; }
+        .p5-act-num { position: absolute; top: 1.4rem; left: 1.6rem; font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; z-index: 2; }
+        .p5-body { padding: 2rem 2.2rem; }
+        .p5-body h4 { font-size: 1.6rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.5rem; }
+        .p5-body p { font-size: 1.3rem; color: var(--text-light); line-height: 1.55; margin-bottom: 1.4rem; }
+        .p5-links { display: flex; gap: 1rem; }
+        .p5-link-live { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; font-weight: 700; color: #fff; background: var(--main-color); padding: 0.5rem 1.4rem; border-radius: 5rem; transition: all 0.2s; }
+        .p5-link-live:hover { background: #5f3dd4; transform: translateY(-1px); }
+        .p5-link-code { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; font-weight: 600; color: var(--main-color); background: rgba(117,78,249,0.08); border: 1px solid rgba(117,78,249,0.2); padding: 0.5rem 1.4rem; border-radius: 5rem; transition: all 0.2s; }
+        .p5-link-code:hover { background: rgba(117,78,249,0.15); }
+
+        /* thumb gradients */
+        .pt-1 { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+        .pt-2 { background: linear-gradient(135deg, #1a0533, #6a11cb, #2575fc); }
+        .pt-3 { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
+        .pt-4 { background: linear-gradient(135deg, #141e30, #243b55); }
+        .pt-5 { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); }
+        .pt-6 { background: linear-gradient(135deg, #360033, #0b8793); }
+        .pt-7 { background: linear-gradient(135deg, #1d1d2e, #4a1942, #754ef9); }
+        .pt-8 { background: linear-gradient(135deg, #0a0a0a, #1a0a3d, #2d1b69); }
+        .pt-9 { background: linear-gradient(135deg, #11998e, #38ef7d); }
+        .pt-10 { background: linear-gradient(135deg, #f24e1e, #a259ff); }
+
+        /* ===== ZACH LIEBERMAN ===== */
+        .zach-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.6rem;
+            padding: 3rem;
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
+        .zach-avatar {
+            width: 7rem; height: 7rem; border-radius: 50%;
+            background: linear-gradient(135deg, var(--main-color), #a855f7);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; flex-shrink: 0;
+        }
+        .zach-info h4 { font-size: 2rem; font-weight: 800; color: var(--text-color); margin-bottom: 0.4rem; }
+        .zach-info p { font-size: 1.4rem; color: var(--text-light); line-height: 1.6; }
+        .zach-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+        .zach-tag { font-size: 1.15rem; padding: 0.3rem 1.1rem; border-radius: 5rem; background: rgba(117,78,249,0.08); color: var(--main-color); border: 1px solid rgba(117,78,249,0.2); font-weight: 600; }
+
+        /* ===== LEARNINGS ===== */
+        .learnings-list { display: flex; flex-direction: column; gap: 1.5rem; }
+        .learning-item { display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2.5rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1.2rem; transition: all 0.3s; }
+        .learning-item:hover { border-color: rgba(117,78,249,0.25); background: rgba(117,78,249,0.02); }
+        .learning-num { font-size: 2rem; font-weight: 800; color: rgba(117,78,249,0.2); min-width: 3rem; line-height: 1.2; }
+        .learning-item h4 { font-size: 1.55rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.4rem; }
+        .learning-item p { font-size: 1.35rem; color: var(--text-light); line-height: 1.65; }
+
+        /* ===== BOTTOM ===== */
+        .cs-bottom { display: flex; justify-content: space-between; align-items: center; padding: 4rem 7%; background: var(--bg-alt); border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 2rem; }
+        .cs-bottom p { font-size: 1.6rem; color: var(--text-light); }
+        .cs-bottom-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .cs-hero-inner { grid-template-columns: 1fr; }
+            .cs-meta-card { min-width: unset; }
+            .cs-stats { grid-template-columns: repeat(2, 1fr); }
+            .cs-two-col { grid-template-columns: 1fr; gap: 3rem; }
+            .contributions-grid, .projects-showcase { grid-template-columns: repeat(2, 1fr); }
+            .cc-pillars { grid-template-columns: 1fr; }
+            .band-weight { margin-left: 0; }
+        }
+        @media (max-width: 650px) {
+            .cs-hero { padding: 12rem 5% 6rem; }
+            .cs-hero h1 { font-size: 3.5rem; }
+            .contributions-grid, .projects-showcase { grid-template-columns: 1fr; }
+            .cs-section { padding: 5rem 5%; }
+            .cs-bottom { flex-direction: column; align-items: flex-start; }
+            .assessment-divider { flex-wrap: wrap; top: 6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Creative Coding</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 1 · Module</div>
+                <h1>Creative <span>Coding</span></h1>
+                <p class="cs-hero-desc">A full module exploring creative coding as an art form — from researching pioneers like Ben Fry and Zach Lieberman, to building 10 live interactive p5.js projects including generative art, audio visualisations, data displays, and a playable game.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-main">p5.js</span>
+                    <span class="cs-tag cs-tag-main">JavaScript</span>
+                    <span class="cs-tag cs-tag-main">Generative Art</span>
+                    <span class="cs-tag cs-tag-main">Interactive</span>
+                    <span class="cs-tag">Data Visualisation</span>
+                    <span class="cs-tag">Audio Visualisation</span>
+                    <span class="cs-tag">Typography</span>
+                    <span class="cs-tag">Game Design</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="https://sway.cloud.microsoft/Y6u4fcHlSL1arAdV?ref=Link" target="_blank" class="btn btn-primary">
+                        <i class='bx bx-link-external'></i> View Sway Portfolio
+                    </a>
+                    <a href="https://github.com/MohdRashid1607/Creative-Coding.git" target="_blank" class="btn btn-secondary">
+                        <i class='bx bxl-github'></i> GitHub Repo
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>Creative Coding</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 1 — 2022/23</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Assessments</label><p>A1 (40%) + SA2 (60%)</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Tools</label><p>p5.js · JavaScript · GitHub</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Live Projects</label><p>10 p5.js Sketches</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>2</strong><span>Assessments</span></div>
+        <div class="cs-stat"><strong>10</strong><span>Live p5.js Projects</span></div>
+        <div class="cs-stat"><strong>2</strong><span>Coder Case Studies</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- ===== STICKY ASSESSMENT NAV ===== -->
+    <div class="assessment-divider">
+        <p>Jump to:</p>
+        <a href="#a1" class="assessment-pill pill-a1"><i class='bx bx-user-check'></i> A1 — Ben Fry Case Study (40%)</a>
+        <a href="#sa2" class="assessment-pill pill-sa2"><i class='bx bx-code-block'></i> SA2 — Creative Portfolio (60%)</a>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         A1 — BEN FRY CASE STUDY (40%)
+    ══════════════════════════════════════════ -->
+    <div id="a1" class="assessment-band assessment-band-a1">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-a1">Assessment 1 · 40%</div>
+                <div class="band-title" style="margin-top:0.8rem;">Creative Coder Case Study — Ben Fry</div>
+                <div class="band-desc" style="margin-top:0.6rem;">A research and analytical essay on one of the most significant figures in creative coding — exploring his origins, contributions, and lasting impact on the field.</div>
+            </div>
+            <div class="band-weight">40%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- BEN FRY PROFILE -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Subject</span>
+            <h2>Who is <span style="color:#f59e0b;">Ben Fry?</span></h2>
+        </div>
+        <div class="profile-card">
+            <div class="profile-avatar">🎨</div>
+            <div class="profile-info">
+                <h4>Ben Fry</h4>
+                <p>Co-creator of Processing · Data Visualisation Pioneer · Author of "Visualizing Data" · MIT Media Lab Alumnus</p>
+                <div class="profile-tags">
+                    <span class="profile-tag">Processing</span>
+                    <span class="profile-tag">Data Visualisation</span>
+                    <span class="profile-tag">Generative Art</span>
+                    <span class="profile-tag">MIT Media Lab</span>
+                    <span class="profile-tag">Author</span>
+                </div>
+            </div>
+        </div>
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Creative coding combines technology and artistic expression to give artists a medium for communicating ideas through code. Ben Fry stands as one of the most important figures in this field — his work has shaped how developers, designers, and artists think about the relationship between programming and creativity.</p>
+                <p class="cs-body">At the MIT Media Lab, Fry became interested in creative coding by investigating the possibilities of programming for complex data visualisation. This research led to one of the most transformative contributions in the field: co-creating the Processing programming language alongside Casey Reas in 2001.</p>
+                <div class="cs-quote">
+                    <p>"Fry helped democratize creative coding — Processing opened up the field to artists, designers, and educators everywhere, allowing a wide range of people to investigate the connection between code and art."</p>
+                    <cite>— A1 Case Study, M.Rashid</cite>
+                </div>
+            </div>
+            <div>
+                <p class="cs-body">Fry's impact stretches far beyond Processing. His book "Visualizing Data" became an essential publication in the field of information visualisation — providing knowledge about the creative process behind efficient data representation that professionals still reference today.</p>
+                <p class="cs-body">His portfolio demonstrates an interconnected approach to creativity: generative art, interactive installations, and educational efforts. Famous projects like "The Shape of Song" and "Anemone" showcase his ability to use coding as a means of creating immersive experiences — allowing viewers to explore the underlying structure found in both music and nature.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEN FRY CONTRIBUTIONS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Key Contributions</span>
+            <h2>What Ben Fry <span style="color:#f59e0b;">Built</span></h2>
+        </div>
+        <div class="contributions-grid">
+            <div class="contrib-card">
+                <div class="contrib-icon"><i class='bx bx-code-alt'></i></div>
+                <h4>Processing Language</h4>
+                <p>Co-created with Casey Reas in 2001, Processing democratised creative coding — giving artists, designers, and educators worldwide a user-friendly tool to explore the connection between code and visual art.</p>
+            </div>
+            <div class="contrib-card">
+                <div class="contrib-icon"><i class='bx bx-book-open'></i></div>
+                <h4>"Visualizing Data" — Book</h4>
+                <p>An essential publication in the field of information visualisation. Provides knowledge about the creative process behind efficient data representation — still a go-to reference for designers and developers.</p>
+            </div>
+            <div class="contrib-card">
+                <div class="contrib-icon"><i class='bx bx-music'></i></div>
+                <h4>The Shape of Song</h4>
+                <p>An interactive project that visualises the repetitive structure of music — turning the hidden patterns inside songs into beautiful arching visual forms. A landmark example of data art.</p>
+            </div>
+            <div class="contrib-card">
+                <div class="contrib-icon"><i class='bx bx-leaf'></i></div>
+                <h4>Anemone</h4>
+                <p>A generative art installation drawing on patterns from nature. Showcases how computational processes can mirror organic systems — blurring the boundary between the digital and the natural world.</p>
+            </div>
+            <div class="contrib-card">
+                <div class="contrib-icon"><i class='bx bx-line-chart'></i></div>
+                <h4>Data Visualisation Pioneer</h4>
+                <p>Fry's work at the MIT Media Lab pushed the boundaries of how complex data can be made visually legible — establishing approaches that underpinned modern data journalism and information design.</p>
+            </div>
+            <div class="contrib-card">
+                <div class="contrib-icon"><i class='bx bx-group'></i></div>
+                <h4>Democratising Creativity</h4>
+                <p>By building accessible tools and publishing foundational texts, Fry lowered the barrier to entry for creative coding — enabling a new generation of artists to use code as a creative medium.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHAT IS CREATIVE CODING -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow" style="color:#f59e0b;">// Analysis</span>
+            <h2>What is <span style="color:#f59e0b;">Creative Coding?</span></h2>
+        </div>
+        <div class="cs-two-col" style="margin-bottom:4rem;">
+            <div>
+                <p class="cs-body">Creative coding is the dynamic discipline combining artistic expression and programming to produce interactive digital artworks, installations, and visualisations. It gives technologists, designers, and artists the ability to investigate the aesthetic potential of code — using data, algorithms, and computation to produce dynamic, responsive experiences.</p>
+                <p class="cs-body">Unlike traditional art forms constrained by physical materials, creative coding embraces the freedom of digital technology — allowing works to change, respond, and adapt in real time using languages like Processing, p5.js, and OpenFrameworks.</p>
+            </div>
+            <div>
+                <p class="cs-body">Creative coding spans generative art, interactive installations, data visualisation, and computer-generated animation. Inspiration comes from mathematics, nature, geometry, and cultural phenomena — with artists exploring emergence, complexity, and interactivity.</p>
+                <p class="cs-body">Its defining characteristic is a strong focus on <strong style="color:var(--text-color)">play, experimentation, and exploration</strong> — an attitude of inquiry where unexpected results, coincidental discoveries, and fresh creative directions emerge through the iterative process of making.</p>
+            </div>
+        </div>
+        <div class="cc-pillars">
+            <div class="cc-pillar">
+                <h4><i class='bx bx-paint'></i> Artistic Expression through Code</h4>
+                <p>Code becomes the paintbrush. Algorithms define composition. Creative coders treat programming languages as creative tools rather than purely functional ones.</p>
+            </div>
+            <div class="cc-pillar">
+                <h4><i class='bx bx-refresh'></i> Iterative by Nature</h4>
+                <p>Tweak, prototype, experiment, and discover. Each iteration reveals something new — fresh directions and unexpected outcomes emerge from the process itself.</p>
+            </div>
+            <div class="cc-pillar">
+                <h4><i class='bx bx-user-voice'></i> Interactive & Responsive</h4>
+                <p>Unlike static art, creative code can respond to user input, data feeds, sound, and motion — creating experiences that change with every interaction.</p>
+            </div>
+            <div class="cc-pillar">
+                <h4><i class='bx bx-infinite'></i> Generative & Emergent</h4>
+                <p>Systems generate outcomes the creator never fully anticipated. The work is never truly finished — it continues to evolve, surprise, and produce new forms.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SA2 — CREATIVE CODING PORTFOLIO (60%)
+    ══════════════════════════════════════════ -->
+    <div id="sa2" class="assessment-band assessment-band-sa2">
+        <div class="band-inner">
+            <div>
+                <div class="band-badge-sa2">Assessment 2 · 60%</div>
+                <div class="band-title" style="margin-top:0.8rem;">Creative Coding Portfolio — 10 Live p5.js Projects</div>
+                <div class="band-desc" style="margin-top:0.6rem;">A full portfolio of creative coding work built in p5.js — from drawing shapes and pixel manipulation to audio visualisation, generative art, and a fully playable browser game.</div>
+            </div>
+            <div class="band-weight">60%<span>of module grade</span></div>
+        </div>
+    </div>
+
+    <!-- 10 PROJECTS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Live Projects</span>
+            <h2>10 p5.js <span>Sketches</span></h2>
+        </div>
+        <div class="projects-showcase">
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-1">
+                    <span class="p5-act-num">Act 01</span>
+                    <i class='bx bx-car p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Car</h4>
+                    <p>A drawn car built entirely with p5.js shapes — wheels, body, windows. A first dive into coordinate-based drawing and composition.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/uCs6lIqS3" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/uCs6lIqS3" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-2">
+                    <span class="p5-act-num">Act 02</span>
+                    <i class='bx bx-planet p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Alien</h4>
+                    <p>An alien character created using p5.js primitives — experimenting with colour, shape layering, and personality through visual design.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/Cp7OL93Vv" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/Cp7OL93Vv" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-3">
+                    <span class="p5-act-num">Act 03</span>
+                    <i class='bx bx-image-alt p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Working with Images</h4>
+                    <p>Five image manipulation techniques — pixel data, posterize filter, pointillism effect, clip & mask, and clip with text overlay.</p>
+                    <div class="p5-links">
+                        <a href="#" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="#" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-4">
+                    <span class="p5-act-num">Act 04</span>
+                    <i class='bx bx-grid p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Simple Pattern</h4>
+                    <p>A repeating geometric pattern generated algorithmically using loops and transforms — exploring rhythm, symmetry, and visual tiling.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/5E9B26K2A" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/5E9B26K2A" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-5">
+                    <span class="p5-act-num">Act 05</span>
+                    <i class='bx bx-font p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Typography</h4>
+                    <p>Text as a visual element — exploring how typography can be animated, distorted, and transformed into an interactive creative medium.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/EdRazN9HT" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/EdRazN9HT" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-6">
+                    <span class="p5-act-num">Act 06</span>
+                    <i class='bx bx-mouse-alt p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Mouse Trails</h4>
+                    <p>Interactive particle trail that follows the cursor — each movement leaving a fading visual history. Exploring real-time user interaction.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/yA-UxSo7b" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/yA-UxSo7b" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-7" style="position:relative;">
+                    <span class="p5-act-num">Act 07</span>
+                    <!-- Galaxy swirl preview -->
+                    <div style="position:absolute;inset:0;overflow:hidden;">
+                        <div style="position:absolute;width:12rem;height:12rem;border-radius:50%;background:radial-gradient(circle,rgba(117,78,249,0.6),transparent);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+                        <div style="position:absolute;width:6rem;height:6rem;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.8),transparent);top:30%;left:30%;"></div>
+                    </div>
+                    <i class='bx bx-meteor p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Interactive Art — Galaxy</h4>
+                    <p>A galaxy-themed generative artwork using Perlin noise for organic swirling particle movement over an image background. The standout project of the module.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/q_wdhzp_8" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/q_wdhzp_8" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-8">
+                    <span class="p5-act-num">Act 08</span>
+                    <i class='bx bx-equalizer p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Audio Visualisation</h4>
+                    <p>Real-time audio input feeds into a visual display — sound becomes shape. Frequencies and amplitudes drive the visual output dynamically.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/QVlFReEc_" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/QVlFReEc_" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-9">
+                    <span class="p5-act-num">Act 09</span>
+                    <i class='bx bx-bar-chart-alt-2 p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Data Visualisation</h4>
+                    <p>A dataset brought to life visually — applying Ben Fry's principles from the A1 case study directly into a working p5.js data sketch.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/jG61Fbz5Q" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/jG61Fbz5Q" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p5-card">
+                <div class="p5-thumb pt-10">
+                    <span class="p5-act-num">Act 10</span>
+                    <i class='bx bx-joystick p5-thumb-icon'></i>
+                </div>
+                <div class="p5-body">
+                    <h4>Game</h4>
+                    <p>A fully playable browser game built entirely in p5.js — the capstone of the portfolio, bringing together interactivity, logic, and visual design.</p>
+                    <div class="p5-links">
+                        <a href="https://editor.p5js.org/mr03539/full/teXK398Gt" target="_blank" class="p5-link-live"><i class='bx bx-play'></i> Live</a>
+                        <a href="https://editor.p5js.org/mr03539/sketches/teXK398Gt" target="_blank" class="p5-link-code"><i class='bx bx-code-alt'></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ZACH LIEBERMAN -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// SA2 Case Study</span>
+            <h2>Creative Coder: <span>Zach Lieberman</span></h2>
+        </div>
+        <div class="zach-card">
+            <div class="zach-avatar">⚡</div>
+            <div class="zach-info">
+                <h4>Zach Lieberman</h4>
+                <p>Co-founder of School for Poetic Computation · OpenFrameworks Creator · Artist & Educator · Pioneering Creative Coder</p>
+                <div class="zach-tags">
+                    <span class="zach-tag">OpenFrameworks</span>
+                    <span class="zach-tag">Interactive Installations</span>
+                    <span class="zach-tag">School for Poetic Computation</span>
+                    <span class="zach-tag">Computer Vision</span>
+                </div>
+            </div>
+        </div>
+        <div class="cs-two-col">
+            <div>
+                <p class="cs-body">Zach Lieberman stands at the intersection of innovation, technology, and art — widely considered a pioneering force in creative coding. With a background in computer science and a passion for art, Lieberman has established a distinctive presence in the creative technology world through projects that push the boundaries of what code can do.</p>
+                <p class="cs-body">One of his most impactful initiatives is the School for Poetic Computation — a welcoming space for artists and tech enthusiasts to explore the realms of code, design, and art together. This institution represents his philosophy that coding should be poetic, accessible, and expressive.</p>
+            </div>
+            <div>
+                <p class="cs-body">Lieberman's career has been marked by breathtaking interactive installations and visualisations that demonstrate his unique creative coding techniques. His work has received recognition for its influence on both the arts and wider culture — pushing what can be accomplished through code and motivating a new generation of creatives.</p>
+                <div class="cs-quote">
+                    <p>"Zach Lieberman's impact on creative coding is truly extraordinary. His innovative work has pushed the boundaries of what can be accomplished through code, motivating a fresh wave of creatives to invest in the intersection of art and technology."</p>
+                    <cite>— SA2 Case Study, M.Rashid</cite>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY LEARNINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>Key <span>Learnings</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Code is a creative medium, not just a functional tool</h4>
+                    <p>This module changed how I see programming. Writing a galaxy simulation or an audio visualiser in p5.js isn't engineering — it's art. The act of coding became expressive, not just logical.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>Pioneers shape the tools we use — and the tools shape us</h4>
+                    <p>Studying Ben Fry and Zach Lieberman made clear that the tools creative coders use today — Processing, p5.js, OpenFrameworks — were built by people who believed art and code belonged together.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Perlin noise unlocks organic, natural movement</h4>
+                    <p>The galaxy project was the most technically challenging. Learning to use noise() for smooth, organic particle movement was a breakthrough — suddenly the canvas felt alive, not mechanical.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>Interactivity transforms an artwork into an experience</h4>
+                    <p>Acts 6 (Mouse Trails) and 10 (Game) showed that the moment a user can affect a piece, it stops being a static artwork and becomes a shared experience. That shift changes everything.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Research and practice reinforce each other</h4>
+                    <p>The A1 Ben Fry case study wasn't just theory — understanding data visualisation as an art form directly informed Act 9. Research made the practical work more intentional and meaningful.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 1 · Creative Coding · BathSpa RAK University</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="code-lab-1.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Code Lab 1</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>

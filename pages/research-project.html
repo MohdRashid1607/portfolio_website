@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Project — M.Rashid</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-responsive.css">
+    <style>
+        /* BASE */
+        .cs-hero{padding:14rem 7% 8rem;background:var(--bg-color);position:relative;overflow:hidden;}
+        .cs-hero::before{content:'';position:absolute;top:-20rem;right:-10rem;width:60rem;height:60rem;background:radial-gradient(circle,rgba(117,78,249,0.07) 0%,transparent 70%);pointer-events:none;}
+        .cs-breadcrumb{display:flex;align-items:center;gap:0.8rem;font-size:1.3rem;color:var(--text-light);margin-bottom:3rem;}
+        .cs-breadcrumb a{color:var(--main-color);font-weight:500;}
+        .cs-breadcrumb a:hover{text-decoration:underline;}
+        .cs-breadcrumb i{font-size:1.6rem;}
+        .cs-hero-inner{display:grid;grid-template-columns:1fr auto;gap:6rem;align-items:start;max-width:120rem;}
+        .cs-year-badge{display:inline-block;font-size:1.2rem;font-weight:700;color:var(--main-color);background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);padding:0.4rem 1.4rem;border-radius:5rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1.8rem;}
+        .cs-hero h1{font-size:4.4rem;font-weight:800;color:var(--text-color);line-height:1.1;letter-spacing:-0.03em;margin-bottom:2rem;}
+        .cs-hero h1 span{color:var(--main-color);}
+        .cs-hero-desc{font-size:1.7rem;color:var(--text-light);line-height:1.7;max-width:60rem;margin-bottom:3rem;}
+        .cs-tags{display:flex;flex-wrap:wrap;gap:0.8rem;margin-bottom:3.5rem;}
+        .cs-tag{font-size:1.25rem;padding:0.5rem 1.4rem;border-radius:5rem;background:var(--bg-alt);color:var(--text-light);border:1px solid var(--border-color);font-weight:500;}
+        .cs-tag-main{background:rgba(117,78,249,0.08);color:var(--main-color);border-color:rgba(117,78,249,0.2);}
+        .cs-tag-y3{background:rgba(16,185,129,0.08);color:#10b981;border-color:rgba(16,185,129,0.2);}
+        .cs-hero-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+        .cs-meta-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:3rem;min-width:26rem;box-shadow:0 4px 24px var(--shadow-soft);}
+        .cs-meta-row{display:flex;flex-direction:column;gap:2rem;}
+        .cs-meta-item label{display:block;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:0.4rem;}
+        .cs-meta-item p{font-size:1.45rem;font-weight:600;color:var(--text-color);}
+        .cs-meta-divider{height:1px;background:var(--border-color);}
+        .cs-grade{font-size:2.4rem !important;font-weight:800 !important;color:var(--main-color) !important;}
+        .cs-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg-alt);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
+        .cs-stat{padding:3rem 4rem;border-right:1px solid var(--border-color);text-align:center;}
+        .cs-stat:last-child{border-right:none;}
+        .cs-stat strong{display:block;font-size:3rem;font-weight:800;color:var(--main-color);margin-bottom:0.4rem;}
+        .cs-stat span{font-size:1.3rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;font-weight:600;}
+        .cs-section{padding:7rem 7%;border-bottom:1px solid var(--border-color);}
+        .cs-section-alt{background:var(--bg-alt);}
+        .cs-section-top{display:flex;align-items:baseline;gap:2rem;margin-bottom:4rem;}
+        .cs-section-eyebrow{font-size:1.1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;}
+        .cs-section h2{font-size:3rem;font-weight:800;color:var(--text-color);letter-spacing:-0.02em;line-height:1.2;}
+        .cs-section h2 span{color:var(--main-color);}
+        .cs-two-col{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+        .cs-body{font-size:1.55rem;color:var(--text-light);line-height:1.8;}
+        .cs-body+.cs-body{margin-top:1.5rem;}
+        .cs-quote{border-left:3px solid var(--main-color);padding:1.8rem 2.2rem;background:rgba(117,78,249,0.04);border-radius:0 1rem 1rem 0;margin:2.5rem 0;}
+        .cs-quote p{font-size:1.6rem;font-style:italic;color:var(--text-color);line-height:1.6;margin-bottom:0.6rem;}
+        .cs-quote cite{font-size:1.25rem;color:var(--main-color);font-style:normal;font-weight:600;}
+        .learnings-list{display:flex;flex-direction:column;gap:1.5rem;}
+        .learning-item{display:flex;gap:2rem;align-items:flex-start;padding:2rem 2.5rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;transition:all 0.3s;}
+        .learning-item:hover{border-color:rgba(117,78,249,0.25);background:rgba(117,78,249,0.02);}
+        .learning-num{font-size:2rem;font-weight:800;color:rgba(117,78,249,0.2);min-width:3rem;line-height:1.2;}
+        .learning-item h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .learning-item p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+        .cs-bottom{display:flex;justify-content:space-between;align-items:center;padding:4rem 7%;background:var(--bg-alt);border-top:1px solid var(--border-color);flex-wrap:wrap;gap:2rem;}
+        .cs-bottom p{font-size:1.6rem;color:var(--text-light);}
+        .cs-bottom-links{display:flex;gap:1.2rem;flex-wrap:wrap;}
+
+        /* ===== ABSTRACT CARD ===== */
+        .abstract-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:4rem;margin-bottom:0;}
+        .abstract-label{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--main-color);margin-bottom:1.5rem;}
+        .abstract-text{font-size:1.55rem;color:var(--text-light);line-height:1.85;}
+        .abstract-keywords{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:2.5rem;}
+        .kw{font-size:1.2rem;padding:0.4rem 1.2rem;border-radius:5rem;background:rgba(117,78,249,0.06);color:var(--main-color);border:1px solid rgba(117,78,249,0.15);font-weight:600;}
+
+        /* ===== BIG DATA STATS ===== */
+        .data-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:4rem;}
+        .dh-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.6rem;padding:3.5rem;text-align:center;position:relative;overflow:hidden;transition:all 0.3s;}
+        .dh-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;}
+        .dh-card:nth-child(1)::before{background:linear-gradient(90deg,#ef4444,#f97316);}
+        .dh-card:nth-child(2)::before{background:linear-gradient(90deg,#f59e0b,#eab308);}
+        .dh-card:nth-child(3)::before{background:linear-gradient(90deg,#754ef9,#a855f7);}
+        .dh-card:hover{transform:translateY(-4px);box-shadow:0 12px 35px var(--shadow-color);border-color:rgba(117,78,249,0.25);}
+        .dh-num{font-size:6rem;font-weight:900;line-height:1;margin-bottom:0.6rem;letter-spacing:-0.04em;}
+        .dh-card:nth-child(1) .dh-num{color:#ef4444;}
+        .dh-card:nth-child(2) .dh-num{color:#f59e0b;}
+        .dh-card:nth-child(3) .dh-num{color:#754ef9;}
+        .dh-label{font-size:1.5rem;font-weight:700;color:var(--text-color);margin-bottom:0.6rem;}
+        .dh-desc{font-size:1.3rem;color:var(--text-light);line-height:1.6;}
+
+        /* ===== RESEARCH QUESTIONS ===== */
+        .rq-list{display:flex;flex-direction:column;gap:2rem;}
+        .rq-item{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.8rem;display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:start;transition:all 0.3s;}
+        .rq-item:hover{border-color:rgba(117,78,249,0.3);box-shadow:0 8px 25px var(--shadow-color);}
+        .rq-badge{width:5rem;height:5rem;border-radius:1rem;background:rgba(117,78,249,0.08);border:1px solid rgba(117,78,249,0.2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:var(--main-color);flex-shrink:0;}
+        .rq-item h4{font-size:1.55rem;font-weight:700;color:var(--text-color);margin-bottom:0.6rem;}
+        .rq-item p{font-size:1.38rem;color:var(--text-light);line-height:1.7;}
+
+        /* ===== METHODOLOGY STEPS ===== */
+        .method-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border-color);border-radius:1.4rem;overflow:hidden;}
+        .method-step{padding:2.5rem 2rem;border-right:1px solid var(--border-color);transition:all 0.3s;}
+        .method-step:last-child{border-right:none;}
+        .method-step:hover{background:rgba(117,78,249,0.03);}
+        .ms-icon{font-size:2.4rem;margin-bottom:1rem;display:block;}
+        .ms-num{font-size:1rem;font-weight:700;color:var(--main-color);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;}
+        .method-step h5{font-size:1.4rem;font-weight:700;color:var(--text-color);margin-bottom:0.4rem;}
+        .method-step p{font-size:1.25rem;color:var(--text-light);line-height:1.55;}
+
+        /* ===== FINDINGS — visual data ===== */
+        /* behaviour donut */
+        .findings-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+        .donut-chart{position:relative;width:22rem;height:22rem;margin:0 auto;}
+        .donut-svg{width:100%;height:100%;}
+        .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+        .donut-center strong{display:block;font-size:3.5rem;font-weight:900;color:var(--text-color);line-height:1;}
+        .donut-center span{font-size:1.2rem;color:var(--text-light);font-weight:600;}
+        .donut-legend{display:flex;flex-direction:column;gap:1rem;margin-top:2.5rem;}
+        .dl-item{display:flex;align-items:center;gap:1.2rem;font-size:1.38rem;}
+        .dl-dot{width:1.4rem;height:1.4rem;border-radius:50%;flex-shrink:0;}
+        .dl-label{color:var(--text-light);}
+        .dl-pct{font-weight:700;color:var(--text-color);margin-left:auto;}
+
+        /* bar chart */
+        .bar-chart{display:flex;flex-direction:column;gap:1.2rem;}
+        .bc-row{display:flex;flex-direction:column;gap:0.5rem;}
+        .bc-label-row{display:flex;justify-content:space-between;font-size:1.3rem;}
+        .bc-label{color:var(--text-light);}
+        .bc-pct{font-weight:700;color:var(--text-color);}
+        .bc-track{height:1.2rem;background:var(--bg-alt);border-radius:5rem;overflow:hidden;border:1px solid var(--border-color);}
+        .bc-fill{height:100%;border-radius:5rem;transition:width 0.6s ease;}
+
+        /* trust gap visual */
+        .trust-gap-card{background:var(--card-bg);border:2px solid rgba(239,68,68,0.2);border-radius:1.6rem;padding:4rem;text-align:center;margin-top:3rem;position:relative;overflow:hidden;}
+        .trust-gap-card::before{content:'⚠️ Trust–Behavior Gap';position:absolute;top:1.6rem;left:50%;transform:translateX(-50%);font-size:1.1rem;font-weight:800;color:#ef4444;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;}
+        .tg-row{display:flex;justify-content:center;gap:6rem;margin-top:1rem;}
+        .tg-col{text-align:center;}
+        .tg-num{font-size:5rem;font-weight:900;line-height:1;margin-bottom:0.4rem;}
+        .tg-num-trust{color:#754ef9;}
+        .tg-num-safe{color:#ef4444;}
+        .tg-label{font-size:1.3rem;color:var(--text-light);font-weight:600;max-width:16rem;}
+        .tg-vs{font-size:2.5rem;font-weight:800;color:var(--border-color);align-self:center;}
+
+        /* survey table */
+        .survey-table{width:100%;border-collapse:collapse;border-radius:1.4rem;overflow:hidden;border:1px solid var(--border-color);}
+        .survey-table th{background:var(--bg-alt);padding:1.4rem 2rem;font-size:1.2rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-light);text-align:left;border-bottom:1px solid var(--border-color);}
+        .survey-table td{padding:1.5rem 2rem;font-size:1.38rem;color:var(--text-light);border-bottom:1px solid var(--border-color);}
+        .survey-table tr:last-child td{border-bottom:none;}
+        .survey-table tr:hover td{background:rgba(117,78,249,0.02);}
+        .st-statement{color:var(--text-color);font-weight:500;}
+        .st-highlight{color:var(--main-color);font-weight:700;}
+
+        /* key findings highlight boxes */
+        .findings-3{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+        .finding-box{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:3rem;transition:all 0.3s;text-align:center;}
+        .finding-box:hover{border-color:rgba(117,78,249,0.3);transform:translateY(-4px);box-shadow:0 12px 35px var(--shadow-color);}
+        .fb-num{font-size:5rem;font-weight:900;line-height:1;margin-bottom:0.8rem;}
+        .fb-1{color:#ef4444;}
+        .fb-2{color:#f59e0b;}
+        .fb-3{color:#754ef9;}
+        .finding-box h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:0.7rem;}
+        .finding-box p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+
+        /* concepts grid */
+        .concepts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+        .concept-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.4rem;padding:2.5rem;transition:all 0.3s;}
+        .concept-card:hover{border-color:rgba(117,78,249,0.3);box-shadow:0 8px 25px var(--shadow-color);}
+        .concept-icon{width:4.5rem;height:4.5rem;background:rgba(117,78,249,0.08);border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--main-color);margin-bottom:1.5rem;}
+        .concept-card h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:0.7rem;}
+        .concept-card p{font-size:1.35rem;color:var(--text-light);line-height:1.65;}
+
+        /* recommendations */
+        .recs-list{display:flex;flex-direction:column;gap:1.5rem;}
+        .rec-item{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;padding:2.5rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;transition:all 0.3s;}
+        .rec-item:hover{border-color:rgba(117,78,249,0.25);}
+        .rec-icon{width:4.5rem;height:4.5rem;background:rgba(117,78,249,0.08);border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--main-color);flex-shrink:0;}
+        .rec-item h4{font-size:1.6rem;font-weight:700;color:var(--text-color);margin-bottom:0.5rem;}
+        .rec-item p{font-size:1.38rem;color:var(--text-light);line-height:1.7;}
+
+        @media(max-width:1100px){
+            .cs-hero-inner{grid-template-columns:1fr;}
+            .cs-meta-card{min-width:unset;}
+            .cs-stats{grid-template-columns:repeat(2,1fr);}
+            .cs-two-col,.findings-layout{grid-template-columns:1fr;gap:3rem;}
+            .data-hero{grid-template-columns:1fr;}
+            .method-grid{grid-template-columns:repeat(3,1fr);}
+            .method-step:nth-child(3){border-right:none;}
+            .findings-3,.concepts-grid{grid-template-columns:repeat(2,1fr);}
+            .tg-row{gap:3rem;}
+        }
+        @media(max-width:650px){
+            .cs-hero{padding:12rem 5% 6rem;}
+            .cs-hero h1{font-size:3.2rem;}
+            .findings-3,.concepts-grid{grid-template-columns:1fr;}
+            .method-grid{grid-template-columns:1fr;}
+            .method-step{border-right:none;border-bottom:1px solid var(--border-color);}
+            .method-step:last-child{border-bottom:none;}
+            .cs-section{padding:5rem 5%;}
+            .cs-bottom{flex-direction:column;align-items:flex-start;}
+            .tg-row{flex-direction:column;gap:2rem;}
+            .data-hero{grid-template-columns:1fr;}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header sticky">
+        <a href="../index.html" class="logo">M.<span>Rashid</span>.</a>
+        <nav class="navbar">
+            <a href="../index.html#home">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio" class="active">Work</a>
+            <a href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="bx bx-moon" id="darkMode-icon"></div>
+            <a href="../index.html#contact" class="header-cta">Hire Me</a>
+        </div>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <!-- HERO -->
+    <section class="cs-hero">
+        <div class="cs-breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class='bx bx-chevron-right'></i>
+            <a href="/pages/project.html">All Projects</a>
+            <i class='bx bx-chevron-right'></i>
+            <span>Research Project</span>
+        </div>
+        <div class="cs-hero-inner">
+            <div>
+                <div class="cs-year-badge">Year 3 · Research Project</div>
+                <h1>Digital Trust & <span>Cybersecurity</span> in the Age of Generative AI</h1>
+                <p class="cs-hero-desc">A 4,000-word quantitative research article surveying 100 participants — investigating how generative AI's human-like interface design erodes Zero-Trust security behaviour, published as a peer-reviewed poster at Bath Spa RAK.</p>
+                <div class="cs-tags">
+                    <span class="cs-tag cs-tag-y3">✓ Year 3</span>
+                    <span class="cs-tag cs-tag-main">Research Paper</span>
+                    <span class="cs-tag cs-tag-main">Quantitative Study</span>
+                    <span class="cs-tag cs-tag-main">Cybersecurity</span>
+                    <span class="cs-tag cs-tag-main">Generative AI</span>
+                    <span class="cs-tag">Zero-Trust</span>
+                    <span class="cs-tag">Halo Effect</span>
+                    <span class="cs-tag">Friction-by-Design</span>
+                    <span class="cs-tag">Google Forms Survey</span>
+                </div>
+                <div class="cs-hero-links">
+                    <a href="../index.html#contact" class="btn btn-primary">
+                        <i class='bx bx-file-blank'></i> Full Paper
+                    </a>
+                </div>
+            </div>
+            <div class="cs-meta-card">
+                <div class="cs-meta-row">
+                    <div class="cs-meta-item"><label>Module</label><p>CC Research Project</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Year</label><p>Year 3 — 2025/26</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Type</label><p>Quantitative Research Article</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Participants</label><p>100 (Survey via Google Forms)</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Supervisor</label><p>Dr. Yasmin</p></div>
+                    <div class="cs-meta-divider"></div>
+                    <div class="cs-meta-item"><label>Grade</label><p class="cs-grade">A</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="cs-stats">
+        <div class="cs-stat"><strong>100</strong><span>Participants</span></div>
+        <div class="cs-stat"><strong>4,000</strong><span>Word Article</span></div>
+        <div class="cs-stat"><strong>49%</strong><span>Would Click Malicious Links</span></div>
+        <div class="cs-stat"><strong>A</strong><span>Grade</span></div>
+    </div>
+
+    <!-- ABSTRACT -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Abstract</span>
+            <h2>The <span>Paper</span></h2>
+        </div>
+        <div class="abstract-card">
+            <div class="abstract-label">Abstract</div>
+            <p class="abstract-text">The rapid advancement of generative AI has significantly transformed human-computer interaction, creating new challenges for digital trust and cybersecurity. This research investigates how the specific design elements of generative AI interfaces — conversational tone and visual professionalism — influence user perceptions and cybersecurity decision-making. The primary objective was to determine if the human-like qualities of these interfaces lead users to bypass traditional security protocols, thereby eroding Zero-Trust principles.</p>
+            <p class="abstract-text" style="margin-top:1.8rem;">A quantitative methodology was employed, utilizing a structured online survey across 100 diverse participants. Findings revealed a significant <strong style="color:var(--text-color)">Trust Gap</strong>: 47% trusted AI more when it sounded confident; 49% would click potentially malicious links if AI content appeared professional; and only 9% consistently verified AI-generated information before acting. Digital trust is increasingly fragile within the age of synthetic media.</p>
+            <div class="abstract-keywords">
+                <span class="kw">Generative AI</span>
+                <span class="kw">Digital Trust</span>
+                <span class="kw">Cybersecurity Behavior</span>
+                <span class="kw">Zero-Trust</span>
+                <span class="kw">Interface Design</span>
+                <span class="kw">Halo Effect</span>
+                <span class="kw">Friction-by-Design</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- THREE HEADLINE NUMBERS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Key Numbers</span>
+            <h2>Three <span>Alarming Findings</span></h2>
+        </div>
+        <div class="data-hero">
+            <div class="dh-card">
+                <div class="dh-num">49%</div>
+                <div class="dh-label">Would Click a Malicious Link</div>
+                <div class="dh-desc">Participants were "Likely" or "Very Likely" to click on a potentially malicious link if the AI-generated content appeared professional and urgent — the Halo Effect in action.</div>
+            </div>
+            <div class="dh-card">
+                <div class="dh-num">9%</div>
+                <div class="dh-label">Always Verify Before Acting</div>
+                <div class="dh-desc">Despite 59% feeling "Very" or "Extremely" confident in detecting phishing, only 9% consistently verify AI-generated information before acting on it. This is the Trust–Behavior Gap.</div>
+            </div>
+            <div class="dh-card">
+                <div class="dh-num">34%</div>
+                <div class="dh-label">Would Ask Another AI to Verify</div>
+                <div class="dh-desc">When given risky AI advice, 34% would "verify" it by asking another AI — a phenomenon identified as <em>"AI Consensus"</em> trust that directly contradicts Zero-Trust principles.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESEARCH QUESTIONS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Objectives</span>
+            <h2>Research <span>Questions</span></h2>
+        </div>
+        <div class="rq-list">
+            <div class="rq-item">
+                <div class="rq-badge">RQ1</div>
+                <div>
+                    <h4>Linguistic Confidence & Security Bypass</h4>
+                    <p>To what extent does the perceived linguistic confidence and anthropomorphic conversational persona of generative AI models correlate with a reduction in user skepticism and an increased willingness to disregard cybersecurity protocols during daily digital interactions?</p>
+                </div>
+            </div>
+            <div class="rq-item">
+                <div class="rq-badge">RQ2</div>
+                <div>
+                    <h4>Visual Professionalism & Social Engineering Vulnerability</h4>
+                    <p>How does the visual aesthetic and high-fidelity professional formatting of AI-generated outputs influence a user's psychological vulnerability to social engineering — specifically regarding deceptive links or unverified security advice?</p>
+                </div>
+            </div>
+            <div class="rq-item">
+                <div class="rq-badge">RQ3</div>
+                <div>
+                    <h4>Friction-by-Design as a Countermeasure</h4>
+                    <p>In what specific ways can "friction-by-design" principles be effectively integrated into generative AI interfaces to re-establish fundamental Zero-Trust behaviors and ensure users maintain critical distance from synthetic content?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Methods</span>
+            <h2>Research <span>Methodology</span></h2>
+        </div>
+        <div class="method-grid" style="margin-bottom:4rem;">
+            <div class="method-step">
+                <span class="ms-icon">📋</span>
+                <div class="ms-num">Design</div>
+                <h5>Quantitative Framework</h5>
+                <p>Structured cross-sectional survey via Google Forms — standardized data for statistical analysis</p>
+            </div>
+            <div class="method-step">
+                <span class="ms-icon">👥</span>
+                <div class="ms-num">Sample</div>
+                <h5>100 Participants</h5>
+                <p>Primarily "Digital Natives" aged 18–25 — university students and employed professionals</p>
+            </div>
+            <div class="method-step">
+                <span class="ms-icon">🔒</span>
+                <div class="ms-num">Pillars</div>
+                <h5>4 Trust Dimensions</h5>
+                <p>Security · Dependability · Integrity · Authenticity — measured across all survey modules</p>
+            </div>
+            <div class="method-step">
+                <span class="ms-icon">🎭</span>
+                <div class="ms-num">Testing</div>
+                <h5>Situational Judgment</h5>
+                <p>Hypothetical cybersecurity scenarios — e.g., AI confidently advising password reuse</p>
+            </div>
+            <div class="method-step">
+                <span class="ms-icon">📊</span>
+                <div class="ms-num">Analysis</div>
+                <h5>Behavioral Metrics</h5>
+                <p>Mean scores and percentage distributions to identify verification behavior trends</p>
+            </div>
+        </div>
+        <!-- demographics strip -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;">
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;padding:2.2rem;text-align:center;">
+                <div style="font-size:2.8rem;font-weight:800;color:var(--main-color);">79%</div>
+                <div style="font-size:1.3rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Male</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;padding:2.2rem;text-align:center;">
+                <div style="font-size:2.8rem;font-weight:800;color:var(--main-color);">59%</div>
+                <div style="font-size:1.3rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Students</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;padding:2.2rem;text-align:center;">
+                <div style="font-size:2.8rem;font-weight:800;color:var(--main-color);">59%</div>
+                <div style="font-size:1.3rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Aged 18–21</div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:1.2rem;padding:2.2rem;text-align:center;">
+                <div style="font-size:2.8rem;font-weight:800;color:var(--main-color);">89%</div>
+                <div style="font-size:1.3rem;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;">Use AI Often</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINDINGS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Results</span>
+            <h2>Survey <span>Findings</span></h2>
+        </div>
+
+        <!-- 3 headline finding boxes -->
+        <div class="findings-3" style="margin-bottom:5rem;">
+            <div class="finding-box">
+                <div class="fb-num fb-1">47%</div>
+                <h4>Confident Tone Increases Trust</h4>
+                <p>Respondents reported higher trust when an AI interface adopted a confident, conversational persona — regardless of the accuracy of the advice given.</p>
+            </div>
+            <div class="finding-box">
+                <div class="fb-num fb-2">49%</div>
+                <h4>Visual Professionalism = Perceived Safety</h4>
+                <p>Participants were likely or very likely to click a potentially malicious link if the AI-generated content appeared professional and urgent.</p>
+            </div>
+            <div class="finding-box">
+                <div class="fb-num fb-3">57%</div>
+                <h4>Feel Safer Using AI for Decisions</h4>
+                <p>Despite only 37% explicitly trusting AI information — 57% feel safer when using AI for decisions. The psychological comfort exceeds the actual trust.</p>
+            </div>
+        </div>
+
+        <!-- PASSWORD REUSE SCENARIO -->
+        <div class="findings-layout">
+            <div>
+                <h3 style="font-size:2.2rem;font-weight:800;color:var(--text-color);margin-bottom:1.5rem;letter-spacing:-0.02em;">Scenario: AI Advises Password Reuse</h3>
+                <p class="cs-body">When participants were presented with an AI confidently advising them to reuse a sensitive password, the responses revealed the dangerous reality of misplaced AI trust.</p>
+                <div class="donut-legend" style="margin-top:2.5rem;">
+                    <div class="dl-item"><div class="dl-dot" style="background:#94a3b8;"></div><span class="dl-label">Ignore the advice (Safe)</span><span class="dl-pct">35%</span></div>
+                    <div class="dl-item"><div class="dl-dot" style="background:#754ef9;"></div><span class="dl-label">Ask another AI (AI Consensus)</span><span class="dl-pct">34%</span></div>
+                    <div class="dl-item"><div class="dl-dot" style="background:#06b6d4;"></div><span class="dl-label">External Verification (Safe)</span><span class="dl-pct">17%</span></div>
+                    <div class="dl-item"><div class="dl-dot" style="background:#ef4444;"></div><span class="dl-label">Follow the risky advice</span><span class="dl-pct">14%</span></div>
+                </div>
+                <p class="cs-body" style="margin-top:2rem;">Only 52% took genuinely safe action (ignoring or verifying externally). A combined 48% either followed the risky advice or validated one AI with another — the "AI Consensus" phenomenon.</p>
+            </div>
+            <div>
+                <!-- donut chart SVG -->
+                <div class="donut-chart">
+                    <svg class="donut-svg" viewBox="0 0 200 200">
+                        <!-- Total = 100%, segments: 35 ignore, 34 ask AI, 17 verify, 14 follow -->
+                        <!-- circumference of r=70 = 439.8 -->
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#e2e8f0" stroke-width="28"/>
+                        <!-- segment 1: ignore=35% = 153.9 of 439.8 -->
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#94a3b8" stroke-width="28"
+                            stroke-dasharray="153.9 285.9" stroke-dashoffset="109.95" transform="rotate(-90 100 100)"/>
+                        <!-- segment 2: ask AI=34% = 149.5 -->
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#754ef9" stroke-width="28"
+                            stroke-dasharray="149.5 290.3" stroke-dashoffset="-43.95" transform="rotate(-90 100 100)"/>
+                        <!-- segment 3: verify=17% = 74.8 -->
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#06b6d4" stroke-width="28"
+                            stroke-dasharray="74.8 365" stroke-dashoffset="-193.45" transform="rotate(-90 100 100)"/>
+                        <!-- segment 4: follow=14% = 61.6 -->
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#ef4444" stroke-width="28"
+                            stroke-dasharray="61.6 378.2" stroke-dashoffset="-268.25" transform="rotate(-90 100 100)"/>
+                    </svg>
+                    <div class="donut-center">
+                        <strong>48%</strong>
+                        <span>Unsafe<br>Response</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust-Behavior Gap -->
+        <div class="trust-gap-card">
+            <div class="tg-row">
+                <div class="tg-col">
+                    <div class="tg-num tg-num-trust">59%</div>
+                    <div class="tg-label">felt "Very/Extremely" confident detecting phishing</div>
+                </div>
+                <div class="tg-vs">vs</div>
+                <div class="tg-col">
+                    <div class="tg-num tg-num-safe">9%</div>
+                    <div class="tg-label">actually verify AI-generated information before acting</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- survey data table -->
+        <div style="margin-top:5rem;">
+            <h3 style="font-size:2rem;font-weight:800;color:var(--text-color);margin-bottom:2.5rem;letter-spacing:-0.02em;">Trust Perception Survey Data <span style="font-size:1.4rem;font-weight:600;color:var(--text-light);">(n=100)</span></h3>
+            <div style="overflow-x:auto;">
+                <table class="survey-table">
+                    <thead>
+                        <tr>
+                            <th style="width:45%;">Statement</th>
+                            <th>Strongly Agree</th>
+                            <th>Agree</th>
+                            <th>Neutral</th>
+                            <th>Disagree</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="st-statement">I generally trust information provided by generative AI</td>
+                            <td>5%</td>
+                            <td class="st-highlight">32%</td>
+                            <td class="st-highlight">47%</td>
+                            <td>11%</td>
+                        </tr>
+                        <tr>
+                            <td class="st-statement">When AI sounds confident, I am more likely to trust it</td>
+                            <td>7%</td>
+                            <td class="st-highlight">40%</td>
+                            <td>41%</td>
+                            <td>8%</td>
+                        </tr>
+                        <tr>
+                            <td class="st-statement">I believe generative AI is reliable for cybersecurity advice</td>
+                            <td>7%</td>
+                            <td class="st-highlight">47%</td>
+                            <td>33%</td>
+                            <td>11%</td>
+                        </tr>
+                        <tr>
+                            <td class="st-statement">When AI provides info without sources, I tend to trust it</td>
+                            <td class="st-highlight">16%</td>
+                            <td class="st-highlight">35%</td>
+                            <td>30%</td>
+                            <td>17%</td>
+                        </tr>
+                        <tr>
+                            <td class="st-statement">Overall, generative AI makes online decisions feel safer</td>
+                            <td class="st-highlight">16%</td>
+                            <td class="st-highlight">41%</td>
+                            <td>38%</td>
+                            <td>5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEY CONCEPTS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Analysis</span>
+            <h2>Core <span>Concepts</span></h2>
+        </div>
+        <div class="concepts-grid">
+            <div class="concept-card">
+                <div class="concept-icon"><i class='bx bx-badge-check'></i></div>
+                <h4>The Halo Effect</h4>
+                <p>Users equate the professional fluency of an AI response with factual and security-related accuracy. A polished interface creates a false sense of informational integrity — the aesthetic of competence replaces actual verification.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon"><i class='bx bx-shield-minus'></i></div>
+                <h4>Zero-Trust Erosion</h4>
+                <p>"Never trust, always verify" — the core Zero-Trust principle — is systematically undermined by AI's conversational, confident tone. Users lower their guard when a machine speaks with the authority of a trusted human.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon"><i class='bx bx-bot'></i></div>
+                <h4>AI Consensus</h4>
+                <p>34% validate suspicious AI advice by asking another AI — "AI Consensus" trust. Validating one black-box system with another directly contradicts Zero-Trust, which mandates independent, objective verification.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon"><i class='bx bx-heart'></i></div>
+                <h4>Socioaffective Alignment</h4>
+                <p>Users treat AI as a trusted peer rather than a flawed software tool. The AI behaves within the user's psychological ecosystem — generating a perception of a deep, reliable relationship that doesn't actually exist.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon"><i class='bx bx-stop-circle'></i></div>
+                <h4>Friction-by-Design</h4>
+                <p>The proposed solution: intentional cognitive friction embedded in AI interfaces. Mandatory verification prompts for high-stakes advice. Not "frictionless" — but <em>friction-with-purpose</em> that restores critical thinking.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon"><i class='bx bx-brain'></i></div>
+                <h4>Hallucinated Confidence</h4>
+                <p>AI-generated content can be factually wrong while sounding authoritative. Users need digital literacy programs that train them to recognise that conversational fluency does not equate to factual accuracy.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div class="cs-section">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Conclusion</span>
+            <h2>Recommendations & <span>Future Work</span></h2>
+        </div>
+        <div class="recs-list" style="margin-bottom:4rem;">
+            <div class="rec-item">
+                <div class="rec-icon"><i class='bx bx-book-reader'></i></div>
+                <div>
+                    <h4>AI Literacy Training</h4>
+                    <p>Educational institutions and workplaces should implement digital literacy programs specifically designed to deconstruct "hallucinated confidence" — teaching users that conversational fluency does not equate to factual accuracy in AI-generated content.</p>
+                </div>
+            </div>
+            <div class="rec-item">
+                <div class="rec-icon"><i class='bx bx-stop-circle'></i></div>
+                <div>
+                    <h4>Design for "Critical Friction"</h4>
+                    <p>AI developers should move away from purely frictionless interfaces and integrate safety-aware UI elements. When an AI provides high-stakes security advice, the system should trigger mandatory "verification prompts" or source citations before the user can act.</p>
+                </div>
+            </div>
+            <div class="rec-item">
+                <div class="rec-icon"><i class='bx bx-shield'></i></div>
+                <div>
+                    <h4>Extending Zero-Trust to AI Content</h4>
+                    <p>Organizations must update their cybersecurity frameworks to include AI interactions — Zero-Trust principles must apply not just to network access, but to AI-generated content itself. Every AI output should be treated as unverified until independently confirmed.</p>
+                </div>
+            </div>
+        </div>
+        <div class="cs-quote">
+            <p>"Digital trust is increasingly fragile in the age of synthetic media. The human-like qualities of AI interfaces effectively diminish user vigilance and bypass traditional security mindsets. Human trust must be rebuilt on a foundation of critical verification rather than conversational familiarity."</p>
+            <cite>— Conclusion, M.Rashid (2025)</cite>
+        </div>
+    </div>
+
+    <!-- LEARNINGS -->
+    <div class="cs-section cs-section-alt">
+        <div class="cs-section-top">
+            <span class="cs-section-eyebrow">// Reflection</span>
+            <h2>What This <span>Research Taught Me</span></h2>
+        </div>
+        <div class="learnings-list">
+            <div class="learning-item">
+                <div class="learning-num">01</div>
+                <div>
+                    <h4>Quantitative research is the most honest kind of argument</h4>
+                    <p>Designing a survey that measured both what people <em>believed</em> about their security habits and what they <em>actually did</em> in scenarios revealed a gap that no amount of anecdote could have shown. Numbers don't lie — but they do surprise you.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">02</div>
+                <div>
+                    <h4>The most dangerous security threat is design, not malware</h4>
+                    <p>49% of participants were willing to click a malicious link not because they were careless, but because the AI-generated content looked professional. The threat landscape has shifted from technical exploits to psychological ones — and the defence must shift too.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">03</div>
+                <div>
+                    <h4>Creative Computing and cybersecurity are the same field</h4>
+                    <p>This research sits at the intersection of UX design, AI, and security. The Halo Effect is a design problem. Friction-by-design is a UX solution. The best cybersecurity interventions of the next decade will be built by designers who understand psychology, not just by engineers who understand protocols.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">04</div>
+                <div>
+                    <h4>"AI Consensus" is a new and underexplored security failure mode</h4>
+                    <p>The finding that 34% validate suspicious AI advice by asking another AI was the most unexpected result. This behaviour has no equivalent in traditional security literature — it's a novel failure mode created entirely by the AI era, and it demands novel defences.</p>
+                </div>
+            </div>
+            <div class="learning-item">
+                <div class="learning-num">05</div>
+                <div>
+                    <h4>Research is a creative act</h4>
+                    <p>Framing the right questions, designing scenarios that reveal real behaviour, and then translating findings into actionable design recommendations — this was the most intellectually demanding project of the degree. And the most satisfying.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="cs-bottom">
+        <p>Year 3 · Research Project · Bath Spa University RAK</p>
+        <div class="cs-bottom-links">
+            <a href="/pages/project.html" class="btn btn-secondary"><i class='bx bx-grid-alt'></i> All Projects</a>
+            <a href="machine-learning.html" class="btn btn-secondary"><i class='bx bx-left-arrow-alt'></i> Prev: Machine Learning</a>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Work Together <i class='bx bx-right-arrow-alt'></i></a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <a href="../index.html" class="footer-logo">M.<span>Rashid</span>.</a>
+            <p>Building the web, one pixel at a time.</p>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <div class="footer-nav">
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#portfolio">Work</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2025 | M.Rashid | All Rights Reserved.</p>
+            <div class="footer-iconTop"><a href="#"><i class='bx bx-up-arrow-alt'></i></a></div>
+        </div>
+    </footer>
+
+    <script>
+    const darkIcon = document.getElementById('darkMode-icon');
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.classList.replace('bx-moon', 'bx-sun');
+    }
+    darkIcon.onclick = () => {
+        darkIcon.classList.toggle('bx-sun');
+        darkIcon.classList.toggle('bx-moon');
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    const menuIcon = document.getElementById('menu-icon');
+    const navbar = document.querySelector('.navbar');
+    menuIcon.onclick = () => {
+        menuIcon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
+    </script>
+</body>
+</html>
