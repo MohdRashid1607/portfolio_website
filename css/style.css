@@ -2669,7 +2669,7 @@ img { border-radius: 12px; }
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background: #754ef9;
+    background: #fff;
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -2678,12 +2678,13 @@ img { border-radius: 12px; }
     z-index: 99998;
     transition: transform 0.1s ease;
     transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
 }
 
 .cursor-ring {
     width: 36px;
     height: 36px;
-    border: 2px solid rgba(117, 78, 249, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.75);
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -2692,13 +2693,14 @@ img { border-radius: 12px; }
     z-index: 99997;
     transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, transform 0.15s ease;
     transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
 }
 
 .cursor-ring.hover {
     width: 52px;
     height: 52px;
-    border-color: rgba(168, 85, 247, 0.8);
-    background: rgba(117, 78, 249, 0.08);
+    border-color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* Hide custom cursor on touch devices and small screens */
