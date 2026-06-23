@@ -25,6 +25,38 @@
 
 <body>
 
+    <!-- Preloader / Loading Screen -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-panel left-panel"></div>
+        <div class="preloader-panel right-panel"></div>
+        <div class="preloader-content">
+            <div class="preloader-name" id="preloaderName"></div>
+            <div class="preloader-subtitle">Creative Portfolio</div>
+            <div class="preloader-bar-track">
+                <div class="preloader-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Background Floating Orbs -->
+    <div class="bg-orbs">
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+    </div>
+
+    <!-- Certificate Lightbox -->
+    <div class="cert-lightbox" id="certLightbox">
+        <button class="cert-lightbox-close" id="certLightboxClose"><i class='bx bx-x'></i></button>
+        <img src="" alt="Certificate" id="certLightboxImg">
+    </div>
+
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -586,7 +618,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-python.png" alt="Advanced Python">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -599,7 +631,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-responsive-design.png" alt="Creating a Responsive Web Design">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -612,7 +644,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-htmlcssjs.png" alt="HTML CSS and JavaScript Building the Web">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -625,7 +657,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-apis.png" alt="Introduction to Web APIs">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -638,7 +670,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-ml.png" alt="Machine Learning with Python Foundations">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -651,7 +683,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-dataviz.png" alt="Python for Data Visualization">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -664,7 +696,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-layout.png" alt="Responsive Layout">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -678,7 +710,7 @@
                 <div class="cert-img-card cert-img-card--prime">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-prime.png" alt="Prime Marketing Certificate">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -692,7 +724,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-html.png" alt="SoloLearn Introduction to HTML">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -705,7 +737,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-python-int.png" alt="SoloLearn Python Intermediate">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -718,7 +750,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-css.png" alt="SoloLearn Introduction to CSS">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -731,7 +763,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-java.png" alt="SoloLearn Introduction to Java">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -744,7 +776,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-tkinter.png" alt="SoloLearn Python tkinter">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -757,7 +789,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-python.png" alt="SoloLearn Introduction to Python">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -771,7 +803,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-python.png" alt="Advanced Python">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -784,7 +816,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-responsive-design.png" alt="Creating a Responsive Web Design">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -797,7 +829,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-htmlcssjs.png" alt="HTML CSS and JavaScript Building the Web">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -810,7 +842,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-apis.png" alt="Introduction to Web APIs">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -823,7 +855,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-ml.png" alt="Machine Learning with Python Foundations">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -836,7 +868,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-dataviz.png" alt="Python for Data Visualization">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -849,7 +881,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-linkedin-layout.png" alt="Responsive Layout">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -862,7 +894,7 @@
                 <div class="cert-img-card cert-img-card--prime">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-prime.png" alt="Prime Marketing Certificate">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -875,7 +907,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-html.png" alt="SoloLearn Introduction to HTML">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -888,7 +920,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-python-int.png" alt="SoloLearn Python Intermediate">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -901,7 +933,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-css.png" alt="SoloLearn Introduction to CSS">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -914,7 +946,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-java.png" alt="SoloLearn Introduction to Java">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -927,7 +959,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-tkinter.png" alt="SoloLearn Python tkinter">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">
@@ -940,7 +972,7 @@
                 <div class="cert-img-card">
                     <div class="cert-img-wrap">
                         <img src="/images/cert-solo-python.png" alt="SoloLearn Introduction to Python">
-                        <div class="cert-img-overlay"><a href="#" target="_blank" class="cert-view-btn">View <i
+                        <div class="cert-img-overlay"><a href="javascript:void(0)" class="cert-view-btn">View <i
                                     class='bx bx-link-external'></i></a></div>
                     </div>
                     <div class="cert-img-info">

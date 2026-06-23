@@ -313,3 +313,135 @@ var certSwiper = new Swiper(".cert-swiper", {
         1400: { slidesPerView: 4, spaceBetween: 24 },
     },
 });
+
+
+/* ========== PRELOADER / LOADING SCREEN ========== */
+(function() {
+    const preloader = document.getElementById('preloader');
+    const preloaderName = document.getElementById('preloaderName');
+    if (!preloader || !preloaderName) return;
+
+    // Prevent scrolling during load
+    document.body.style.overflow = 'hidden';
+
+    // Split name into individual letters with staggered delays
+    const name = 'M. Rashid';
+    name.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.classList.add('letter');
+        if (char === ' ') {
+            span.classList.add('space');
+        } else {
+            span.textContent = char;
+        }
+        span.style.animationDelay = (0.15 + i * 0.08) + 's';
+        preloaderName.appendChild(span);
+    });
+
+    // Hide preloader after animation completes
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            preloader.classList.add('loaded');
+            // Allow scrollbar to return after split transition finishes
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 1000);
+        }, 2600);
+    });
+
+    // Fallback: force hide after 5 seconds in case load event already fired
+    setTimeout(() => {
+        if (!preloader.classList.contains('loaded')) {
+            preloader.classList.add('loaded');
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 1000);
+        }
+    }, 5000);
+})();
+
+
+/* ========== CUSTOM CURSOR ========== */
+(function() {
+    // Only on non-touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    if (!dot || !ring) return;
+
+    let mouseX = -100, mouseY = -100;
+    let ringX = -100, ringY = -100;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+    });
+
+    // Smooth follow for the ring
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Hover effect on interactive elements
+    const hoverTargets = document.querySelectorAll('a, button, input, textarea, select, .btn, .filter-btn, .cert-view-btn, .services-box, .portfolio-box');
+    hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+})();
+
+
+/* ========== CERTIFICATE LIGHTBOX ========== */
+(function() {
+    const lightbox = document.getElementById('certLightbox');
+    const lightboxImg = document.getElementById('certLightboxImg');
+    const lightboxClose = document.getElementById('certLightboxClose');
+    if (!lightbox || !lightboxImg || !lightboxClose) return;
+
+    // Open lightbox when clicking any cert view button
+    document.querySelectorAll('.cert-view-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Find the sibling img in the same cert-img-wrap
+            const wrap = btn.closest('.cert-img-wrap');
+            if (!wrap) return;
+            const img = wrap.querySelector('img');
+            if (!img) return;
+
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    // Close on clicking backdrop (not the image)
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+})();
